@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 26094e40dd28ea24485c6bc61fe74389
   - enabled: 1
-    path: Assets/Scenes/MoveScreen.unity
+    path: Assets/Scenes/MoveScene.unity
     guid: dd4cd1b2a0f62464a8c9e6df568405c2
+  - enabled: 1
+    path: Assets/Scenes/VisitScene.unity
+    guid: 0dd27073a43b7fd4bbfbe97d5024df75
   m_configObjects: {}

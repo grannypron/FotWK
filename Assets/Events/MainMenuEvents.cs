@@ -29,7 +29,7 @@ public class MainMenuEvents : MonoBehaviour
 
     IEnumerator LoadMoveScreen()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MoveScreen");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MoveScene");
 
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
