@@ -1,12 +1,27 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 namespace FotWK
 {
-    class UnitySoundEngine : ISoundEngine
+    class UnitySoundEngine : MonoBehaviour, ISoundEngine
     {
-        public void playSound(string soundId)
+        void Start() {}
+
+        void Awake()
         {
-            GameObject.Find(soundId).GetComponent<AudioSource>().Play();
+            DontDestroyOnLoad(this.gameObject);
+        }
+
+        public void playSound(string soundId, MonoBehaviour caller)
+        {
+            AudioSource audio = GameObject.Find(soundId).GetComponent<AudioSource>();
+            audio.Play();
+            //caller.StartCoroutine(WaitCoroutine());
+        }
+        
+        IEnumerator WaitCoroutine()
+        {
+            yield return new WaitForSeconds(10);
         }
     }
 }

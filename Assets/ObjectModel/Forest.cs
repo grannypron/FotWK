@@ -6,10 +6,10 @@ namespace FotWK
 {
 	public class Forest : EncounterableLocation
 	{
-		public override void onVisit()
-		{
-			base.onVisit();
-		}
+		const int mEncounterChance = 28;
 
+		public override int getEncounterChance() {
+			return mEncounterChance;
+		}
 	}
 }

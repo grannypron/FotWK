@@ -4,11 +4,11 @@ using System.Text;
 
 namespace FotWK
 {
-	public class Teleporter : ILocation
+	public class Teleporter : BaseLocation
 	{
-		public void onVisit()
+		public override void onVisit()
 		{
-
+			NextScene("MoveScene");
 		}
 	}
 }

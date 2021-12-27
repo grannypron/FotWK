@@ -11,7 +11,7 @@ public class MoveSceneEvents : MonoBehaviour
     void Start()
     {
         Tilemap closeUpMapTilemap = GameObject.Find("CloseUpMapTilemap").GetComponent<Tilemap>();
-        renderMap(GameStateManager.getGameState().getPlayerState(1).getMapPosition(), closeUpMapTilemap);
+        renderMap(GameStateManager.getGameState().getCurrentPlayerState().getMapPosition(), closeUpMapTilemap);
     }
 
     // Update is called once per frame
@@ -42,18 +42,18 @@ public class MoveSceneEvents : MonoBehaviour
 
         if (xMove != 0 || yMove != 0) { 
             // Change position
-            Vector2 position = GameStateManager.getGameState().getPlayerState(1).getMapPosition();
+            Vector2 position = GameStateManager.getGameState().getCurrentPlayerState().getMapPosition();
             // Bounds checking
             if (position.x + xMove <= 0 || position.x + xMove > Globals.MAX_MAP_X) {
             } else if (position.y + yMove <= 0 || position.y + yMove > Globals.MAX_MAP_Y) {
             } else {
                 int newX = (int)position.x + xMove;
                 int newY = (int)position.y + yMove;
-                GameStateManager.getGameState().getPlayerState(1).setMapPosition(new Vector2(newX, newY));
+                GameStateManager.getGameState().getCurrentPlayerState().setMapPosition(new Vector2(newX, newY));
 
                 Tilemap closeUpMapTilemap = GameObject.Find("CloseUpMapTilemap").GetComponent<Tilemap>();
                 TileBase tile = closeUpMapTilemap.GetTile(new Vector3Int(newX, newY, 0));
-                renderMap(GameStateManager.getGameState().getPlayerState(1).getMapPosition(), closeUpMapTilemap);
+                renderMap(GameStateManager.getGameState().getCurrentPlayerState().getMapPosition(), closeUpMapTilemap);
 
                 // Get the tile that is now active (under the position indicator)
                 string tileName = getTileNameUnderCursor(new Vector2Int(newX, newY), closeUpMapTilemap);
@@ -95,11 +95,11 @@ public class MoveSceneEvents : MonoBehaviour
 
     void NextScreen()
     {
-        StartCoroutine(LoadVisitMenu());
+        StartCoroutine(LoadVisitScreen());
     }
 
 
-    IEnumerator LoadVisitMenu()
+    IEnumerator LoadVisitScreen()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("VisitScene");
 

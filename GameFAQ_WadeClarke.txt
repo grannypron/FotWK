@@ -1,0 +1,1436 @@
+              .____               .
+              /       __.  .___  _/_   .___    ___    ____   ____
+              |__.  .'   \ /   \  |    /   \ .'   `  (      (
+              |     |    | |   '  |    |   ' |----'  `--.   `--.
+              /      `._.' /      \__/ /     `.___, \___.' \___.'
+
+                             ,__       .    _
+                        __.  /  `     _/_   /        ___
+                      .'   \ |__       |    |,---. .'   `
+                      |    | |         |    |'   ` |----'
+                       `._.' |         \__/ /    | `.___,
+                             /
+          .       __    .           _           .
+          /       |  ` _/_     ___  /           /   / ` , __     ___.
+          |       |  |  |    .'   ` |,---.      |_-'  | |'  `. .'   `
+          |  /\   /  |  |    |      |'   `      |  \  | |    | |    |
+          |,'  \,'   /  \__/  `._.' /    |      /   \ / /    |  `---|
+                                                                \___/
+
+-------------------------------------------------------------------------------
+
+                 Fortress of the Witch King (Apple II) Guide
+
+                             Version 1.0, 26/5/2009
+
+                            by Wade Clarke (bloomer)
+
+                        email: bloomer(AT)iprimus.com.au
+
+PREFACE
+
+Games as old as this one (1983) can strike modern gamers as being totally
+baffling when no instructions are available. This guide will tell you
+absolutely everything you need to know to be able to play and enjoy Fortress of
+the Witch King on an Apple II or emulator - and then about four times as much
+information again, making it a fairly exhaustive documentation of the game's
+workings.
+
+LEGAL
+
+This guide is copyright (c) Wade Clarke 2009. It may not be reproduced for any
+commercial purposes. It may not be redistributed with any alterations. If you
+wish to host it on your gaming site, please email me for permission.
+
+*** ABOUT THE CONTENTS
+
+To jump to any particular section of the guide, do a text search for the
+bracketed number beside that section heading in the contents.
+
+When you are referred to other sections while reading the guide, the number of
+the target section will be presented in square brackets. EG: 'See COMBAT [14]'
+
+*******************************************************************************
+                             CONTENTS OF THIS GUIDE
+*******************************************************************************
+
+(1)  INTRODUCTION
+(2)  GAMEPLAY OVERVIEW
+(3)  CONTROLS
+(4)  SAVING YOUR GAME
+
+GAME DETAILS -
+
+(5)  YOUR PARTY. GOLD AND WEIGHT
+(6)  MOVEMENT & THE MAIN MENU COMMANDS
+(7)  UNIT TYPES
+     Warriors _ Clerics _ Scouts (SIGHT POWER explained) _ Raiders _
+     Wizard _ Elves and Dwarves
+(8)  TOWNS AND HAGGLING -
+     Secrets of haggling
+(9)  ITEMS AND SPELLS YOU CAN BUY IN TOWN
+     Rations _ Teleport Spell _ Spell of Seeing _ Rafts _ Mules
+(10) SPECIAL ITEMS (NON-PURCHASEABLE)
+     Sword (Dragon Slayer) _ Talisman of Speed _ Hammer of Thor
+(11) Magic Maps
+     Reading and following magic maps
+(12) SPELL OF SEEKING
+(13) BIG FOUR ITEMS
+     Horn of Opening _ Boots of Stealth _ Armour of Defence _
+     Sword of Strength
+(14) COMBAT
+(15) DRAGON DENS
+(16) INSIDE THE FORTRESS
+(17) FIGHTING THE WITCH KING
+(18) SCORING
+
+APPENDICES -
+
+(19) GAME STRATEGY OVERVIEW
+(20) STARTING INVENTORY BY DIFFICULTY LEVEL
+(21) MULTIPLAYER CONSIDERATIONS
+(22) COMBAT SPELLS
+(23) THE CHEATINGEST THING YOU CAN DO IN THE GAME (WITHOUT HACKING IT)
+(24) COMMODORE 64 VERSION
+(25) FM-7 VERSION
+
+(26) CREDITS
+
+-------------------------------------------------------------------------------
+
+(1) INTRODUCTION
+
+Fortress of the Witch King (FOTWK) was released by Avalon Hill's Microcomputer
+Games division for the Apple II in 1983, and ported to the Commodore 64 and the
+Japanese FM-7 in 1984. FOTWK is an RPG-adventure game in which your goal is to
+build up a party of adventurers who are sufficiently numerous, hardy and
+well-equipped to gain entry to the Witch King's fortress. Once you've found the
+Witch King you have to defeat him in one-on-one combat to win the game. Up to
+four players can participate in a game, and there is some scope for fighting
+each other along the way, but the winner in any game is always the player who
+offs the Witch King.
+
+FOTWK takes its major cues from 'Wilderness Campaign', a game released by
+Synergistic Software for the Apple II in 1980. Wilderness had the same party
+building and bartering, a world map, random encounters and a master baddie whom
+you had to ultimately bash in order to win. In Wilderness's case it was The
+Necromancer. FOTWK is prettier than Wilderness, more sophisticated in most
+areas and has the multiplayer capability as well, though in broad design terms
+it is probably less watertight. What's most important is that FOTWK is a lot of
+fun to play, and has a particular mini epic feel to it that is the hallmark of
+this genre of early eighties home gaming. You can experience a whole
+rags-to-riches adventure campaign in the space of an hour or so, or in less
+time than that if you play the game on an overclocking emulator.
+
+Most of FOTWK is programmed in Applesoft BASIC, and in the course of writing
+this guide I examined the program listings to verify a lot of the game's
+details and mathematical formulae.
+
+*******************************************************************************
+
+(2) GAMEPLAY OVERVIEW
+
+The program generates a fresh terrain map of dimensions 40 x 40 when you start
+a new game. The Witch King's fortress is situated roughly towards the centre of
+the map and the players' start positions are randomised. Each player can choose
+their own difficulty level from 1-4. This difficulty level affects nothing but
+the size and contents of a player's initial inventory, making it possible to
+handicap certain players in a multiplayer game. All players share the one game
+map, whose difficulty they will have to agree on. The higher the game map's
+difficulty (1-20), the more snakey the terrain will be, with more mountain and
+lake spaces.
+
+Players take turns moving around the map on foot or by the occasional teleport
+spell, looking for wandering monsters to fight while revealing the map terrain.
+Killing monsters gets you gold and other helpful booty. Gold you earn can be
+spent in towns on rations, equipment and more members for your party, including
+some with special abilities. Warriors are the base unit of this game. Without
+them you can't fight anything, and more warriors = more firepower. While other
+units add neat powers to your arsenal, fights still rest on your warriors
+because they act as your hit points. If you run out of warriors, a fight is
+considered to be over and lost to you, no matter who else you have left
+standing. It's not possible to die and face 'GAME OVER' in FOTWK,Â you are just
+inconvenienced and forced to start rebuilding your warrior population from
+scratch.
+
+Warriors also need to eat every turn, though no other units do, so make sure
+you buy enough rations in towns to sustain them, or they (and some other units
+that normally don't eat) start dying of starvation. If you run out of food or
+warriors, or both, you can visit a monk sanctuary where you can receive free
+top ups. If away from a sanctuary you can try praying for divine help, but this
+eats up a whole turn each time you try.
+
+The other important basic unit is the scout. The more scouts you have, the
+further you can see from your current position on the map, allowing you to
+explore and reveal the terrain much more quickly. Scouts will also help you
+slip into the Witch King's fortress when it's time to do that.
+
+It is possible to hug the first town you find on the map and build up a party
+entirely within the compass of a few spaces, triggering monster encounters
+nearby, earning gold, returning to town and spending it, repeating this cycle.
+The reason you have for venturing further and exploring the map is that there
+are four major magical items to be found out there, henceforth referred to as
+the Big Four items, which can tremendously enhance your ability to successfully
+invade the Witch King's fortress and clobber him in a one-on-one fight. Each of
+these items is found on a particular mountain space on the map, where it is
+guarded by a dragon.
+
+You can't see these dragon dens on the screen, they look just like all the
+other mountain spaces. So how do you find them? If you can obtain one of the
+rare Spells of Seeking, you can cast it, name the item you're looking for and
+you'll be shown where it is on the map. The harder but more typical way to
+locate an item is by finding the corresponding magic map (there are four you
+can collect, one for each item), successfully interpreting it and then
+following it.
+
+Once you've built your party up a bit and maybe located some or all of the
+magic items, then it's time to invade the Witch King's fortress. This means
+going there and successfully finding the entrance, at which point you'll run a
+gauntlet of tough back-to-back monster battles. Once you find the room in which
+the King is hiding, you have to defeat him in a one-on-one final battle over
+which you have no direct control. Fail or retreat at any point in the fortress
+and you'll be evicted from it, with bruised dignity at the least and maybe most
+or all of your party devastated at the most. A game only ends after the Witch
+King has been slain, and the slaying player wins.
+
+*******************************************************************************
+
+(3) CONTROLS
+
+Turn on your CAPS LOCK or the game will ignore 90% of your keypresses.
+
+The game always lists onscreen what keys you can press to perform available
+actions at any particular time. Or it may ask you a clear question requiring a
+clear typed answer and a hit of RETURN.
+
+A command and the key that launches it will be presented in this FAQ in the
+following manner:
+
+(M)OVE
+(E)ND TURN
+
+etc.
+
+The only place in the whole game you are likely to be tricked into feeling you
+don't know what to press next is after you have chosen to 'M'OVE, and been
+presented with the close up map view and directional options. If you try to
+move diagonally at this point (northwest, northeast, southwest or southeast)
+and have fewer than 2 Movement Factors remaining, you will not be allowed to
+move and the game will not react at all; it is waiting for you to choose a
+non-diagonal direction to move in.
+
+*******************************************************************************
+
+(4) SAVING YOUR GAME
+
+FOTWK asks you after every turn if you want to save your game.
+
+The disk image of FOTWK I originally downloaded from the asimov Apple II
+archive had a few problems, including a bug that would prevent you from
+restoring any of your saved games. The name of the buggy version is:
+
+fortess_of_the_witch_king.dsk.gz (Yes, it is incorrectly titled 'fortess')
+
+After booting the program and answering 'Y'ES to the question asking if you
+want to resume a saved game, you are given a prompt where you can type in the
+name of the save file, or catalog the disk by typing '?'. If you're using the
+bugged version, nothing that you type here will have any effect. In essence,
+the program becomes stuck and all you can do is reboot.
+
+I fixed this bug and a couple of others and submitted the fixed version to the
+asimov archive in May 2009, where it can be found thus:
+
+ftp.asimov.net
+
+/pub/apple_II/images/games/adventure/fortress_of_the_witch_king_fix.zip
+
+In the fixed version, you can save and restore multiple games as was originally
+intended.
+
+The important thing to know about saving is that when you are asked to enter a
+name for the file, you must give the save file a name with the suffix .SAVE
+
+An example of what to type:
+
+WADE1.SAVE
+
+is a valid save name, but plain old
+
+WADE1
+
+is not.
+
+If I had just typed 'WADE1', the game would have been saved under that name,
+but the program would not have been able to find the WADE1 files later to
+resume from them. This may seem weird, but these were the old days of
+rough'n'tumble file management. The game's original manual would have told you
+of the need to append .SAVE to any save file names, and the purpose of this
+would probably have been to make sure you didn't erase any of the actual FOTWK
+program files, none of which end with .SAVE
+
+You can save as many game positions as you want to, to both the FOTWK game disk
+and any other DOS 3.3 floppies, so long as you keep giving the save files
+different names and the disks have space left on them. When resuming a game,
+enter ? then RETURN at the prompt to see all the files on the current disk if
+you need to be reminded of what you might have called your save file(s). If you
+run out of room on a disk, use an Apple file maintenance or utility program to
+delete some unwanted save games, or do it manually if you know your way around
+APPLESOFT. You can also RENAME files to add the .SAVE suffix to them if you
+forgot to type it when saving your game.
+
+*******************************************************************************
+                                  GAME DETAILS
+*******************************************************************************
+
+(5) YOUR PARTY. GOLD AND WEIGHT
+
+Your party consists of a collection of living units, your gold and rations,
+useful equipment and magic items and spells.
+
+Since gold pays for everything, you'll want to make sure you can carry all that
+you find. Gold is the only item that counts towards your numerical weight
+allowance.
+
+The number of gold pieces you can carry is:
+
+5 + (No. of scouts in party X 5) + (No. of warriors X 10) + (No. of mules X 50)
+
+with a cap of 30,000.
+
+Whenever you find more more gold than you can carry, you will immediately drop
+the excess new gold, which is lost forever. The solution is to start buying
+mules early in the adventure. Bulk up on them in town and you will have
+developed a buffer so that you'll rarely or never drop any money. Remember that
+for every 10 mules you buy, you can carry another 500 gold pieces on top of
+what your scouts and warriors can already carry.
+
+*******************************************************************************
+
+(6) MOVEMENT & THE MAIN MENU COMMANDS
+
+When it's your turn, you will be presented with the MAIN MENU of options.
+Select with a single keypress.
+
+...............
+1 = LOOK AT MAP
+
+You will see a screen sized cumulative lo-res graphic map showing all terrain
+you have personally explored and all terrain you have ever seen - and can see
+from where you stand now - as determined by your Sight Power (SP) (See UNIT
+TYPES [7] - SCOUTS). Each square on the map is represented by a coloured
+rectangle. All unexplored portions of the map are black. Movement off the edge
+of the map is not possible.
+
+KEY TO MAP:
+
+WHITE = Your party's location.
+
+YELLOW = Town. Buy units and supplies here.
+
+PINK = Sanctuary. The monks will give you free food or warriors if your party
+is starving / at death's door.
+
+GREEN = Woods. Most common terrain type, in which the chance of encountering
+monsters is average.
+
+BROWN = Mountains. Terrain in which the chance of encountering monsters is
+high. Dragon dens are also found in mountains (there are only 4 dragon dens per
+game.)
+
+BLUE = Lake. Impassable without a raft. No encounters occur on lakes.
+
+DARK BLUE = The fortress of the Witch King. The fortress covers a 2 x 2 area.
+
+If the halo of squares revealed around your party when you move is annoyingly
+tiny (EG you can only see 1 space in each direction), you need more scouts to
+increase your SP. See UNIT TYPES [7] - SCOUTS.
+
+........................
+2 = LOOK AT CLOSE UP MAP
+
+In this mode you will see a prettier, Ultima style hi-res graphic of the area
+immediately around your party. The potential display area is 10 x 10 squares,
+but you will still only see in this mode squares that you have personally
+travelled through or ever 'seen' from afar via your scout-determined SP.
+
+The square white cursor is your party location. Everything else should be
+easily discernible - woods, mountains, pink sanctuary castles, orange+white
+towns, blue lakes, and the 2 x 2 fortress of the Witch King.
+
+.............
+I = INVENTORY
+
+See a list of all your units, supplies and equipment.
+
+........
+M = MOVE
+
+In each turn of the game you have a base rate of 3 Movement Factors (MF's) to
+spend on moving around the world map. You can increase this number by finding
+Boots of Stealth or a Talisman of Speed. If your party is starving, your base
+rate drops to 1 MF.
+
+All MF requirements when moving are determined by the contents of the target
+map square.
+
+Moving north, south, west or east, or staying where you are (which is the
+curious method needed to revisit a town you're in, for instance) all cost 1 MF
+normally. They cost 2 MF if the target was a mountain space, however you can
+move onto or stay on mountains if you only have 1 MF left.
+
+Moving diagonally (northwest, northeast, southwest, southeast) costs 2 MF
+normally, or 3 MF if the target was a mountain space. If you have fewer than
+2MF remaining and try to move diagonally, the game simply ignores your
+keypresses until you choose a non-diagonal direction. Again there's an
+exception where mountains are concerned. While you will be charged 3 MF to move
+diagonally onto mountains if you have 3+ MF, you will still be allowed to make
+the move if you only have 2 MF remaining.
+
+Note that you can perform unlimited status checking tasks, like viewing maps or
+your inventory, at no cost to your MF during your turn.
+
+When you have expended all MF (zero remain), are finished with status checks
+and content to commence the next turn - or to pass control to the next player
+in a multiplayer game - or to end your turn immediately for any reason even
+though you have MF's remaining - you have to let the program know by pressing
+'E' for END TURN at the main menu.
+
+ASIDE - THE TELEPORT EXPLOIT: If you cast a teleport spell while you have any
+MF's remaining, it will cost you 1 MF. However if you cast the teleport spell
+last thing in your turn, when you are at 0 MF but before you have pressed 'E',
+you get to make the teleport and take action in your new location, and your
+turn still won't have ended. In fact it's possible to cast multiple teleport
+spells while at 0 MF and extend a turn for as long as you are able and willing
+to use up teleports.
+
+.............
+U = USE SPELL
+
+Choose this and the game will go through all of your available spells, asking
+you in the case of each one whether you want to cast it now. Keep pressing 'N'
+to say NO until it's time to say (Y)ES for the spell you want. See ITEMS AND
+SPELLS YOU CAN BUY IN TOWN [9] and SPELL OF SEEKING [12]
+
+............
+E = END TURN
+
+Does just what it says - ends your turn. See the above 'M = MOVE' section to
+understand when and how you need to use this command.
+
+.....................
+L = LOOK AT MAGIC MAP
+
+There are four magic maps pointing you towards the locations of the Big Four
+items to be found during the game. Look at any or all magic maps you have found
+by using this command. See MAGIC MAPS [11]
+
+*******************************************************************************
+
+(7) UNIT TYPES
+
+Here are the units you can obtain during the game and their uses, strengths and
+weaknesses.
+
+*** WARRIORS
+
+The core unit of the game. You cannot fight anyone or anything if you have no
+warriors, and if you run out of them during a fight, you lose the fight (fail
+to gain any loot from it and are removed from it) no matter what other units of
+yours remain standing. Thus warriors function as both your hit points and your
+base fighting strength. You'll need a lot of warriors to win fights against
+more powerful groups of monsters.
+
+While there is no cap on the number of warriors you can have, it is not
+possible to gather so many warriors that you ever become invulnerable to
+enemies. This is because the game automatically throws proportionally larger
+groups of monsters at you based on the strength of your party at any particular
+time. (see COMBAT [14] for details)
+
+You can buy warriors in towns quite cheaply. If you run out of them, your party
+is considered to be in a dire way and the game will give you the opportunity on
+each turn to pray for 'help.' Praying is not always successful and eats up your
+whole turn instantly, but when it does work you will receive some warriors for
+free to just reactivate you.
+
+The number of rations consumed by your warriors in one turn is 20% the number
+of warriors you have. Note that ration consumption occurs once per turn, not
+per MF. If your turn begins and you have no rations, you will enter STARVATION
+mode. Some warriors will drop dead each turn, you may lose other units for
+various weird or amusing reasons and you will be reduced to 1 MF per turn. This
+is a bad place to be, so if you're starving and you see that you can't get to a
+town or sanctuary quickly on foot or by teleport, you should certainly pray for
+help in hopes of receiving some rations.
+
+While on the road, parley with any groups of warriors or other beings you meet
+if given the opportunity. The odds are high that they'll join you rather than
+fight you, and you can considerably improve the size of your army for free this
+way. Just don't forget that more warriors will need more rations. Don't invite
+80 warriors to join you if you're aware that you'll go into starvation mode
+next turn as a result.
+
+*** CLERICS
+
+A cleric is part fighting man, part holy man. Clerics aren't cheap but they
+have some neato powers that pay off significantly when you buy lots of them for
+your party.
+
+--- CLERIC POWERS:
+
+- Clerics will attempt to resurrect some of your slain warriors at the end of
+every round of fighting
+- One cleric counts as two warriors in a fight
+
+If you have any clerics in your party, the chance of them restoring slain
+warriors at the end of a combat round is:
+
+35 + (no. of clerics in party) %
+
+This percentage can equal or exceed 100, so if you have 65+ clerics, they
+should restore slain warriors after every round. The actual number of warriors
+restored is also proportional to the number of clerics you have, and if your
+army is large, the numbers can be spectacular, or almost total. The effect is
+most pronounced and important when you are fighting large back-to-back groups
+of monsters in the Witch King's fortress, because that's the only time in the
+game when you have no chance to restock your party between fights. Huge cleric
+numbers (EG 100) can negate nearly all losses.
+
+Clerics can be killed in battle, but tend to die at a far lower rate than your
+warriors,Â unless you have very few warriors. Unfortunately clerics can't
+resurrect other clerics, only warriors.
+
+If you visit a town market and have more than 14 clerics in your party already,
+you will not be able to buy any more. The way to get around this is to enter
+market with 14 or fewer clerics and buy a great stack of them in one big
+transaction, which you'll have to save up for first. For the mass resurrection
+power and fighting clout you'll gain, it can be worth it.
+
+*** SCOUTS
+
+Scouts are important units with lots of powers to bring to your party. They
+don't assist offensively in battles but can be casualties of them. They die at
+a low rate.
+
+Note that you can't buy any more scouts if you enter a market and have more
+than 9 of them already. The same trick applies here as applied with the
+clerics; save your money, enter the market with 9 or fewer scouts, then buy the
+huge number of them that you really want in one transaction.
+
+--- SCOUT POWERS:
+
+- Most important: Scouts increase your Sight Power (SP) (details follow)
+- Scouts help you carry gold, but not as much as warriors do (see YOUR PARTY.
+GOLD AND WEIGHT [5])
+- Scouts help you locate the entrance to the Witch King's Fortress (details
+follow)
+- (MULTIPLAYER ONLY) Scouts can spot nearby players on the map, allowing you to
+attempt to raid them, and can help repel raids by other players on your own
+camp
+
+- SCOUTS INCREASE YOUR SIGHT POWER (SP) / SIGHT POWER EXPLAINED
+
+The scout's main ability is to let you see further from where your party stands
+on the world map.
+
+Your Sight Power (SP) = (No. of scouts in party / 2) + 1
+
+SP extends around your party in all possible directions as far as you could
+move in (SP) steps, with diagonal movements permitted. Thus it manifests as a
+square field of visibility with your party at the approximate or exact centre,
+and whose side length is ( (No. of scouts in party) + 3 )
+
+An example:
+
+You have 8 scouts in your party.
+
+Your SP = (8/2) + 1 = 5
+
+Whenever your party moves, wherever it goes, it will see and reveal 5 map
+squares in all directions around it.
+
+In the demo diagram below for a party with an SP of 5 --
+
+. = a map square your party can see from where it stands, while
+
+X = where your party currently stands:
+
+      . . . . . . . . . . .
+      . . . . . . . . . . .
+      . . . . . . . . . . .
+      . . . . . . . . . . .
+      . . . . . . . . . . .
+      . . . . . X . . . . .
+      . . . . . . . . . . .
+      . . . . . . . . . . .
+      . . . . . . . . . . .
+      . . . . . . . . . . .
+      . . . . . . . . . . .
+
+Increase your SP to at least a few squares as soon as you can in the game by
+buying some scouts. Being able to see only one or two squares around you makes
+finding towns and sanctuaries much harder.
+
+37 scouts will give you an incredible field of vision whose dimensions are
+those of the world map. A more ridiculous 76 will instantly reveal the entire
+map, even if you happen to be standing in a corner of it at the moment of
+purchase.
+
+- SCOUTS HELP YOU LOCATE THE ENTRANCE TO THE WITCH KING'S FORTRESS
+
+When I say 'Help you locate...' I don't mean just finding where it is on the
+map. The Witch King's fortress is a 2 x 2 area which is never hard to find,
+being located in each new game at a semi-randomised position roughly around the
+centre of the map. When you move onto any of the fortress's squares, the game
+assumes you want to try to break in and storm the place, and checks to see if
+you were canny enough to find a way in.
+
+Your chance of finding a way in and thus progressing to the INSIDE THE FORTRESS
+[16] scenario is:
+
+(No. of scouts in your party) %
+
+with a bonus 75% if you possess the Horn of Opening. If your chance by this
+formula is 100% or better, you will always find the entrance. Inversely, not
+finding the entrance on one particular move has no repercussions for the
+future. Each time you move onto a fortress square (or stay on one), the game
+rechecks to see if you managed to locate the entrance.
+
+Never walk on a fortress map square if you don't want to try and break in, as
+there's a chance you may succeed in entering, and the game doesn't ask you to
+see if that's what you really wanted to do.
+
+- (MULTIPLAYER ONLY) SCOUTS CAN SPOT NEARBY PLAYERS ON THE MAP, ALLOWING YOU TO
+ATTEMPT TO RAID THEM, AND CAN HELP REPEL RAIDS BY OTHER PLAYERS ON YOUR OWN
+CAMP
+
+If another player is within your sight range as determined by your current SP,
+you may have the opportunity to try to raid them, which amounts to stealing
+gold and items from them. See RAIDERS below.
+
+When someone else attempts to raid you, the more scouts you have, the greater
+your chances of inflicting casualties on the attacker's raiders, even if they
+do manage to steal stuff from you in the process.
+
+*** RAIDERS
+
+Raiders have no use at all in a single player game of FOTWK, and should not be
+purchased if playing one.
+
+In a multiplayer game, raiders can be quite powerful. Having raiders lets you
+raid the camp of another player if it was first spotted by your scouts. Both
+the chances of a successful raid and the amount of gold and loot you can gain
+from that raid increase as your number of raiders increases. Raiders are met by
+the target player's warriors, who may kill some raiders during the raid. If
+warriors are so numerous as to succeed in outnumbering/killing all raiders, the
+raid will fail and no loot will be obtained.
+
+If you have no raiders, don't try raiding, as your chance of success will be
+zero and you'll have wasted your MF on the attempt.
+
+Raiders can steal gold and spells, and much more importantly, magic maps and
+Big Four items. If someone steals one or more Big Four items from you, you can
+either try to steal them back, or go back to the relevant dragon den(s) where
+you will be able to get another one of the stolen item. In this way it's
+possible for there to be more than one of each of the Big Four items floating
+around in a multiplayer game. (See MULTIPLAYER CONSIDERATIONS [21])
+
+A raided player also loses 1 MF for their next turn, but not if this would
+reduce them to 0 MF.
+
+*** WIZARD, THE
+
+The wizard appears for sale in towns less frequently than any other unit but
+makes for a great addition to your party as soon as you can afford the
+approximately 125 Gold price tag. You can only own one wizard at a time and he
+can be killed in battle, at which time you can replace him.
+
+--- WIZARD POWERS:
+
+- His mere presence is the equivalent of an extra 20 Warriors in battle
+- He will often cast offensive spells in battle
+
+*** ELVES AND DWARVES
+
+You can't buy elves or dwarves in town markets. You have to happen upon groups
+of them at random while walking around the world map, and then, when given the
+option to parley, say (Y)ES. The odds are that the humanoids in question will
+join you.
+
+DWARVES are brawlers. In a fight, each dwarf is as good as two warriors.
+
+ELVES frequently cast offensive spells in battle. The more elves you have, the
+stronger the effect of any spells they cast.
+
+Note that a random event that can strike at times during the game is that you
+will be told that elves or dwarves have stolen something from your party. Elves
+steal the Talisman of Speed. Dwarves steal the Hammer of Thor. Such thefts are
+completely unrelated to the presence or absence of elves or dwarves in your
+party, they happen regardless, so don't turn down elves or dwarves out of fear
+of theft.
+
+*******************************************************************************
+
+(8) TOWNS AND HAGGLING
+
+When you enter a town map space, or elect to stay where you are while already
+on one, you will visit that town's marketplace and can try to make one purchase
+during the current MF.
+
+You can bulk buy the following units, items and spells in towns. If you have
+more of an item than the number in brackets, that item will definitely not be
+listed for sale:
+
+RATION
+TELEPORT SPELL
+CLERIC           [ 14 ]
+SCOUT            [ 9 ]
+WARRIOR
+RAIDER           [ 14 ]
+SPELL OF SEEING  [ 1 ]
+RAFT
+MULE 
+WIZARD           [ 1 ]
+
+Availability and prices are randomised slightly on each visit to a market. This
+randomisation applies even to consecutive visits to the market in the same
+town. So if you don't see a particular item you want, or the price of something
+you want is too high for you, you don't have to go to another town. Buy
+something you do want during this MF, or don't, and then just choose to (M)OVE
+and (S)TAY WHERE YOU ARE on your next MF to get a total refresh of the market's
+inventory and prices.
+
+Remember however that refreshing the inventory cannot overcome the bracketed
+number limitations. You can never own more than 1 wizard, and no wizard will be
+for sale if you have one. Ditto with the spell of seeing. The other bracketed
+limitations, such as 14 clerics or 9 scouts, can be overcome in terms of your
+inventory by making one mass transaction of that unit type (see UNIT TYPES [7]
+- CLERICS for the explanation) while you are still below the limit, but no
+market will offer to sell you more clerics, scouts or raiders if you already
+have more than 14, 9 or 14 of them respectively.
+
+Buying is a haggling process. Each item or unit has a recommended price, but if
+you choose to buy it, you will be asked to nominate a price. If you offer less
+than the recommended price per unit and the merchant accepts your offer, you
+could save a lot of money, especially on a bulk buy. If you're unlucky, you may
+just aggravate the merchant and cause the market to close, essentially meaning
+you wasted this MF. This isn't too terrible, as the market reopens immediately
+and you can try again next MF, if you wish, by choosing to (M)OVE and then
+(S)TAY WHERE YOU ARE. But being ignored is definitely annoying, and if you are
+playing a game in which you care deeply about your score (I don't recommend
+this) you will want to minimise the number of wasted turns.
+
+--- SECRETS OF HAGGLING:
+
+When you make an offer...
+
+(Your offer) divided by (recommended price) = Barter Factor
+
+Chance of the market immediately closing in disgust at your offer = ((1-BARTER
+FACTOR) X 100) %
+
+Chance of the merchant accepting your reduced offer = (BARTER FACTOR X 100) %
+
+Meeting the merchant halfway on an offer does what it says. If the price
+difference is only 1 gold, it will mean you get the item for the lower price.
+
+If you don't meet the merchant halfway, the market might close, or you might
+get to make a new offer.
+
+*******************************************************************************
+
+(9) ITEMS AND SPELLS YOU CAN BUY IN TOWN
+
+RATIONS
+
+Needed to sustain your warriors on a turn-by-turn basis. (See UNIT TYPES [7] -
+WARRIORS) They don't weigh anything, and running out tends to be bad, so stock
+up.
+
+TELEPORT SPELL
+
+Teleport lets you instantly move to any space on the world map when you cast
+it. You will be presented with your cumulative world map and asked to move the
+cursor to select your destination. You can teleport deep into unexplored
+territory if you want, which, when you land there, can be a great way to
+suddenly reveal a lot of it via the halo of your SP. But don't risk teleporting
+into the unknown unless you have a raft or at least one more teleport spell -
+see LAKE DANGER! below.
+
+Teleporting when you have 0 MF remaining in a turn does not cause your turn to
+end, so that's usually the best time to cast the spell for maximum efficiency.
+You can also cast consecutive teleports while at 0 MF in this way without
+ending your turn.
+
+*** LAKE DANGER!
+
+DON'T teleport onto a lake space without a raft. A bunch of your guys will
+drown for starters, but the real danger is that you can hang your game. If you
+find yourself stuck on a lake space surrounded by nothing but other lake
+spaces, and you don't have a raft or a teleport spell, it is physically
+impossible to escape. Your first attempt to (M)OVE at this point will result in
+the game entering an infinite loop of asking you where you want to move to, and
+not accepting any response.
+
+SPELL OF SEEING
+
+You can only hold 1 spell of seeing at a time. Cast it and you will be able to
+take a look at the entire world map, regardless of how much of it you have
+personally seen or explored. Note however that seeing the whole map in this way
+does not add any detail to your personal world map. After you press a key, or a
+lot of time has passed, the map goes away, so note whatever it was you hoped to
+note beforehand. (EG - The location of the Witch King's fortress, of the
+nearest town or where a particular land formation might be relative to your
+party.) Be aware that if you're playing the game on an emulator and
+overclocking it, the map might disappear from the screen before you've had a
+good chance to study it.
+
+RAFTS
+
+Once you have a raft you can move across lake spaces, which makes it a lot
+easier to explore the map. Lakes are also encounter free, which is good to know
+if you want to move around in peace for any particular reason.
+
+There exists seemingly redundant code in the FOTWK program that forces you to
+start dropping rafts unless you have a mule for every four rafts owned. I
+haven't been able to find a reason to ever buy more than one raft.
+
+MULES
+
+Fantastic animals which help you carry all that gold. You can own an unlimited
+number of mules, and each mule lets you carry another 50 gold, so get a bunch
+of them early in the game. If lots of your warriors die during one battle, you
+may end up dropping all gold found at the end of it unless you've got mules to
+take up the weight.
+
+*******************************************************************************
+
+(10) SPECIAL ITEMS (NON-PURCHASEABLE)
+
+Here are the items you can obtain only through fighting and exploration. You'll
+most often find these items amongst the spoils of a fight, but sometimes you'll
+find them at the end of your turn while just walking around the world map.
+
+(In the case of all special items, you can only possess one of each at a time.)
+
+SWORD (DRAGON SLAYER)
+
+This sword gives you a big attack boost when fighting a dragon, but doesn't
+actually help in day-to-day combat.
+
+TALISMAN OF SPEED
+
+Grants you 1 extra MF each turn. Great to have, but nothing you can count on,
+as these talismans come and go. They're not too hard to find but they're also
+stolen with reasonable frequency by wandering elves.
+
+HAMMER OF THOR
+
+Owning one of these is as good as having another 15 warriors in your party for
+fighting purposes. Like the talisman, the hammer will come and go. You'll find
+it at random, then have it stolen by wandering dwarves, then find it again,
+etc.
+
+(11) MAGIC MAPS
+
+These maps reveal the locations of the four dragon dens in which you can find
+the Big Four items. You will usually find these maps amongst the spoils of a
+fight with monsters, but occasionally you may just find a map lying on the
+ground. Another way to get maps is by stealing them off other players in
+multiplayer.
+
+There are four maps a player can collect, one for each dragon den. You have a
+chance of finding any maps you currently don't have whenever you defeat some
+monsters. If another player steals your map(s) in multiplayer, you can replace
+them by any of the above described means - winning them off monsters, finding
+them on the ground or stealing them (back) off other players. In other words,
+there is not only one copy of each map in existence.
+
+The maps will be numbered 1-4 in your inventory, and you can use the (L)OOK AT
+MAGIC MAP command to examine them. Note that due to programming quirks, the map
+numbers may change around whenever you find new maps or have maps stolen by
+other players. For instance, if you have only one map, it will be called Map 1.
+If you then find a second map, it will be called Map 2. However, looking at Map
+1 again at this point may show a new, different location, while Map 2 may now
+show the view previously depicted by Map 1.
+
+The only time you are guaranteed to see absolute map numbers rather than
+relative ones is when you are in possession of all 4 maps at once.
+
+If this seems confusing, remember the basics: There are only 4 dragon dens in
+each game. They never move during a game and the item found in each particular
+den does not change. A total of four magic maps will depict the locations of
+these dens, but the map numbers may seem to change over time. Because of this,
+it is better to keep track of which Big Four item is found in which den by
+remembering what each particular map-depicted location looks like, and where it
+is on the world map, rather than by which map number goes with which item,
+because the map numbers may change during the game.
+
+READING AND FOLLOWING MAGIC MAPS
+
+When you look at a magic map, you will see a screen-filling close up hi-res
+view of the area around the corresponding dragon den, centred as much as
+possible on the den itself. The den location is marked by a white 'X'. If your
+party's location happens to be within that screen's worth of terrain, it will
+be indicated by the usual square white cursor.
+
+If you aren't so crazily lucky as to find yourself within walking distance of
+the den, you'll need to try to sleuth out where the scenery you're looking at
+is in terms of the world map.
+
+To do so, you need to choose 2 - LOOK AT WORLD MAP from the main menu, and try
+to visually match the land formations seen on the magic map with something you
+see on the world one.
+
+For instance, on the magic map you might observe that the dragon's den is on a
+mountain space at the top of a distinctive L-shape trail of mountains. That
+L-shape should be reasonably easy to spot on your world map if you have
+previously revealed it through exploration.
+
+In short, use anything and everything distinctive you see on the magic map to
+try to find the position of those land formations on your world map. Note the
+relative locations of towns, sanctuaries, bodies of water, etc., as all of
+these can help.
+
+If a dragon den is very near one of the four edges of the world map, this will
+be obvious on the magic map because the view will not be able to be centred on
+the den. For instance, if the white 'X' of the den is near the top of the magic
+map, that tells you that the den must be within a few spaces of the north/top
+edge of the world map. A den near the left edge of a magic map must be within a
+few spaces of the left edge of the world map, near the right must be near the
+right edge, etc.
+
+Of course there will be many times when a magic map is showing you a place
+that's out in terrain you haven't seen or explored yet, so you won't be able to
+find that location on the world map. That's obviously the cue for you to
+continue exploring until you do find it. Make sure to keep checking back with
+any magic maps whose world map positions you haven't yet verified as you keep
+playing.
+
+*******************************************************************************
+
+(12) SPELL OF SEEKING
+
+This is the only spell you can't buy. You can find it amongst combat loot or
+occasionally just lying on the ground. It's probably also the most
+success-hastening spell you can get, as it instantly reveals the location of
+any one Big Four item that you nominate. More accurately, it reveals the
+location of the dragon den you should visit to obtain that item. It does so by
+flashing the target square on your world map. Study the map carefully before
+dismissing it to memorise the location. Even if the square is out on its own in
+a black void of unexplored territory, you can get some kind of coordinate
+reference point for it by noting that it's roughly or exactly X squares above
+or below something else that you can see, or N squares from a corner of the
+map, etc. Also note that on the Apple II, the width of a character in the text
+window beneath the map is exactly the width of one of the map squares, so
+counting text characters in from either side of the screen can serve as a good
+reference.
+
+It's a good idea to immediately follow up the spell of seeking with a teleport
+spell to zap yourself right onto the target space before you forget where it is
+- assuming your party isn't so weak that it won't be able to bash up the dragon
+it finds there.
+
+*******************************************************************************
+
+(13) BIG FOUR ITEMS
+
+1. HORN OF OPENING - Lets you find the entrance to the Witch King's fortress
+very easily. Possessing the horn gives you a base chance of success in doing so
+of 75% (instead of the regular base chance of 0%) which is then improved by 1%
+for each scout in your party. See UNIT TYPES [7] - SCOUTS - SCOUTS HELP YOU
+LOCATE THE ENTRANCE TO THE WITCH KING'S FORTRESS
+
+2. BOOTS OF STEALTH - These give you an extra MF each turn, help protect you
+from monsters in the Witch King's fortress and help you in the final fight with
+the Witch King.
+
+3. ARMOUR OF DEFENCE - The armour helps protect you from monsters in the Witch
+King's fortress and helps you in the final fight with the Witch King.
+
+4. SWORD OF STRENGTH - Helps you fight monsters in the Witch King's fortress
+and helps you in the final fight with the Witch King.
+
+Alone, the boots are probably the best item to have, as they make you more
+efficient in every turn of the game as well as helping you in the fortress. The
+horn certainly helps a lot to find the way in, but you can get by without it if
+you just buy a lot of scouts. 50 scouts will find the way in in one in two
+moves on average, which is very practical. 33 scouts will find the way in in
+one in three moves on average, etc. Trying to find the way in with just 20
+scouts (1 in 5 moves) or fewer may start to feel like a drag, and possibly take
+a lot of turns.
+
+Items 2-4 collectively can be viewed as thirds of a success factor for your
+travails in the Witch King's fortress. See INSIDE THE FORTRESS [16] and
+FIGHTING THE WITCH KING [17]
+
+*******************************************************************************
+
+(14) COMBAT
+
+When your turn ends on a woods or mountains space, you may encounter monsters.
+Chances of an encounter are average in the woods, high in the mountains and
+100% in a mountain dragon den (see DRAGON DENS [15])
+
+Monsters usually appear in groups whose size is calculated relative to the size
+of your own forces, so while you can become very powerful by buying hundreds of
+warriors, doing so will generate proportionally bigger groups of baddies.
+Damage inflicted and casualties in battle are also proportional, as are
+monetary rewards. You will reap lots of gold by winning a string of big fights
+with a huge army, but the monsters encountered will tend to hack your numbers
+back down towards a more moderate range, at which point your casualty rate will
+also decrease. You'll certainly want to be in the 100+ warriors range before
+you storm the Witch King's home.
+
+Also, don't forget the power afforded by having other units and magic weapons
+in your party. If you have lots of clerics, you can sustain much higher numbers
+of warriors over time, well into the 100's, with your clerics undoing most of
+the damage inflicted on you after each round of battle.
+
+Elves and dwarves die at a far lower rate than warriors, so if you manage to
+parley large groups of either into joining you, that can make you very
+powerful.
+
+When you enter battle mode, game options are simple. You may be surprised by
+the monsters, forcing you into combat. If you aren't surprised, you will be
+told the number and kind of monsters you face, and asked whether you want to
+run away. If (Y)ES, you might escape and be called a coward (sticks and
+stones...) Or you may be pulled into the fight anyway.
+
+The broad generalisation about enemy strength is this: More numerous monsters
+hurt you more than less numerous but 'bigger' monsters. So if you have a huge
+fighting force, you will lose fewer warriors in taking on a dragon or a few
+ogres than you will if you fight a swarm of 1292 hobgoblins. Monsters who are
+on their own may sometimes not even take 1 warrior off you in a fight. This is
+why ripping off dragons is the best loot-making strategy in the game (see
+DRAGON DENS [15]). Dragons are also the only monsters who display extra
+vulnerability to a particular weapon you can obtain, the SWORD (DRAGON SLAYER).
+
+Once a fight begins, status messages will start to crawl down the screen. Note
+the instruction at the top of the screen: 'PRESS 'R' TO RETREAT!!'
+
+While the status messages continue to appear, tap 'R' once at any time if you
+don't like the way the fight's going and want to try to run away at the next
+opportunity. The program will give no indication that it heard you, but before
+the next combat round begins, you will be asked if you want to retreat. If
+(Y)ES, you may succeed in escaping, or you may not.
+
+If you don't tap 'R', the game assumes you want to fight on, and will simply
+tell you to press RETURN at the end of the round to begin the next one.
+
+Note also that if you're playing this game on an emulator and are overclocking
+the virtual Apple II, the status messages may appear too fast for you to be
+able to hit (R)ETREAT in time, at least during the initial round of combat.
+
+Battle continues until you run out of warriors, the monsters are dead or you
+run/retreat successfuly. Some battles may seem to enter a holding pattern in
+which the numbers on each side don't change for many consecutive rounds,
+especially when you have few warriors fighting a single monster. Don't worry
+about this, just keep pressing RETURN and the deadlock will eventually break.
+
+If you win, you will receive a complete list of all gold, items and spells you
+found. If you're too encumbered to carry your newfound money you will
+immediately drop some or all of it. (See YOUR PARTY. GOLD AND WEIGHT [5])
+
+*******************************************************************************
+
+(15) DRAGON DENS
+
+As described in the GAMEPLAY OVERVIEW [2], dragon dens are not visible to the
+eye. They look the same as mountain spaces. You might accidentally stumble into
+them while exploring, but usually you will be visiting them by choice, having
+first discovered their location by studying magic maps or casting spells of
+seeking.
+
+Whenever you move onto or stay on a dragon den, you will always encounter at
+least one dragon. It's possible to assemble a party large enough that you will
+start to encounter groups of more than one dragon, by which time you probably
+will have no trouble dealing with however many dragons are thrown at you.
+
+The important thing to know is that you will always fight a dragon when on a
+dragon den. And you can stay there and fight a dragon every single turn if you
+want. This is an excellent idea if you party proved tough enough to kill the
+first dragon with few or no scratches, because you get the highest gold returns
+in the game from slain dragons.
+
+For a small party, and if you haven't got yourself a SWORD (DRAGON SLAYER) yet,
+dragons may take a few rounds to wallop, and will cast spells at you in the
+meantime. They might also breathe fire (happens rarely) which, in a manner so
+loyal to Dungeons & Dragons rules that it brings a tear to my eye, does damage
+proportional to the number of hit points the dragon has left.
+
+If you beat the dragon and don't already have the Big Four item to be found in
+its den, you will always succeed in finding that item amongst your loot.
+
+*******************************************************************************
+
+(16) INSIDE THE FORTRESS
+
+When you move onto the Witch King's fortress on the map, that's you saying 'I
+want to invade the fortress now!' If you successfully locate the entrance,
+thanks to the Horn of Opening and/or your scout units (see UNIT TYPES [7] -
+SCOUTS - SCOUTS HELP YOU LOCATE THE ENTRANCE TO THE WITCH KING'S FORTRESS) you
+will progress to the 'Inside The Fortress' scenario.
+
+This is something you DON'T want to do until you've built your party and
+inventory up enough that you feel pretty confident of victory, because if you
+fail inside the fortress, it is guaranteed that most or all of your party will
+be destroyed before you get kicked out.
+
+Monsters met inside the fortress inflict huge damage compared to their cousins
+outside it. (They're drawing on the Witch King's evil aura or something.) This
+is where the Big Four items come in. For each of Big Four items 2-4 you have,
+you negate roughly a third of the monsters' special advantage. If you don't
+bring any of the items with you, fortress monsters are likely to tear through
+even 2000+ warriors in a few rounds. Thus, conventional wisdom says, 'Bring as
+many Big Four items with you as possible.' However, there is one effective
+workaround: If you bring huge numbers of clerics with you, it's possible to
+resurrect nearly all slain warriors after every round of combat. 100 clerics
+definitely works.
+
+... The Witch King's fortress contains 16 chambers. Their arrangement is
+semi-randomised in each new game, but they always present as a square grid of 4
+x 4 dimensions. An invading player enters the fortress via the court room,
+which is always on the north edge of the fortress at grid coordinate 3,1
+
+The Witch King can be found in one randomly chosen room in the fortress, from
+which he never moves during the game. There is also a randomly placed
+teleporter in one room which will throw your party outside.
+
+You can move around the fortress one room at a time using any of the cardinal
+compass directions. All rooms contain exits in all available directions, so
+there's no maze-like quality to it. You just want to keep exploring until you
+find the Witch King. The catch is that in almost every room you move through
+you have to fight a big group of tough monsters, and there's no chance of
+respite until you win the game or are thrown out of the fortress for any
+reason, the most common one being that all your warriors were killed.
+
+Make a simple map of the fortress as you go, noting down which rooms you've
+already cleared. If you find the telporter, note where it is, because it won't
+move. Ditto with the Witch King.
+
+While inside the fortress, you are able to make unlimited moves until one of
+three things happens:
+
+1. You find and slay the Witch King, and win the game.
+2. You find the Witch King but lose the fight with him.
+3. You lose all your warriors while fighting monsters.
+4. You tread on a teleporter and are unceremoniously evicted.
+
+In cases 3-4, the result is that your turn will end and your party (or what is
+left of it) will be randomly deposited on a map square not too far from the
+fortress.
+
+*******************************************************************************
+
+(17) FIGHTING THE WITCH KING
+
+Once you've found the Witch King, your party temporarily vanishes while you and
+he jump into a swordfight.
+
+There are no commands you can issue during the fight; all you can do is cross
+your fingers as you read the blow by blow account and keep pressing RETURN.
+
+The chance of you winning the fight is broadly determined by how many of three
+of the Big Four items you have obtained: the Boots of Stealth, the Armour of
+Defence and the Sword of Strength. Each one subtly helps in the way you would
+expect; the boots make you harder to hit, the armour absorbs damage, the sword
+helps you inflict more damage.
+
+Having said that, my own experience is that you can still win the fight about
+two thirds of the time if you bring none of these items with you. If you bring
+all of them you are helping to assure your win, though you actually can still
+lose if you're extraordinarily unlucky.
+
+'Two thirds of the time' may seem to be quite good starting odds against the
+Witch King, but the price of failure is extremely high. If the Witch King beats
+you, you lose everything you own except for your scouts, warriors and your
+wizard if you have one, before being evicted from the fortress. So that's all
+your money, spells, Big Four items, etc. With no rations you will begin to
+starve immediately on your next turn outside the fortress, too.
+
+If you beat the Witch King, you win the game and the glory, and will then
+receive your score - which you should probably ignore.
+
+*******************************************************************************
+
+(18) SCORING
+
+When you kill the Witch King, your final score =
+
+   (100 - No. of turns you took to win) divided by
+   (1 + (No. Big Four items 2-4 you possess) )
+
+with a minimum possible score of 0. Game difficulty has no bearing on the
+score.
+
+Thus the highest scores are likely to be achieved by playing on Easy (1)
+difficulty, and not collecting any of Big Four items 2-4 (IE everything but the
+Horn) before offing the Witch King as quickly as possible.
+
+The score formula for the game is ill-conceived and not very indicative of how
+well you played, so I choose to ignore it most of the time. However, if you do
+want to try to rack up a great score, the secret is to aggressively use the
+teleport exploit. See THE CHEATINGEST THING YOU CAN DO IN THE GAME (WITHOUT
+HACKING IT) [23]
+
+*******************************************************************************
+                                   APPENDICES
+*******************************************************************************
+
+(19) GAME STRATEGY OVERVIEW
+
+- When you start a new game your first priority should be to locate a town. If
+you're lucky, one may already be visible on your close up map. If not and
+you're playing on Easy, you will have one spell of seeing in your inventory, so
+cast it now and scope out the nearest / most readily accessible town. If you're
+not playing on Easy, it's time to start wandering at random, but do so
+efficiently.
+
+- It's not uncommon to start starving and losing warriors before finding your
+first town, because you don't start the game with many rations. So also keep an
+eye out for a sanctuary where you may be able to grab some life-saving food.
+Visiting a sanctuary is a more efficient way to save yourself than by praying
+(which is random and turn-devouring) except when the distance to the nearest
+sanctuary is great.
+
+- Once you've staked out one town, you're in business. Get some rations then
+wander the nearby terrain looking for monsters to fight for loot. If you see a
+mountain range nearby, that's good as you can trigger an encounter in mountains
+on almost every move.
+
+- Balance fighting and loot gathering with returning to town to replenish your
+forces and supplies, and with some exploration of the map. With your early
+spoils, buy mules so you can carry all gold you find, and buy some scouts so
+you can start to uncover the world map quickly. You only have to buy a raft
+once in the game, so do it as soon as is practical so that you can move
+anywhere on the map.
+
+- Haggle prices down in markets. It can be more efficient to spend a few MF's
+trying to successfully haggle a lower price for an item you wish to buy in bulk
+than to accept higher prices and have to mount bigger gold-finding expeditions.
+Also remember that if rations are being sold for 2 gold each, you'll be able to
+get them for 1 if you offer 1 and are then able to meet the merchant halfway.
+
+- Spells of seeking are worth casting immediately once obtained if you can
+follow them up with a teleport to the revealed dragon den. Remember that you
+can stock up on teleport spells at the market, and will also find them with
+reasonable frequency on slain monsters.
+
+- Study magic maps as soon as you find any. You may recognise the land
+formations on them and know where to go straight away, or be able to guess at
+where the place they depict is if it's near the edge of the world map. You may
+even discover you're within a screen of a dragon den but didn't know it.
+
+- Dragons are the best targets in the game. If you've found one, stay on the
+space and attack it for turn after turn. This becomes especially true as your
+army grows larger. 2000 orcs met whilst wandering the countryside will dent
+you, but 5 dragons probably still won't. Teleport onto a dragon repeatedly
+after you've run out of MF in your turn if you want to make large amounts of
+money in the shortest possible time.
+
+- For some extravagant map-revealing power or warrior-resurrecting power, hoard
+your money then buy up hugely on scouts or clerics respectively in single
+transactions.
+
+- How do you know you're ready to tackle the Witch King's fortress? Make sure
+you can get into the fortress in the first place by bringing either the Horn of
+Opening or lots of scouts. To be able to survive the gauntlet of fortress
+monsters, bring some or all of the combat-oriented Big Four items (Sword of
+Strength, Armour of Defence, Boots of Stealth). And/or, buy a huge stack of
+clerics. 100 clerics will resurrect nearly all lost warriors every round, no
+matter how great the casualties. Note that with or without clerics, your
+chances of losing to the Witch King himself are increased if you don't possess
+any of the Big Four items. Losing to the Witch King personally is a real game
+wrecker, far more serious than losing to any of his monster friends.
+
+*******************************************************************************
+
+(20) STARTING INVENTORY BY DIFFICULTY LEVEL
+
+The difficulty level a player selects affects just one thing -Â their starting
+inventory.
+
+Here are the inventories you get for commencing on the different difficulty
+levels 1 through 4:
+
+DIFFICULTY 1 (EASY) START INVENTORY                 
+                                        
+AMOUNT   :     ITEM                     
+  25     : RATIONS
+  1      : TELEPORT SPELL
+  2      : CLERICS
+  3      : SCOUTS
+  50     : GOLD PIECES
+  50     : WARRIORS
+  1      : SWORD (DRAGON SLAYER)
+  3      : RAIDERS
+  1      : SPELL OF SEEING
+  1      : MULE
+
+DIFFICULTY 2 START INVENTORY   
+
+AMOUNT   :     ITEM
+  26     : RATIONS
+  1      : TELEPORT SPELL
+  1      : CLERIC
+  2      : SCOUTS
+  50     : GOLD PIECES
+  40     : WARRIORS
+  2      : RAIDERS
+  1      : MULE
+
+DIFFICULTY 3 START INVENTORY   
+
+AMOUNT   :     ITEM
+  22     : RATIONS
+  1      : TELEPORT SPELL
+  1      : SCOUT
+  40     : GOLD PIECES
+  30     : WARRIORS
+  1      : RAIDER
+  1      : MULE
+
+DIFFICULTY 4 (HARD) START INVENTORY   
+
+AMOUNT   :     ITEM
+  18     : RATIONS
+  1      : TELEPORT SPELL
+  30     : GOLD PIECES
+  20     : WARRIORS
+
+Based on the number of scouts you begin the game with, here are the dimensions
+of the map view you will have when you start:
+
+    -------------------!-------------------------------
+        DIFFICULTY     !     LOCAL VIEW DIMENSIONS
+    ___________________!_______________________________
+        1  (Easy)      !            6 x 6
+        2              !            5 x 5
+        3              !            4 x 4
+        4  (Hard)      !            3 x 3
+    -------------------!-------------------------------
+
+*******************************************************************************
+
+(21) MULTIPLAYER CONSIDERATIONS
+
+1. The difficulty level chosen by each player affects nothing but their
+starting inventory. You can handicap experienced players by starting them on a
+higher difficulty.
+
+2. The option to save the game is offered after each full round of player
+turns.
+
+3. Logically speaking, a player should only be able to benefit from knowledge
+of the world map (and other matters) that they have gained themselves during
+their own turn. But to enforce this in reality, you'd have to make players face
+away from the screen whenever it isn't their turn, otherwise they can study
+each other's world maps, magic maps, locations and inventories, which obviously
+affects gameplay. I wonder if the original FOTWK manual recommended the facing
+away solution?
+
+4. In multiplayer, there can be multiple incidences of all of the Big Four
+items, and ultimately it's possible for all players to have all four items at
+once.
+
+For instance, if Player A obtains the Horn of Opening from the relevant dragon
+den, and is then raided by Player B, who steals the horn, Player A could now
+get a new horn by revisiting the dragon den. If that horn were stolen too, by
+Player C, Player A could get yet another horn from the dragon den. In this way,
+if players raid each other and revisit the dragon dens enough, lots of Big Four
+items will come into the game. As many of each one as there are players.
+
+*******************************************************************************
+
+(22) COMBAT SPELLS
+
+Wizards, elves, dragons, ogres and hackers can cast spells in combat.
+
+Here's a list of the relative offensive power of the spells you will see and
+hear being lobbed about by your friends and enemies:
+
+1. Death Ray (1-9 power)
+2. Faerie Fire (1-10)
+3. Lightning Bolt / Tower of Flame (1-13)
+4. Fireball (1-20)
+
+*******************************************************************************
+
+(23) THE CHEATINGEST THING YOU CAN DO IN THE GAME (WITHOUT HACKING IT)
+
+With the teleport exploit you can make as many moves in a turn as you want
+without it ever ending, so long as you are able to keep on teleporting.
+
+This tip is most helpful in a multiplayer game, where it holds up other players
+from doing anything, but it can also help you maximise your effectiveness in a
+single player game in which you have decided to care about your final score, or
+to simply try and take as few turns as possible.
+
+Described below is the best way I have discovered to prolong a turn almost
+indefinitely via the teleport exploit. You must make some preparations before
+you can do this, but it may prove to be the last turn you ever take in the
+game, because you can cap it off by teleporting to the Witch King's fortress.
+
+First, your party needs to be big enough that it draws large amounts of gold
+from slain monsters. 150+ warriors is a good number. You should also bring at
+least 60 mules, the more the better. Second, you need to know where one dragon
+den is. Bringing rations is theoretically unimportant because if the turn
+rarely or never never ends, few or no rations are consumed.
+
+Now, buy up on teleport spells in town. Spend all your money on as many as you
+can. Teleport to the dragon and wallop it. Continue to (S)TAY WHERE YOU ARE and
+wallop the dragon until you're out of MF's. Now, teleport onto the dragon
+repeatedly until you're down to your last few teleports. Note that you have
+done all this in one turn. When laden with gold and down to your last few
+teleport spells, teleport back to a town. If you can, immediately buy another
+big stack of teleport spells. It's important to try to get them at first
+opportunity because they aren't always available for sale, and you don't want
+to have to (E)ND your turn because you ran out. If you need to buy more of
+anything else, use teleport spells to stay on the town and revisit the market.
+You should have made so much money from the dragons that you can afford a huge
+stack of teleport spells and new forces, at which point you can teleport back
+to the dragon and continue the loop. Essentially your goal is to teleport
+endlessly so that your turn never ends, killing dragons, acquiring gold at an
+ever-increasing rate, teleporting on the town to buy more teleports and units
+as needed, revisiting the dragon den, etc.
+
+If this works out, you may be able to go on to complete the whole game in this
+one turn.
+
+*******************************************************************************
+
+(24) COMMODORE 64 VERSION
+
+The game was ported to the Commodore 64 in 1984, and the port appears to be
+verbatim in almost every way. The musical cues and sound effects are exactly
+the same as on the Apple. The title screen has a few more colours available to
+it, and the hi-res maps are also slightly prettier, though they draw more
+slowly than on the Apple. It's funny that the lo-res maps are verbatim, because
+on the Apple they're generated by a native lo-res mode, whereas in the
+Commodore 64 version they would have had to emulate that to make it look
+exactly the same. Finally, a too-dark blue font is used for the text on the
+Commodore.
+
+*******************************************************************************
+
+(25) FM-7 VERSION
+
+I haven't been able to find an FM-7 copy of the game to try on an emulator, and
+even if I could, I can't read Japanese. But I have seen some screenshots from
+this version and the game itself looks to be basically the same. One cool
+addition is a moody loading screen featuring a digitised photo of an old castle
+by a lake.
+
+*******************************************************************************
+                                  (26) CREDITS
+*******************************************************************************
+
+Thanks to M E Mehlich who designed and programmed FOTWK, and Jim Talbot of
+Avalon Hill who painted the game's highly memorable box cover art.
+
+Thanks to ASchultz for his friendship and Apple II power, to Zigfried for a
+spot of help with Japanese, and to all folks who host this guide. And let's not
+forget about me, I wrote this thing.
+
+This FAQ is Copyright 2009 Wade Clarke, all rights reserved.
+All copyrights and trademarks are acknowledged.
+Fortress of the Witch King is (C) 1983 by Avalon Hill

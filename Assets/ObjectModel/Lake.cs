@@ -4,11 +4,11 @@ using System.Text;
 
 namespace FotWK
 {
-	public class Lake : ILocation
+	public class Lake : BaseLocation
 	{
-		public void onVisit()
+		public override void onVisit()
 		{
-
+			NextScene("MoveScene");
 		}
 
 	}

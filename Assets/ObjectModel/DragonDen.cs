@@ -4,13 +4,13 @@ using System.Text;
 
 namespace FotWK
 {
-	public class DragonDen : ILocation
+	public class DragonDen : BaseLocation
 	{
 		Force force;
 
-		public void onVisit()
+		public override void onVisit()
 		{
-
+			NextScene("MoveScene");
 		}
 	}
 }

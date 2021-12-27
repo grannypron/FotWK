@@ -8,7 +8,7 @@ namespace FotWK
 {
     public static class LocationFactory
     {
-        public static ILocation getVisitByTileName(String tileName) 
+        public static BaseLocation getVisitByTileName(String tileName) 
         {
             tileName = tileName.ToLower();
             if (tileName == "forest")

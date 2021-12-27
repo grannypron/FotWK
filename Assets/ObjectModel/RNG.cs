@@ -13,5 +13,10 @@ namespace FotWK
             int roll = UnityEngine.Random.Range(1, 100);
             return roll <= percentage;
         }
+        public static int rollInRange(int start, int end)
+        {
+            int roll = UnityEngine.Random.Range(start, end);
+            return roll;
+        }
     }
 }

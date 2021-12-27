@@ -1,22 +1,34 @@
-﻿namespace FotWK
-{
-    class UnityGameEngine : IGameEngine
-    {
-        public static UnityGameEngine mSingleton = new UnityGameEngine();
+﻿using UnityEngine;
 
-        UnitySoundEngine mSoundEngine = new UnitySoundEngine();
+namespace FotWK
+{
+    class UnityGameEngine : MonoBehaviour, IGameEngine
+    {
+
+        private UnitySoundEngine mSoundEngine;
+        private static UnityGameEngine mGameEngine;
+
+        void Start() { }
+
+        void Awake()
+        {
+            DontDestroyOnLoad(this.gameObject);
+            mGameEngine = this.gameObject.GetComponent<UnityGameEngine>();
+            mGameEngine.mSoundEngine = this.gameObject.GetComponent<UnitySoundEngine>();
+        }
+
         UnityGameEngine()
         {
         }
 
         public ISoundEngine getSoundEngine()
         {
-            return mSoundEngine;
+            return mGameEngine.mSoundEngine;
         }
 
         public static IGameEngine getEngine()
         {
-            return mSingleton;
+            return mGameEngine;
         }
     }
 }

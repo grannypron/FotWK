@@ -4,11 +4,11 @@ using System.Text;
 
 namespace FotWK
 {
-	public class WitchKingSpot : ILocation
+	public class WitchKingSpot : BaseLocation
 	{
-		public void onVisit()
+		public override void onVisit()
 		{
-
+			NextScene("MoveScene");  // or EndScene???
 		}
 	}
 }

@@ -9,8 +9,14 @@ using FotWK;
 
 public class VisitSceneEvents : MonoBehaviour
 {
+
+    public delegate void VisitSceneInputCallback(string key);
+
     private const int NUM_CHARS_PER_LINE = 51;
     private const int LINE_CENTERING_OFFSET = 5;
+
+    private VisitSceneInputCallback mInputCallback = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,47 +26,52 @@ public class VisitSceneEvents : MonoBehaviour
         Text txtScreenText = GameObject.Find("txtScreenText").GetComponent<Text>();
         txtScreenText.text = formattedTileString.ToUpper();
 
-        ILocation location = LocationFactory.getVisitByTileName(tile);
+        BaseLocation location = LocationFactory.getVisitByTileName(tile);
         location.onVisit();
-        NextScreen();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (mInputCallback != null && Input.anyKeyDown)
+        {
+            mInputCallback = null;
+            mInputCallback(Input.inputString);
+        }
+
     }
 
-    public static void SetText(string txt)
+    public static VisitSceneEvents GetVisitSceneEvents()
     {
+        return GameObject.Find("EventSystem").GetComponent<VisitSceneEvents>();
+    }
+
+    public void SetText(string txt, bool center = false)
+    {
+        if (center)
+        {
+            txt = centerString(txt);
+        }
         GameObject.Find("txtScreenText").GetComponent<Text>().text = txt;
     }
 
-    public static void AddTextLine(string txt)
+    public void AddTextLine(string txt)
     {
         GameObject.Find("txtScreenText").GetComponent<Text>().text += "\n" + txt;
     }
 
-    void NextScreen()
+    public void ActivateInputKeypress(VisitSceneInputCallback inputCallback)
     {
-        StartCoroutine(LoadMainMenu());
+        this.mInputCallback = inputCallback;
+        InputField inputCursor = GameObject.Find("inputCursor").GetComponent<InputField>();
+        inputCursor.Select();
+        inputCursor.ActivateInputField();
     }
 
-    private string centerString(string str)
+    public static string centerString(string str)
     {
         int paddingLeft = (int) Math.Floor((NUM_CHARS_PER_LINE - str.Length) / 2f);
         return str.PadLeft(paddingLeft + LINE_CENTERING_OFFSET);
     }
 
-    IEnumerator LoadMainMenu()
-    {
-        yield return new WaitForSeconds(Globals.VISIT_SCREEN_NO_EVENT_PAUSE_TIME);
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MainMenu");
-
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-    }
 }

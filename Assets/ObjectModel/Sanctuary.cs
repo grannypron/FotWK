@@ -4,11 +4,12 @@ using System.Text;
 
 namespace FotWK
 {
-	public class Sanctuary : ILocation
+	public class Sanctuary : BaseLocation
 	{
-		public void onVisit()
+		public override void onVisit()
 		{
-			UnityGameEngine.getEngine().getSoundEngine().playSound("Sanctuary");
+			UnityGameEngine.getEngine().getSoundEngine().playSound("Sanctuary", VisitSceneEvents.GetVisitSceneEvents());
+			NextScene("MoveScene");
 		}
 	}
 }

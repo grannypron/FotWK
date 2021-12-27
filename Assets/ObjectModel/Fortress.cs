@@ -4,11 +4,12 @@ using System.Text;
 
 namespace FotWK
 {
-	public class Fortress : EncounterableLocation
+	public class Fortress : BaseLocation
 	{
 		public override void onVisit()
 		{
-			base.onVisit();
+            VisitSceneEvents.GetVisitSceneEvents().SetText("INVADING THE FORTRESS OF THE WITCH KING");
+			NextScene("MoveScene");   // or EndScene if they win
 		}
 
 	}

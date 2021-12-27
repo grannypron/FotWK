@@ -6,12 +6,12 @@ namespace FotWK
 {
 	public class Party
 	{
-		Force force;
-		int gold;
-		int rations;
-		Array spells;
-		Array equipment;
-		Array magicMaps;
-		Array specialItems;
+		public Force force;
+		public int gold;
+		public int rations;
+		public Array spells;
+		public Array equipment;
+		public Array magicMaps;
+		public Array specialItems;
 	}
 }

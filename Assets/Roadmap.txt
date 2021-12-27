@@ -1,0 +1,23 @@
+Encounters
+	- capture dun dun dun dun sound
+	- Surprise mechanic
+	- Parlay mechanic - start testing the input gathering and test the code to add the force numbers to the party
+	- Run away mechanic
+	- Playing a second sound on surprise never plays - probably related to sounds don't always finish playing
+	- 3520  PRINT "YOU HAVE FOUND THE FOLLOWING ITEMS" mechanic
+Inventory screen
+Battles
+Maybe use generics more for the monsters?
+Spells
+Magic Map
+Load/Save 
+Moves per turn
+Player name mechanic
+Map level difficulty mechanic
+Player level difficulty mechanic
+
+- Rando todos:
+"STAND BY.  FILLING ARRAYS" should be in negative text
+Sounds don't always finish playing
+- double check the formula for parlay success with Wade Clarke's FAQ/game - only need 100 food/gold?
+- Get better about the naming convention of input fields like VisitScreenInput vs inputNumPlayers

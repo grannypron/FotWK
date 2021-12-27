@@ -4,8 +4,7 @@ using System.Text;
 
 namespace FotWK
 {
-	public class Force
+	public class Force : Dictionary<UnitTypeID, int>
 	{
-		Array units;
 	}
 }

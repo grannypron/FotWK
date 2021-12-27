@@ -4,14 +4,14 @@ using System.Text;
 
 namespace FotWK
 {
-	public class Town : ILocation
+	public class Town : BaseLocation
 	{
 		Force force;
 		Array equipment;
 		Array units;
-		public void onVisit()
+		public override void onVisit()
 		{
-
+			NextScene("MoveScene");
 		}
 	}
 }

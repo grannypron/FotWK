@@ -6,9 +6,10 @@ namespace FotWK
 {
 	public class Mountains : EncounterableLocation
 	{
-		public override void onVisit()
-		{
-			base.onVisit();
+		const int mEncounterChance = 80;
+
+		public override int getEncounterChance() {
+			return mEncounterChance;
 		}
 
 	}
