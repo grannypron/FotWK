@@ -1,0 +1,3 @@
+The game seems to use a seed for random generation so the same game pretty much happens if you make the same moves.  We don't really do that.
+
+No effort was made to order the inventory screen listing in the order that the original game ordered it.

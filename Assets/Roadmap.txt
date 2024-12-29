@@ -1,20 +1,20 @@
 Encounters
-	- capture dun dun dun dun sound
 	- Surprise mechanic
 	- Parlay mechanic - start testing the input gathering and test the code to add the force numbers to the party
 	- Run away mechanic
 	- Playing a second sound on surprise never plays - probably related to sounds don't always finish playing
 	- 3520  PRINT "YOU HAVE FOUND THE FOLLOWING ITEMS" mechanic
 Inventory screen
-Battles
+Battles - Battle Scene
 Maybe use generics more for the monsters?
 Spells
 Magic Map
-Load/Save 
+Load/Save - serialization of state - json?
 Moves per turn
 Player name mechanic
 Map level difficulty mechanic
 Player level difficulty mechanic
+Remove GamesState.initForDemo() and remove GameState-deleteme from MainMenu scene
 
 - Rando todos:
 "STAND BY.  FILLING ARRAYS" should be in negative text
