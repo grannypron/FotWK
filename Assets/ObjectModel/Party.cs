@@ -9,9 +9,27 @@ namespace FotWK
 		public Force force;
 		public int gold;
 		public int rations;
-		public Array spells;
-		public Array equipment;
-		public Array magicMaps;
-		public Array specialItems;
+		public SpellCollection spells;
+		public Equipment[] equipment;
+		public MagicMap[] magicMaps;
+		public SpecialItem[] specialItems;
+		public SupportUnitCollection supportUnits;
+
+		public void initializeToStartingValues()
+		{
+			rations = 25;
+			gold = 50;
+			spells = new SpellCollection();
+			spells[SpellType.SEEING] = 1;
+			spells[SpellType.TELEPORT] = 1;
+			force = new Force();
+			//force.Add(UnitTypeID.Cleric, 2);
+			//force.Add(UnitTypeID.Scout, 3);
+			//force.Add(UnitTypeID.Raider, 3);
+			force.Add(UnitTypeID.Warrior, 50);
+			supportUnits = new SupportUnitCollection();
+			supportUnits[SupportUnitType.Mule] = 1;
+			specialItems = new SpecialItem[] { new DragonSlayer() };
+		}
 	}
 }
