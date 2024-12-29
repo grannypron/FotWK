@@ -12,6 +12,7 @@ namespace FotWK
 
         void Awake()
         {
+            //TODO: check that there is not already a GameEngine object here - maybe throw a lock around this?
             DontDestroyOnLoad(this.gameObject);
             mGameEngine = this.gameObject.GetComponent<UnityGameEngine>();
             mGameEngine.mSoundEngine = this.gameObject.GetComponent<UnitySoundEngine>();
