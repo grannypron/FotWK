@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class PlayerState
 {
-    private Vector2 mapPosition;
-    private Party party;
+    private Vector2 mMapPosition;
+    private Party mParty;
     public PlayerState()
     {
-        mapPosition = new Vector2(0, 0);
-        party = new Party();
+        mMapPosition = new Vector2(0, 0);
+        mParty = new Party();
     }
-    public Vector2 getMapPosition() { return mapPosition; }
-    public void setMapPosition(Vector2 pos) { mapPosition = pos; }
-    public Party getParty() { return party; }
+    public Vector2 getMapPosition() { return mMapPosition; }
+    public void setMapPosition(Vector2 pos) { mMapPosition = pos; }
+    public Party getParty() { return mParty; }
 
 }
