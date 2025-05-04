@@ -37,7 +37,7 @@ public class GameState
 
     public PlayerState getCurrentPlayerState()
     {
-        return getPlayerState(1);
+        return getPlayerState(1);   //TODO: Multiplayer fix
     }
 
     public Force getCurrentEnemyForce() {
@@ -48,10 +48,11 @@ public class GameState
         mCurrentEnemyForce = force;
     }
 
-    private void initForDemo()
+    public void initForDemo()
     {
         mPlayerStates[0].setMapPosition(new Vector2(18, 20));
         mPlayerStates[0].getParty().force = new Force();
+        mPlayerStates[0].getParty().initializeToStartingValues();
         foreach (UnitTypeID unitTypeId in Enum.GetValues(typeof(UnitTypeID)))  
         {  
             mPlayerStates[0].getParty().force[unitTypeId] = 0;

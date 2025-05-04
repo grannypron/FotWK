@@ -1,3 +1,5 @@
 The game seems to use a seed for random generation so the same game pretty much happens if you make the same moves.  We don't really do that.
 
 No effort was made to order the inventory screen listing in the order that the original game ordered it.
+
+Surprise mechanic set to 20% - from Apple 2 source line 2220 - hanve't verified from C64 version - 2220  PRINT :D = 0:D1 = 0:X3 = 1: IF  RND (1) < .2 THEN  PRINT : PRINT "YOU HAVE BEEN SURPRISED!": GOSUB 1390: GOTO 2290

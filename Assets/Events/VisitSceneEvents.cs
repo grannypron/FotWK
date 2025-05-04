@@ -9,11 +9,10 @@ using FotWK;
 
 public class VisitSceneEvents : MonoBehaviour
 {
+    public const int SCREEN_NUM_CHARS_PER_LINE = 51;
+    public const int SCREEN_LINE_CENTERING_OFFSET = 5;
 
     public delegate void VisitSceneInputCallback(string key);
-
-    private const int NUM_CHARS_PER_LINE = 51;
-    private const int LINE_CENTERING_OFFSET = 5;
 
     private VisitSceneInputCallback mInputCallback = null;
 
@@ -21,7 +20,7 @@ public class VisitSceneEvents : MonoBehaviour
     void Start()
     {
         string tile = GameStateManager.getGameState().getCurrentTileName();
-        string formattedTileString = centerString(tile);
+        string formattedTileString = Utility.centerString(tile);
 
         Text txtScreenText = GameObject.Find("txtScreenText").GetComponent<Text>();
         txtScreenText.text = formattedTileString.ToUpper();
@@ -50,7 +49,7 @@ public class VisitSceneEvents : MonoBehaviour
     {
         if (center)
         {
-            txt = centerString(txt);
+            txt = Utility.centerString(txt);
         }
         GameObject.Find("txtScreenText").GetComponent<Text>().text = txt;
     }
@@ -66,12 +65,6 @@ public class VisitSceneEvents : MonoBehaviour
         InputField inputCursor = GameObject.Find("inputCursor").GetComponent<InputField>();
         inputCursor.Select();
         inputCursor.ActivateInputField();
-    }
-
-    public static string centerString(string str)
-    {
-        int paddingLeft = (int) Math.Floor((NUM_CHARS_PER_LINE - str.Length) / 2f);
-        return str.PadLeft(paddingLeft + LINE_CENTERING_OFFSET);
     }
 
 }

@@ -45,25 +45,26 @@ namespace FotWK
             // 2220  PRINT :D = 0:D1 = 0:X3 = 1: IF  RND (1) < .2 THEN  PRINT : PRINT "YOU HAVE BEEN SURPRISED!": GOSUB 1390: GOTO 2290
             if (RNG.rollPercentage(Globals.SURPRISE_CHANCE)) {
                 visitSceneEvents.AddTextLine("YOU HAVE BEEN SURPRISED!");
-                UnityGameEngine.getEngine().getSoundEngine().playSound("AttentionAndCharge", visitSceneEvents);   // TODO: play BadNews here - "GOSUB 1390"
+                UnityGameEngine.getEngine().getSoundEngine().playSound("Disappointment", visitSceneEvents);
                 // Battle automatically happens when you are surprised
                 GameStateManager.getGameState().setCurrentEnemyForce(force);
                 yield return LoadNextScene("BattleScene");
-            }
+            } else { 
 
-            //2230  PRINT : IF S = 0 OR S > 14 THEN  PRINT "DO YOU WISH TO PARLEY";: GOSUB 40: IF  NOT Y THEN 2270
-            UnitTypeID unitTypeID = force.Keys.First<UnitTypeID>(); // Assume here that the force is only made up of one unit type
-            if (UnitsDataFactory.getUnitsData().isParlayable(unitTypeID))
-            {
-                // Collect input.  If y, do the parlay routine
-                visitSceneEvents.AddTextLine("DO YOU WISH TO PARLEY");        // GOSUB 40 prints the "(Y/N)?"
-                GameStateManager.getGameState().setCurrentEnemyForce(force);
-                visitSceneEvents.ActivateInputKeypress(handleParlayInput);
-            }
-            else
-            {
-                GameStateManager.getGameState().setCurrentEnemyForce(force);
-                yield return LoadNextScene("BattleScene");
+                //2230  PRINT : IF S = 0 OR S > 14 THEN  PRINT "DO YOU WISH TO PARLEY";: GOSUB 40: IF  NOT Y THEN 2270
+                UnitTypeID unitTypeID = force.Keys.First<UnitTypeID>(); // Assume here that the force is only made up of one unit type
+                if (UnitsDataFactory.getUnitsData().isParlayable(unitTypeID))
+                {
+                    // Collect input.  If y, do the parlay routine
+                    visitSceneEvents.AddTextLine("DO YOU WISH TO PARLEY");        // GOSUB 40 prints the "(Y/N)?"
+                    GameStateManager.getGameState().setCurrentEnemyForce(force);
+                    visitSceneEvents.ActivateInputKeypress(handleParlayInput);
+                }
+                else
+                {
+                    GameStateManager.getGameState().setCurrentEnemyForce(force);
+                    yield return LoadNextScene("BattleScene");
+                }
             }
 
 
@@ -127,7 +128,7 @@ namespace FotWK
         public abstract int getEncounterChance();
 
 
-        public Force generateRandomOpposingForce(Force playerForce) {
+        public static Force generateRandomOpposingForce(Force playerForce) {
             // 2180 S =  INT ( RND (1) * 17): IF S = 11 OR S = 10 THEN 2180
             // Calculate a random number from 1-17, except for 11 or 10
             // Probably the 11/10 exception was to skip "WITCH KING" and "DRAGON"

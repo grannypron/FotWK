@@ -1,17 +1,18 @@
 Encounters
-	- Surprise mechanic
 	- Parlay mechanic - start testing the input gathering and test the code to add the force numbers to the party
 	- Run away mechanic
 	- Playing a second sound on surprise never plays - probably related to sounds don't always finish playing
 	- 3520  PRINT "YOU HAVE FOUND THE FOLLOWING ITEMS" mechanic
+Capture Player name on start screen
 Inventory screen
 Battles - Battle Scene
+	- Player name on battle screen
+	- Retreat
 Maybe use generics more for the monsters?
 Spells
 Magic Map
 Load/Save - serialization of state - json?
 Moves per turn
-Player name mechanic
 Map level difficulty mechanic
 Player level difficulty mechanic
 Remove GamesState.initForDemo() and remove GameState-deleteme from MainMenu scene

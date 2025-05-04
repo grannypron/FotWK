@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,4 +15,22 @@ public static class Utility
     {
         obj.transform.position = new Vector3((-1*HIDE_X_OFFSET) + obj.transform.position.x, obj.transform.position.y, obj.transform.position.z);
     }
+
+    public static string centerString(string s)
+    {
+        int width = Constants.SCREEN_NUM_CHARS_PER_LINE;
+        if (s.Length >= width)
+        {
+            return new string(' ', Constants.SCREEN_LINE_CENTERING_OFFSET) + s;
+        }
+
+        int leftPadding = (width - s.Length) / 2;
+        int rightPadding = width - s.Length - leftPadding;
+
+        return new string(' ', Constants.SCREEN_LINE_CENTERING_OFFSET) + new string(' ', leftPadding) + s + new string(' ', rightPadding);
+    }
 }
+
+
+
+
