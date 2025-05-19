@@ -1,13 +1,116 @@
 Encounters
-	- Parlay mechanic - start testing the input gathering and test the code to add the force numbers to the party
+	- Parlay mechanic - start testing the input gathering and test the code to add the force numbers to the party - only warriors, elves, and dwarves
 	- Run away mechanic
 	- Playing a second sound on surprise never plays - probably related to sounds don't always finish playing
 	- 3520  PRINT "YOU HAVE FOUND THE FOLLOWING ITEMS" mechanic
 Capture Player name on start screen
 Inventory screen
+570  PRINT "  "I%(P,X);: HTAB 10: PRINT ": "I$(X);: IF I%(P,X) > 1 THEN  PRINT "S";
+I is a 2d array of P = player (I think) and the second index (1-22) are the types:
+
+0: RATION
+1: TELEPORT SPELL
+2: CLERIC
+3: SCOUT
+4: GOLD PIECE
+5: WARRIOR
+6: SWORD (DRAGON SLAYER)
+7: RAIDER
+8: SPELL OF SEEING
+9: RAFT
+10: MULE
+11 is magic map?
+12: WIZARD
+13: HORN OF OPENING
+14: BOOTS OF STEALTH
+15: ARMOUR OF DEFENSE
+16: SWORD OF STRENGTH
+17: HAMMER OF THOR
+18: TALISMAN OF SPEED
+19: SPELL OF SEEKING
+20: HORSES
+21: ELVE
+22: DWARVE
+
+
+In Apple IIe, I% is stored at 8A00
+
+8374 starts this text, which should be lined up with the I values:
+LARGE HALLWAYTHE TROPHY ROOMTHE GUARD ROOMWKAN ARMORYA BEDROOMTHE COURT ROOMA KITCHENTHE CELLARA LARGE LIBRARYTHE MASTER BEDROOMA SMALL HALLWAYTHE TORTURE CHAMBERA DINING HALLTHE BARRACKSDWARVEELVEHORSESSPELL OF SEEKINGTALISMAN OF SPEEDHAMMER OF THORSWORD OF STRENGTHARMOUR OF DEFENSEBOOTS OF STEALTHHORN OF OPENINGWIZARDMULERAFTSPELL OF SEEINGRAIDERSWORD (DRAGON SLAYER)WARRIORGOLD PIECESCOUTCLERICTELEPORT SPELLRATIONRIGHT LEGLEFT LEGRIGHT ARMLEFT ARMCHESTDWARVEELVEHOBGOBLINGORGONHYDRAWITCH KINGDRAGONHACKERWIZARDEARTH GIANTOGRETROLLORCGOBLINWEREBEARBANDITWARRIOR
+Preumably, this is the order, although it is backwards in memory:
+
+RIGHT LEGLEFT LEGRIGHT ARMLEFT ARMCHEST
+
+Presumably then, here are our indexes for non-player types, which tracks with line 2230 (parley mechanics):
+0: WARRIOR
+1: BANDIT
+2: WEREBEAR
+3: GOBLIN
+4: ORC
+5: TROLL
+6: OGRE
+7: EARTH GIANT
+8: WIZARD
+9: HACKER
+10: DRAGON
+11: WITCH KING
+12: HYDRA
+13: GORGON
+14: HOBGOBLIN
+15: ELVE
+16: DWARVE
+
+
+
+
 Battles - Battle Scene
 	- Player name on battle screen
+
+	 FIGURE OUT WHERE O(S) COMES FROM!!!  L = O(S):                                              S is the monster type
+
+	 I changed the disk image to print out L on the encounter screen instead of X and here is what I found: - just keep doing that to print out the values - "D:\FotWK\Apple2Source\Fortress-of-the-Witch-King_Apple-II_EN\Fortress of the Witch King (1983)(Avalon Hill) - Copy.do"
+1 warrior
+.6 hobgoblins  (99 99 99 99 02???)
+.7 bandits
+.3 goblins
+10 trolls
+16 ogre
+20 earth giants
+40 hydra
+30 gorgon
+50 hacker
+3 dwarves (C0 00 00 00 00)
+2 elves  (80 00 00 00 00)
+But these are floating point, so I have to find out how they are stored in memory
+
+
+	- Each round doesn't necessarily contain combat - check out the first encounter after inventory.C64, we see two wizards and we are surprised, but no combat happens, just a round update
+		 2290  FOR DF = 0 TO 500: NEXT : HOME : PRINT  TAB( 10)"PRESS 'R' TO RETREAT!!": 
+		 PRINT : PRINT :
+		 Y = X * L:
+		 Y1 = (I%(P,5) + (I%(P,11) * 20) + ( RND (1) * 15) + (I%(P,17) * 15) * X3) + I%(P,22) * 2
+		 IF S = 10 AND I%(P,6) > 0 THEN Y1 = Y1 + 50
+			2300  PRINT "THE BATTLE RAGES ON"
+			IF  RND (1) < Y1 * .012 THEN							*** Note here that ALL statements after on the line after the "THEN" keyword will be executed (when there are multiple separated by colons), not just the first
+				GOSUB 1400: 
+				PRINT N$(P)"'S SIDE PRESSES THE ATTACK ":
+				D = D +  RND (1) * Y1 + 1:
+				GOSUB 3840
+		 2310  IF  RND (1) < Y * .01 THEN  
+				PRINT "THE "O$(S);
+				IF X > 1 THEN  PRINT "S ADVANCE";:					*** Interesting place to handle the plural, but whatever
+				GOTO 2340
+		 2320  IF  NOT  RND (0) < Y * .01 THEN 2440                 *** Show the "Round update" - RND(0) is the last value returned from the RNG, so this equates to an "else"
+		 2330  PRINT " ADVANCES";
+		 2340  PRINT :
+			D1 = D1 +  RND (1) * Y * .4: 
+			GOSUB 1390: 
+			GOSUB 4000
+		 2350 Z =  INT ( RND (1) * 12): 
+		 IF Z = 5 OR Z < 2 OR Z = 4 OR Z = 6 OR Z = 8 OR Z = 9 THEN 2380
+	- "Round Update" comes if there is no retreat
 	- Retreat
+Implement random you find stuff scene
 Maybe use generics more for the monsters?
 Spells
 Magic Map
@@ -15,7 +118,7 @@ Load/Save - serialization of state - json?
 Moves per turn
 Map level difficulty mechanic
 Player level difficulty mechanic
-Remove GamesState.initForDemo() and remove GameState-deleteme from MainMenu scene
+Remove GamesState.initForDemo(), BattleSceneEvents.initForDemo() and remove GameState-deleteme from MainMenu scene
 
 - Rando todos:
 "STAND BY.  FILLING ARRAYS" should be in negative text
