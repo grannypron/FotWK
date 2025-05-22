@@ -8,7 +8,7 @@ namespace FotWK
 {
     public static class RNG
     {
-        public static bool rollPercentage(int percentage)
+        public static bool rollAgainstPercentage(int percentage)
         {
             int roll = UnityEngine.Random.Range(1, 100);
             return roll <= percentage;
@@ -17,6 +17,10 @@ namespace FotWK
         {
             int roll = UnityEngine.Random.Range(start, end);
             return roll;
+        }
+        public static float rollPercentage0To1()
+        {
+            return UnityEngine.Random.Range(0, 100.0f)/100.0f;
         }
     }
 }

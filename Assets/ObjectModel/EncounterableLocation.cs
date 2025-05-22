@@ -43,7 +43,7 @@ namespace FotWK
 
             // Roll for surprise & play sound if surprised - 20% chance of being surprised
             // 2220  PRINT :D = 0:D1 = 0:X3 = 1: IF  RND (1) < .2 THEN  PRINT : PRINT "YOU HAVE BEEN SURPRISED!": GOSUB 1390: GOTO 2290
-            if (RNG.rollPercentage(Globals.SURPRISE_CHANCE)) {
+            if (RNG.rollAgainstPercentage(Globals.SURPRISE_CHANCE)) {
                 visitSceneEvents.AddTextLine("YOU HAVE BEEN SURPRISED!");
                 UnityGameEngine.getEngine().getSoundEngine().playSound("Disappointment", visitSceneEvents);
                 // Battle automatically happens when you are surprised
@@ -84,7 +84,7 @@ namespace FotWK
 
             //2250  IF  RND (1) < (I%(P,0) + I%(P,4)) * .01 THEN  PRINT "THEY WILL JOIN THE RANKS!!": GOSUB 1400: GOTO 2580
             // I%(P,0) is rations - see line 380 and I%(P,4) is gold = see line 1710
-            if (RNG.rollPercentage(player.getParty().rations + player.getParty().gold))   // TODO: Double check this
+            if (RNG.rollAgainstPercentage(player.getParty().rations + player.getParty().gold))   // TODO: Double check this
             {
                 visitSceneEvents.AddTextLine("THEY WILL JOIN THE RANKS!!");
 
@@ -102,7 +102,7 @@ namespace FotWK
 
         public override void onVisit()
         {
-            if (RNG.rollPercentage(getEncounterChance()))
+            if (RNG.rollAgainstPercentage(getEncounterChance()))
             {
                 VisitSceneEvents visitSceneEvents = VisitSceneEvents.GetVisitSceneEvents();
                 visitSceneEvents.StartCoroutine(encounter());
