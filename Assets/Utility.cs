@@ -29,6 +29,16 @@ public static class Utility
 
         return new string(' ', Constants.SCREEN_LINE_CENTERING_OFFSET) + new string(' ', leftPadding) + s + new string(' ', rightPadding);
     }
+
+    public static string addS(int quantity, string str)
+    {
+        return quantity > 1 ? "S" : "";
+
+    }
+    public static void assert(bool assert)
+    {
+        System.Diagnostics.Debug.Assert(assert);
+    }
 }
 
 

@@ -22,5 +22,4 @@ public class PlayerState
     {
         mName = name;
     }
-
 }

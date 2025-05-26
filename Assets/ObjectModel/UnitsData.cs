@@ -65,7 +65,7 @@ namespace FotWK
 
         private void init() {
             mUnitTypeID = new Dictionary<UnitTypeID, UnitType>();
-            // These come from WKDTINIT#fc0801
+            // These come from WKDTINIT#fc0801  - in the code, they are referenced as O(*) - they are used to determine the number of units that are present in an encounter
             //WARRIOR, 1,BANDIT,  .7,WEREBEAR,5,GOBLIN,.3,ORC,.5,TROLL,10,OGRE,16,EARTH GIANT,20,WIZARD,25,HACKER,50,DRAGON,100 
             //WITCH KING,150,HYDRA,40,GORGON,30,HOBGOBLIN,.6,ELVE,2,DWARVE,3
             mUnitTypeID.Add(UnitTypeID.Warrior, new UnitType("Warrior", 1f));

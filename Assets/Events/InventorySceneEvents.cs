@@ -41,9 +41,12 @@ public class InventorySceneEvents : MonoBehaviour
                 txtScreenText.text += AddInventoryLine(unit.Value, "UNIT _ TODO");
             }
         }
-        foreach (FotWK.SpecialItem item in party.specialItems)
+        foreach (FotWK.SpecialItemType itemType in Enum.GetValues(typeof(FotWK.SpecialItemType)))
         {
-            txtScreenText.text += AddInventoryLine(1, "SPECIAL ITEM _ TODO");
+            if (party.hasSpecialItem(itemType))
+            { 
+                txtScreenText.text += AddInventoryLine(1, "SPECIAL ITEM _ TODO" + itemType);
+            }
         }
 
 

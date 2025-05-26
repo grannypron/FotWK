@@ -12,7 +12,7 @@ namespace FotWK
 		public SpellCollection spells;
 		public Equipment[] equipment;
 		public MagicMap[] magicMaps;
-		public SpecialItem[] specialItems;
+		public SpecialItemCollection mSpecialItems;
 		public SupportUnitCollection supportUnits;
 
 		public void initializeToStartingValues()
@@ -29,7 +29,13 @@ namespace FotWK
 			force.Add(UnitTypeID.Warrior, 50);
 			supportUnits = new SupportUnitCollection();
 			supportUnits[SupportUnitType.Mule] = 1;
-			specialItems = new SpecialItem[] { new DragonSlayer() };
+			mSpecialItems = new SpecialItemCollection();
+			mSpecialItems.Add(SpecialItemType.DragonSlayer);
 		}
+		public bool hasSpecialItem(SpecialItemType type)
+		{
+			return mSpecialItems.Contains(type);
+		}
+
 	}
 }

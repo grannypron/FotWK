@@ -135,7 +135,7 @@ namespace FotWK
             // Here, getEncounterableForceUnits() filters those two out for us
             UnitsData units = UnitsDataFactory.getUnitsData();
             List<UnitTypeID> encounterableTypes = units.getEncounterableForceUnitTypeID();
-            int unitTypeIdx = RNG.rollInRange(3, 3);//encounterableTypes.Count);
+            int unitTypeIdx = RNG.rollInRange(3, 3);//encounterableTypes.Count)  TODO: Remove;
             UnitTypeID monsterId = encounterableTypes[unitTypeIdx];
             UnitType monster = units.getUnitTypeByID(monsterId);
             

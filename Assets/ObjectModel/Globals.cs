@@ -14,4 +14,5 @@ public static class Globals
     public static int ENCOUNTER_ENEMY_SIZE_RANDOM_FACTOR = 3;
 
     public static int SURPRISE_CHANCE = 1;//20;
+    public static float ATTACK_PRESS_CHANCE_MULTIPLIER = .012f;
 }
