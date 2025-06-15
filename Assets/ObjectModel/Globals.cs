@@ -15,4 +15,6 @@ public static class Globals
 
     public static int SURPRISE_CHANCE = 1;//20;
     public static float ATTACK_PRESS_CHANCE_MULTIPLIER = .012f;
+
+    public static int MOVES_PER_TURN = 4;
 }

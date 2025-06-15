@@ -9,6 +9,7 @@ public class GameState
     private PlayerState[] mPlayerStates;
     private string mCurrentTileName;
     private Force mCurrentEnemyForce;
+    private int mMovementFactorsRemaining;
 
     public GameState() {
         mPlayerStates = new PlayerState[1];
@@ -48,6 +49,11 @@ public class GameState
         mCurrentEnemyForce = force;
     }
 
+    public int getMovementFactorsRemaining()
+    {
+        return mMovementFactorsRemaining;
+    }
+
     public void initForDemo()
     {
         mPlayerStates[0].setMapPosition(new Vector2(18, 20));
@@ -58,6 +64,8 @@ public class GameState
             mPlayerStates[0].getParty().force[unitTypeId] = 0;
         }  
         mPlayerStates[0].getParty().force[UnitTypeID.Warrior] = 50;
+        mPlayerStates[0].setName("Hotmustard");
+        mMovementFactorsRemaining = 4;
     }
     
 
