@@ -17,4 +17,7 @@ public static class Globals
     public static float ATTACK_PRESS_CHANCE_MULTIPLIER = .012f;
 
     public static int MOVES_PER_TURN = 4;
+
+    public static int MIN_RATION_SANCTUARY_HELP = 10;
+    public static int MIN_WARRIOR_SANCTUARY_HELP = 10;
 }

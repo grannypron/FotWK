@@ -1,8 +1,14 @@
+
+If at the end of your turn you have no food, you get "You have no more food\nX of your warriors have just died of starvation(which blinks)\nPress return to continue"  If you have less than X, you get the message 'Do you want to pray for help(y/n)?'
+If you don't have enough warriors (and maybe other units), you get the message that "you have to drop some gold"
+
 Encounters
 	- Parlay mechanic - start testing the input gathering and test the code to add the force numbers to the party - only warriors, elves, and dwarves
 	- Run away mechanic
 	- Playing a second sound on surprise never plays - probably related to sounds don't always finish playing
 	- 3520  PRINT "YOU HAVE FOUND THE FOLLOWING ITEMS" mechanic
+
+Fix lower case vs upper case style discrepancies and name private variables with m prefix
 Capture Player name on start screen
 Inventory screen
 570  PRINT "  "I%(P,X);: HTAB 10: PRINT ": "I$(X);: IF I%(P,X) > 1 THEN  PRINT "S";
@@ -65,24 +71,6 @@ Presumably then, here are our indexes for non-player types, which tracks with li
 
 Battles - Battle Scene
 	- Player name on battle screen
-
-	 FIGURE OUT WHERE O(S) COMES FROM!!!  L = O(S):                                              S is the monster type
-
-	 I changed the disk image to print out L on the encounter screen instead of X and here is what I found: - just keep doing that to print out the values - "D:\FotWK\Apple2Source\Fortress-of-the-Witch-King_Apple-II_EN\Fortress of the Witch King (1983)(Avalon Hill) - Copy.do"
-1 warrior
-.6 hobgoblins  (99 99 99 99 02???)
-.7 bandits
-.3 goblins
-10 trolls
-16 ogre
-20 earth giants
-40 hydra
-30 gorgon
-50 hacker
-3 dwarves (C0 00 00 00 00)
-2 elves  (80 00 00 00 00)
-But these are floating point, so I have to find out how they are stored in memory
-
 
 	- Each round doesn't necessarily contain combat - check out the first encounter after inventory.C64, we see two wizards and we are surprised, but no combat happens, just a round update
 		 2290  FOR DF = 0 TO 500: NEXT : HOME : PRINT  TAB( 10)"PRESS 'R' TO RETREAT!!": 
