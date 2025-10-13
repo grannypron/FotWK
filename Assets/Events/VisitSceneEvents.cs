@@ -34,8 +34,8 @@ public class VisitSceneEvents : MonoBehaviour
     {
         if (mInputCallback != null && Input.anyKeyDown)
         {
-            mInputCallback = null;
             mInputCallback(Input.inputString);
+            mInputCallback = null;
         }
 
     }

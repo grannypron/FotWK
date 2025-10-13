@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +31,7 @@ public class BattleSceneEvents : MonoBehaviour
         PlayerState player = GameStateManager.getGameState().getCurrentPlayerState();
         FotWK.Force enemyForce = GameStateManager.getGameState().getCurrentEnemyForce();
 
+        float playerAdvantageFactor = 0;  // D in the AppleSoft Basic source code - zeroed out when the battle begins at 2220
         Text txtScreenText = GameObject.Find("txtScreenText").GetComponent<Text>();
         txtScreenText.text = Utility.centerString("PRESS 'R' TO RETREAT\n");
 
@@ -56,23 +56,39 @@ public class BattleSceneEvents : MonoBehaviour
             (player.getParty().hasSpecialItem(FotWK.SpecialItemType.HammerOfThor) ? 1 * 15 : 0 * armorOfDefenseMultiplier) +   // TODO: Can multiple hammers of thor be had?
             (playerForce[FotWK.UnitTypeID.Dwarf] * 2);
 
-        if (FotWK.RNG.rollPercentage0To1() < forceWeight * Globals.ATTACK_PRESS_CHANCE_MULTIPLIER) /*IF RND(1) < Y1 * .012 THEN*** Note here that ALL statements after on the line after the "THEN" keyword will be executed(when there are multiple separated by colons), not just the first */
+        if (FotWK.RNG.rollPercentage0To1() < forceWeight * Globals.ATTACK_PRESS_CHANCE_MULTIPLIER)
+        { /*IF RND(1) < Y1 * .012 THEN*** Note here that ALL statements after on the line after the "THEN" keyword will be executed(when there are multiple separated by colons), not just the first */
             FotWK.UnityGameEngine.getEngine().getSoundEngine().playSound("Attention", GetBattleSceneEvents());     //GOSUB 1400: 
-				/*PRINT N$(P)"'S SIDE PRESSES THE ATTACK ":
-				D = D + RND(1) * Y1 + 1:
-				GOSUB 3840*/
-
-        txtScreenText.text += "\n";
-        txtScreenText.text += Utility.centerString(GameStateManager.getGameState().getCurrentPlayerState().getName().ToUpper() + "'S SIDE PRESSES THE ATTACK");
-        txtScreenText.text += "\n";
+            // PRINT N$(P)"'S SIDE PRESSES THE ATTACK ":
+            txtScreenText.text += "\n";
+            txtScreenText.text += Utility.centerString(GameStateManager.getGameState().getCurrentPlayerState().getName().ToUpper() + "'S SIDE PRESSES THE ATTACK");
+            txtScreenText.text += "\n";
+            /* 
+             *D = D + RND(1) * Y1 + 1:  //I feel like D is some kind of player "advantage".  Like is keeping track of whether they are doing well for a sort of rubber banding effect?
+             */
+            playerAdvantageFactor += FotWK.RNG.rollPercentage0To1() * forceWeight + 1;
+            /*
+            * GOSUB 3840*/  //TODO: This handles the "Your blah blah's are Crushing the enemy" and also handles spell casting by wizards/elves - so I guess this is like AttackActions
+            PlayerAttackActions(); // TODO
+        }
 
         txtScreenText.text += "";
         if (mRetreatPressed)
         {
-            retreat();
+            if (FotWK.RNG.rollAgainstPercentage(Globals.RUN_AWAY_CHANCE))   // 2270  ...: IF Y AND  RND (1) < .8 THEN  GOSUB 1390: ...
+            {
+                // Successful run away 
+                txtScreenText.text += "     COWARD\n";   // 2270  ...PRINT "     COWARD":CO = 1: GOTO 1390
+                                                         // I believe the CO = 1 is irrelevant here, because that is only considered on 2760, which I believe is during a Witch-King attack?
+                FotWK.UnityGameEngine.getEngine().getSoundEngine().playSound("Disappointment", GetBattleSceneEvents());
+                // TODO: GO BACK TO MAIN MENU
+            }
         }
     }
+    void PlayerAttackActions()
+    {
 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -81,8 +97,6 @@ public class BattleSceneEvents : MonoBehaviour
             mRetreatPressed = true;
         }
     }
-
-    void retreat() { }
 
     public BattleSceneEvents GetBattleSceneEvents()
     {

@@ -4,9 +4,10 @@ If you don't have enough warriors (and maybe other units), you get the message t
 
 Encounters
 	- Parlay mechanic - start testing the input gathering and test the code to add the force numbers to the party - only warriors, elves, and dwarves
-	- Run away mechanic
+	- Run away mechanic - // TODO: GO BACK TO MAIN MENU on line 84 of BattleSceneEvents
 	- Playing a second sound on surprise never plays - probably related to sounds don't always finish playing
 	- 3520  PRINT "YOU HAVE FOUND THE FOLLOWING ITEMS" mechanic
+	- It's interesting, aren't elves parley-able?  If not, I have to change isParlayable() in UnitsData.cs  2230  PRINT : IF S = 0 OR S > 14 THEN  PRINT "DO YOU WISH TO PARLEY";:
 
 Fix lower case vs upper case style discrepancies and name private variables with m prefix
 Capture Player name on start screen

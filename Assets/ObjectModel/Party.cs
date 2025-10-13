@@ -15,6 +15,18 @@ namespace FotWK
 		public SpecialItemCollection mSpecialItems;
 		public SupportUnitCollection supportUnits;
 
+		public Party()
+        {
+			force = new Force();
+			gold = 0;
+			rations = 0;
+			spells = new SpellCollection();
+			equipment = new Equipment[0];
+			magicMaps = new MagicMap[0];
+			mSpecialItems = new SpecialItemCollection();
+			supportUnits = new SupportUnitCollection();
+		}
+
 		public void initializeToStartingValues()
 		{
 			rations = 25;

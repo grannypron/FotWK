@@ -10,7 +10,7 @@ public class MainMenuEvents : MonoBehaviour
     void Start()
     {
         GameStateManager.getGameState().initForDemo();
-
+        GameStateManager.getGameState().getCurrentPlayerState().getParty().rations = 1;
         int movementFactorsRemaining = GameStateManager.getGameState().getMovementFactorsRemaining();
         string playerName = GameStateManager.getGameState().getCurrentPlayerState().getName();
 
