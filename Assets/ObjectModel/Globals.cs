@@ -15,9 +15,11 @@ public static class Globals
 
     public static int SURPRISE_CHANCE = 1;//20;   //2220  PRINT :D = 0:D1 = 0:X3 = 1: IF  RND (1) < .2 THEN  PRINT : PRINT "YOU HAVE BEEN SURPRISED!": GOSUB 1390: GOTO 2290
     public static float ATTACK_PRESS_CHANCE_MULTIPLIER = .012f;   // 2300  PRINT "THE BATTLE RAGES ON": IF  RND (1) < Y1 * .012 THEN  GOSUB 1400: PRINT N$(P)"'S SIDE PRESSES THE ATTACK ":D = D +  RND (1) * Y1 + 1: GOSUB 3840
-    public static int RUN_AWAY_CHANCE = 80;   // 2270  PRINT "WILL YOU RUN AWAY";: GOSUB 40: IF Y AND  RND (1) < .8 THEN  GOSUB 1390: PRINT "     COWARD":CO = 1: GOTO 1390
+    public static int RUN_AWAY_CHANCE = 181;   // 2270  PRINT "WILL YOU RUN AWAY";: GOSUB 40: IF Y AND  RND (1) < .8 THEN  GOSUB 1390: PRINT "     COWARD":CO = 1: GOTO 1390
 
     public static int MOVES_PER_TURN = 4;
+
+    public static int ENCOUNTER_CHANCE_MULTIPLIER = 10;//0; // For quick turning on/off encounters or to scale difficulty
 
     public static int MIN_RATION_SANCTUARY_HELP = 10;
     public static int MIN_WARRIOR_SANCTUARY_HELP = 10;

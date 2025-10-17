@@ -27,6 +27,7 @@ namespace FotWK
 
             PlayerState player = GameStateManager.getGameState().getCurrentPlayerState();
             UnitsData units = UnitsDataFactory.getUnitsData();
+            player.setSurprised(false);
 
             Force force = generateRandomOpposingForce(player.getParty().force);
             foreach (KeyValuePair<UnitTypeID, int> entry in force)
@@ -45,12 +46,11 @@ namespace FotWK
             // 2220  PRINT :D = 0:D1 = 0:X3 = 1: IF  RND (1) < .2 THEN  PRINT : PRINT "YOU HAVE BEEN SURPRISED!": GOSUB 1390: GOTO 2290
             if (RNG.rollAgainstPercentage(Globals.SURPRISE_CHANCE)) {
                 visitSceneEvents.AddTextLine("YOU HAVE BEEN SURPRISED!");
+                player.setSurprised(true);
                 UnityGameEngine.getEngine().getSoundEngine().playSound("Disappointment", visitSceneEvents);
                 // Battle automatically happens when you are surprised
-                GameStateManager.getGameState().setCurrentEnemyForce(force);
-                yield return LoadNextScene("BattleScene");
-            } else { 
-
+            } else {
+                player.setSurprised(false);
                 //2230  PRINT : IF S = 0 OR S > 14 THEN  PRINT "DO YOU WISH TO PARLEY";: GOSUB 40: IF  NOT Y THEN 2270
                 UnitTypeID unitTypeID = force.Keys.First<UnitTypeID>(); // Assume here that the force is only made up of one unit type
                 if (UnitsDataFactory.getUnitsData().isParlayable(unitTypeID))
@@ -58,21 +58,15 @@ namespace FotWK
                     // Collect input.  If y, do the parlay routine
                     visitSceneEvents.AddTextLine("DO YOU WISH TO PARLEY");        // GOSUB 40 prints the "(Y/N)?"
                     GameStateManager.getGameState().setCurrentEnemyForce(force);
-                    visitSceneEvents.ActivateInputKeypress(handleParlayInput);
-                }
-                else
-                {
-                    GameStateManager.getGameState().setCurrentEnemyForce(force);
-                    yield return LoadNextScene("BattleScene");
+                    InputReceiverEvents.GetInputReceiverEvents().ActivateInputKeypress(handleParlayInput);
+
+                    //TODO: Here we should go to the battle screen - or maybe just move the else clause below out of the else and it's parent else
                 }
             }
 
+            GameStateManager.getGameState().setCurrentEnemyForce(force);
+            yield return LoadNextScene("BattleScene");
 
-            // TODO: Option to run away
-            //2270  PRINT "WILL YOU RUN AWAY";: GOSUB 40: IF Y AND  RND (1) < .8 THEN  GOSUB 1390: PRINT "     COWARD":CO = 1: GOTO 1390
-            //2280  IF Y THEN  PRINT "THEY HAVE YOU NOW": GOSUB 1380
-
-            //yield return LoadNextScene("MoveScene");
         }
 
         private void handleParlayInput(string key)
@@ -102,7 +96,7 @@ namespace FotWK
 
         public override void onVisit()
         {
-            if (RNG.rollAgainstPercentage(getEncounterChance()))
+            if (RNG.rollAgainstPercentage(Globals.ENCOUNTER_CHANCE_MULTIPLIER * getEncounterChance()))
             {
                 VisitSceneEvents visitSceneEvents = VisitSceneEvents.GetVisitSceneEvents();
                 visitSceneEvents.StartCoroutine(encounter());

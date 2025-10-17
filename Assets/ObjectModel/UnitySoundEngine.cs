@@ -14,6 +14,7 @@ namespace FotWK
 
         public void playSound(string soundId, MonoBehaviour caller)
         {
+            Debug.Log(soundId);
             AudioSource audio = GameObject.Find(soundId).GetComponent<AudioSource>();
             audio.Play();
             //caller.StartCoroutine(WaitCoroutine());

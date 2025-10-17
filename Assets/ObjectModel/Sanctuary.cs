@@ -29,7 +29,7 @@ namespace FotWK
 			visitSceneEvents.AddTextLine("'GO IN PEACE'");
 			visitSceneEvents.AddTextLine("");
 			visitSceneEvents.AddTextLine("PRESS RETURN TO CONTINUE");
-			visitSceneEvents.ActivateInputKeypress(handleInput);
+			InputReceiverEvents.GetInputReceiverEvents().ActivateInputKeypress(handleInput);
 		}
 
 		private void handleInput(string key)

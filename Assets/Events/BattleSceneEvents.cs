@@ -6,6 +6,7 @@ public class BattleSceneEvents : MonoBehaviour
 {
     private bool mListenForRetreat = false;
     private bool mRetreatPressed = false;
+    private string mRunAwayKey = null;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,11 @@ public class BattleSceneEvents : MonoBehaviour
 
         PlayerState player = GameStateManager.getGameState().getCurrentPlayerState();
         FotWK.Force enemyForce = GameStateManager.getGameState().getCurrentEnemyForce();
+
+        if (!player.getSurprised())
+        {
+            yield return RunAwayOption();
+        }
 
         float playerAdvantageFactor = 0;  // D in the AppleSoft Basic source code - zeroed out when the battle begins at 2220
         Text txtScreenText = GameObject.Find("txtScreenText").GetComponent<Text>();
@@ -77,14 +83,63 @@ public class BattleSceneEvents : MonoBehaviour
         {
             if (FotWK.RNG.rollAgainstPercentage(Globals.RUN_AWAY_CHANCE))   // 2270  ...: IF Y AND  RND (1) < .8 THEN  GOSUB 1390: ...
             {
-                // Successful run away 
-                txtScreenText.text += "     COWARD\n";   // 2270  ...PRINT "     COWARD":CO = 1: GOTO 1390
-                                                         // I believe the CO = 1 is irrelevant here, because that is only considered on 2760, which I believe is during a Witch-King attack?
-                FotWK.UnityGameEngine.getEngine().getSoundEngine().playSound("Disappointment", GetBattleSceneEvents());
-                // TODO: GO BACK TO MAIN MENU
+                // TODO: WILL YOU RUN AWAY
+                yield return StartCoroutine(RunAwayOption());
+
+                // Go back to main menu
+                AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainMenu");
+                // Wait until the asynchronous scene fully loads
+                while (!asyncLoad.isDone)
+                {
+                    yield return null;
+                }
+
             }
         }
     }
+
+    IEnumerator RunAwayOption()
+    {
+        // 2270  PRINT "WILL YOU RUN AWAY";: GOSUB 40: IF Y AND RND(1) < .8...
+        Text txtScreenText = GameObject.Find("txtScreenText").GetComponent<Text>();
+        txtScreenText.text += "\nWILL YOU RUN AWAY (Y/N)?\n";
+        InputReceiverEvents.GetInputReceiverEvents().ActivateInputKeypress(handleRunAwayInput);
+        yield return new WaitUntil(() => mRunAwayKey != null);
+        if (mRunAwayKey == "y")
+        {
+            // Successful run away 
+            txtScreenText.text += "     COWARD\n";   // 2270  ...PRINT "     COWARD":CO = 1: GOTO 1390
+                                                     // I believe the CO = 1 is irrelevant here, because that is only considered on 2760, which I believe is during a Witch-King attack?
+            FotWK.UnityGameEngine.getEngine().getSoundEngine().playSound("Disappointment", GetBattleSceneEvents());
+            yield return new WaitForSecondsRealtime(2);
+
+            AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainMenu");
+            // Wait until the asynchronous scene fully loads
+            while (!asyncLoad.isDone)
+            {
+                yield return null;
+            }
+
+        }
+        else
+        {
+            AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("BattleScene");
+            // Wait until the asynchronous scene fully loads
+            while (!asyncLoad.isDone)
+            {
+                yield return null;
+            }
+
+        }
+        mRunAwayKey = null;
+        yield return null;
+    }
+
+    private void handleRunAwayInput(string key)
+    {
+        mRunAwayKey = key;
+    }
+
     void PlayerAttackActions()
     {
 
