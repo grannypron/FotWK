@@ -147,8 +147,6 @@ namespace FotWK
                 qty = 1;
             }
 
-            // 2200 X7 = X * L:                                            - Not sure what X7 is used for right now, might be loot generation - see 3560
-
             //          IF S > 14 AND X < 2 THEN X = 2                      -  So for the last 3 types in the list, Elves, Dwarves, and Hobgolins(interestingly?), there must always be at least 2
             if (monsterId == UnitTypeID.Elf || monsterId == UnitTypeID.Dwarf || monsterId == UnitTypeID.Hobgoblin) {
                 if (qty < 2) {

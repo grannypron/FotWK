@@ -4,12 +4,13 @@ If you don't have enough warriors (and maybe other units), you get the message t
 
 Encounters
 	- Parlay mechanic - start testing the input gathering and test the code to add the force numbers to the party - only warriors, elves, and dwarves
-	- Run away mechanic - // TODO: GO BACK TO MAIN MENU on line 84 of BattleSceneEvents
 	- Playing a second sound on surprise never plays - probably related to sounds don't always finish playing
 	- 3520  PRINT "YOU HAVE FOUND THE FOLLOWING ITEMS" mechanic
-	- It's interesting, aren't elves parley-able?  If not, I have to change isParlayable() in UnitsData.cs  2230  PRINT : IF S = 0 OR S > 14 THEN  PRINT "DO YOU WISH TO PARLEY";:
+	- It's interesting, aren't elves parley-able?  No they are because I left out Dragon & WitchKing in the enum.  I have put them in.  If not, I have to change isParlayable() in UnitsData.cs  2230  PRINT : IF S = 0 OR S > 14 THEN  PRINT "DO YOU WISH TO PARLEY";:
+	- After initial encounter, if you get the chance to run away, the screen should NOT clear before asking "Will you run away"
+	
 
-Fix lower case vs upper case style discrepancies and name private variables with m prefix
+Fix lower case vs upper case source code style discrepancies and name private variables with m prefix
 Capture Player name on start screen
 Inventory screen
 570  PRINT "  "I%(P,X);: HTAB 10: PRINT ": "I$(X);: IF I%(P,X) > 1 THEN  PRINT "S";
@@ -26,17 +27,17 @@ I is a 2d array of P = player (I think) and the second index (1-22) are the type
 8: SPELL OF SEEING
 9: RAFT
 10: MULE
-11 is magic map?
-12: WIZARD
-13: HORN OF OPENING
-14: BOOTS OF STEALTH
-15: ARMOUR OF DEFENSE
-16: SWORD OF STRENGTH
-17: HAMMER OF THOR
-18: TALISMAN OF SPEED
-19: SPELL OF SEEKING
-20: HORSES
-21: ELVE
+11: WIZARD  (0X8A36)
+12: MAGIC MAP 1 / HORN OF OPENING   (8A38 = 0x0A or 0x0B)
+13: MAGIC MAP 2 / BOOTS OF STEALTH  (8A3A = 0x0A or 0x0B)
+14: MAGIC MAP 3 / ARMOUR OF DEFENSE (8A3C = 0x0A or 0x0B)
+15: MAGIC MAP 4 / SWORD OF STRENGTH (8A3E = 0x0A or 0x0B)
+16: RAIDED FLAG   8A40
+17: HAMMER OF THOR   8A42
+18: TALISMAN OF SPEED 8A44
+19: SPELL OF SEEKING   8A46
+20: HORSES				8A48
+21: ELVE				8A4A
 22: DWARVE
 
 

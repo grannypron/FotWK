@@ -34,6 +34,18 @@ namespace FotWK
             }
         }
 
+		public void Remove(SpecialItemType type)
+		{
+			if (mItems.Contains(type))
+			{
+				Utility.assert(false);
+			}
+			else
+			{
+				mItems.Remove(type);
+			}
+		}
+
 		public bool Contains(SpecialItemType type)
         {
 			return mItems.Contains(type);

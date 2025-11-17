@@ -11,7 +11,7 @@ namespace FotWK
 		public int rations;
 		public SpellCollection spells;
 		public Equipment[] equipment;
-		public MagicMap[] magicMaps;
+		public List<MagicMap> magicMaps;
 		public SpecialItemCollection mSpecialItems;
 		public SupportUnitCollection supportUnits;
 
@@ -22,7 +22,7 @@ namespace FotWK
 			rations = 0;
 			spells = new SpellCollection();
 			equipment = new Equipment[0];
-			magicMaps = new MagicMap[0];
+			magicMaps = new List<MagicMap>();
 			mSpecialItems = new SpecialItemCollection();
 			supportUnits = new SupportUnitCollection();
 		}
@@ -47,6 +47,15 @@ namespace FotWK
 		public bool hasSpecialItem(SpecialItemType type)
 		{
 			return mSpecialItems.Contains(type);
+		}
+		public void addSpecialItem(SpecialItemType type)
+		{
+			mSpecialItems.Add(type);
+		}
+		public void removeSpecialItem(SpecialItemType type)
+		{
+			Utility.assert(mSpecialItems.Contains(type));
+			mSpecialItems.Remove(type);
 		}
 
 	}

@@ -17,6 +17,8 @@ namespace FotWK
         EarthGiant,
         Wizard,
         Hacker,
+        Dragon,
+        WitchKing,
         Hydra,
         Gorgon,
         Hobgoblin,

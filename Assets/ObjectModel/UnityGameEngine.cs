@@ -18,6 +18,16 @@ namespace FotWK
             mGameEngine.mSoundEngine = this.gameObject.GetComponent<UnitySoundEngine>();
         }
 
+        public static void setGameEngine_ForTesting(UnityGameEngine e)
+        {
+            mGameEngine = e;
+        }
+
+        public void setSoundEngine_ForTesting(UnitySoundEngine e)
+        {
+            mSoundEngine = e;
+        }
+
         UnityGameEngine()
         {
         }

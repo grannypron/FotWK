@@ -8,7 +8,7 @@ namespace FotWK
     {
 		SEEING = 1,
 		TELEPORT = 2,
-		SEEKING = 3   // Or is this just a typo?
+		SEEKING = 3
 	}
 	public class Spell
 	{

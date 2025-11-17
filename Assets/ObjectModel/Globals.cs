@@ -23,4 +23,15 @@ public static class Globals
 
     public static int MIN_RATION_SANCTUARY_HELP = 10;
     public static int MIN_WARRIOR_SANCTUARY_HELP = 10;
+
+    public static int LOOT_TELEPORT_SPELL_PERCENTAGE = 25;  //3530  IF  RND (1) < .25 THEN I%(P,1) = I%(P,1) + 1: PRINT I$(1)
+    public static int LOOT_DRAGON_SLAYER_PERCENTAGE = 20;  //3540  IF  RND (1) < .2 AND I%(P,6) < 1 THEN I%(P,6) = 1: PRINT I$(6)
+    public static int LOOT_SPELL_OF_SEEKING_PERCENTAGE = 15; //3550  IF  RND (1) < .15 AND I%(P,8) < 1 THEN I%(P,8) = 1: PRINT I$(8)
+
+    public static int WITCH_KING_LOOT_VALUE = 2000;
+
+    public static int PLAYER_GOLD_CAP = 30000;  // 3590  IF I%(P,4) + Z > 30000 THEN I%(P,4) = 30000:Z = 0
+
+    public static int MAGIC_MAP_CHANCE = 100 - 70; // 3600... IF RND(1) < .7 THEN 3640
+
 }
