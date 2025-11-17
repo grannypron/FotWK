@@ -26,7 +26,8 @@ public static class Globals
 
     public static int LOOT_TELEPORT_SPELL_PERCENTAGE = 25;  //3530  IF  RND (1) < .25 THEN I%(P,1) = I%(P,1) + 1: PRINT I$(1)
     public static int LOOT_DRAGON_SLAYER_PERCENTAGE = 20;  //3540  IF  RND (1) < .2 AND I%(P,6) < 1 THEN I%(P,6) = 1: PRINT I$(6)
-    public static int LOOT_SPELL_OF_SEEKING_PERCENTAGE = 15; //3550  IF  RND (1) < .15 AND I%(P,8) < 1 THEN I%(P,8) = 1: PRINT I$(8)
+    public static int LOOT_SPELL_OF_SEEING_PERCENTAGE = 15; //3550  IF  RND (1) < .15 AND I%(P,8) < 1 THEN I%(P,8) = 1: PRINT I$(8)
+    public static int LOOT_SPECIAL_ITEM_PERCENTAGE = 30; //3700  IF L< 10 OR RND(1) > .3 THEN RETURN
 
     public static int WITCH_KING_LOOT_VALUE = 2000;
 

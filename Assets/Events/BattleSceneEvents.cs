@@ -148,9 +148,9 @@ public class BattleSceneEvents : MonoBehaviour
 
         // 3550  IF RND(1) < .15 AND I% (P, 8) < 1 THEN I% (P, 8) = 1: PRINT I$(8)  
         // 7025 IF RND(1)< .15 AND I% (P, 8) < 1 THEN I% (P, 8) = 1:PRINT I$(8)
-        if (FotWK.RNG.rollAgainstPercentage(Globals.LOOT_SPELL_OF_SEEKING_PERCENTAGE))
+        if (FotWK.RNG.rollAgainstPercentage(Globals.LOOT_SPELL_OF_SEEING_PERCENTAGE))
         {
-            player.getParty().spells[FotWK.SpellType.SEEKING] = player.getParty().spells[FotWK.SpellType.SEEKING] + 1;
+            player.getParty().spells[FotWK.SpellType.SEEING] = 1;
         }
 
         float lootFactor = originalEnemyForce.CalculateLootFactor();
@@ -212,66 +212,68 @@ public class BattleSceneEvents : MonoBehaviour
                 player.getParty().magicMaps.Add(foundMap);
             }
 
-            // 3640  GOSUB 3700: GOSUB 3740: IF S<  > 10 THEN 30
+            // Doing my best to cover the logic here - most of the below has to do with magic maps and the 1/11 flags i think
+            //3640  GOSUB 3700: GOSUB 3740: IF S<  > 10 THEN 30
             //3650 Z = 9: FOR X = 0 TO 3: IF S% (X, 0) = P % (P, 0) AND S% (X, 1) = P % (P, 1) THEN Z = X
             //3660  NEXT: IF Z > 3 GOTO 30
             //3670 Z = Z + 12: IF I% (P, Z) > 1 GOTO 30
             //3680  PRINT I$(Z): IF I% (P, Z) > 0 THEN I% (P, Z) = 11: GOTO 30
             //3690 I % (P, Z) = 10: GOTO 30
+
+            // Special item - reversed the boolean
             //3700  IF L< 10 OR RND(1) > .3 THEN RETURN
-            //3710 Z = INT(RND(1) * 3) + 17: IF I% (P, Z) > 0 THEN RETURN
-            //3720  IF Z = 18 THEN MV = MV + 1: IF MV< 1 THEN MV = 1
-            //3730 I % (P, Z) = 1: PRINT I$(Z): RETURN
-            //3740  IF S = 11 THEN PRINT "THE CROWN OF THE WITCH KING": PRINT "THE SCEPTER OF THE WITCH KING": PRINT "THE ORB OF THE WITCH KING": PRINT "HUNDREDS OF GEMS AND PIECES OF JEWELERY"
-            //3750  RETURN 
-            // It seems like there is somehow a bug.  The code below seems to indicate that 
-            // I%(P, 13) through I%(P, 15) are used as the count of 4 different magic maps.  Also see line 1280:
-            //          1280 Z = 0: FOR X = 12 TO 15: IF I% (P, X) = 1 OR I% (P, X) = 11 THEN Z = Z + 1
-            //          1290  NEXT: TEXT: HOME: IF Z = 0 THEN PRINT "YOU HAVE NO MAGIC MAPS": PRINT: GOTO 30
-            //          1300  PRINT "YOU HAVE "Z" MAP";: IF Z > 1 THEN PRINT "S";
-            //          1310  PRINT: PRINT: FOR X = 1 TO Z: PRINT X" = MAP#"X: NEXT: PRINT: PRINT "WHICH MAP DO YOU WISH TO LOOK AT";
-            // However, it seems I%(P, 12) through 15 are also used to store special artifacts like WIZARD, HORN OF OPENING, BOOTS OF STEALTH, 15: ARMOUR OF DEFENSE
-            // See line 2610:
-            //  2610  GOSUB 1380:Y3 = 1:X = I % (P, 3): IF I% (P, 12) > 1 THEN X = X + 75
-            //  2620  IF RND(I) > X * .01 THEN PRINT "YOU CAN NOT FIND THE ENTRANCE": GOSUB 1390: GOTO 30
+            if (FotWK.UnitsDataFactory.getUnitsData().getUnitTypeByID(monsterId).getWeight() > 10 && 
+                FotWK.RNG.rollAgainstPercentage(Globals.LOOT_SPECIAL_ITEM_PERCENTAGE))
+            {
+                //3710 Z = INT(RND(1) * 3) + 17: 
+                int z = FotWK.RNG.rollInRange(0, 2);
+                // IF I% (P, Z) > 0 THEN RETURN     // Do not give out more than one of these and if you roll the same one, you end up getting nothing
+                
+                switch (z)
+                {
+                    case 0:
+                        if (!player.getParty().hasSpecialItem(FotWK.SpecialItemType.HammerOfThor))
+                        {
+                            //3730 I % (P, Z) = 1: PRINT I$(Z): RETURN
+                            player.getParty().addSpecialItem(FotWK.SpecialItemType.HammerOfThor);
+                        }
+                        break;
+                    case 1:
+                        if (!player.getParty().hasSpecialItem(FotWK.SpecialItemType.TalismanOfSpeed))
+                        {
+                            //3730 I % (P, Z) = 1: PRINT I$(Z): RETURN
+                            player.getParty().addSpecialItem(FotWK.SpecialItemType.TalismanOfSpeed);
+                        }
 
-            // Maybe the apple II port differs from the c64 version?
-            // c64 version:
-            // 7045 Z = INT(RND(1) * 4) + 12:IF I% (P, Z) = 1 OR I% (P, Z) = 11 THEN 7090
-            //7050 PRINT"MAGIC MAP"
-            //7060 IF I% (P, Z) > 0 THEN I% (P, Z) = 11:GOTO 7090
-            //7070 I % (P, Z) = 1
-            //7090 GOSUB 7200:GOSUB 7300:IF S<>10 THEN 85
-            //7100 Z = 9:FOR X = 0 TO 3:IF S% (X, 0) = P % (P, 0)AND S% (X, 1) = P % (P, 1)THEN Z = X
-            //7110 NEXT: IF Z> 3 THEN 85
-            //7120 Z = Z + 12:IF I% (P, Z) > 1 THEN 85
-            //7130 PRINT I$(Z):IF I% (P, Z) > 0 THEN I% (P, Z) = 11:GOTO 85
-            //7140 I % (P, Z) = 10:GOTO 85
-            //7200 IF L<10 OR RND(1)> .3 THEN RETURN
-            //7210 Z = INT(RND(1) * 3) + 17:IF I% (P, Z) > 0 THEN RETURN
-            //7215 IF Z = 18 THEN MV = MV + 1:IF MV<1 THEN MV = 1
-            //7220 I % (P, Z) = 1:PRINT I$(Z):RETURN
-            //7300 IF S<>11 THEN RETURN
+                        //3720  IF Z = 18 THEN MV = MV + 1: IF MV< 1 THEN MV = 1
+                        // TODO: AFFECT MOVE SPEED HERE - MV is MOVES!
 
+                        break;
+                    case 2:
+                        if (player.getParty().spells[FotWK.SpellType.SEEKING] <= 0)
+                        {
+                            //3730 I % (P, Z) = 1: PRINT I$(Z): RETURN
+                            player.getParty().spells[FotWK.SpellType.SEEKING] = 1;
+                        }
+                        break;
+                    default:
+                        Utility.assert(false);
+                        break;
+                }
+
+            }
+
+
+            if (monsterId == FotWK.UnitTypeID.WitchKing)
+            {
+                //3740  IF S = 11 THEN PRINT "THE CROWN OF THE WITCH KING": PRINT "THE SCEPTER OF THE WITCH KING": PRINT "THE ORB OF THE WITCH KING": PRINT "HUNDREDS OF GEMS AND PIECES OF JEWELERY"
+                //3750  RETURN 
+                // TODO: Handle ending here I guess?
+            }
 
 
         }
 
-        /*
-         
-         3640  GOSUB 3700: GOSUB 3740: IF S <  > 10 THEN 30
-         3650 Z = 9: FOR X = 0 TO 3: IF S%(X,0) = P%(P,0) AND S%(X,1) = P%(P,1) THEN Z = X
-         3660  NEXT : IF Z > 3 GOTO 30
-         3670 Z = Z + 12: IF I%(P,Z) > 1 GOTO 30
-         3680  PRINT I$(Z): IF I%(P,Z) > 0 THEN I%(P,Z) = 11: GOTO 30
-         3690 I%(P,Z) = 10: GOTO 30
-         3700  IF L < 10 OR  RND (1) > .3 THEN  RETURN 
-         3710 Z =  INT ( RND (1) * 3) + 17: IF I%(P,Z) > 0 THEN  RETURN 
-         3720  IF Z = 18 THEN MV = MV + 1: IF MV < 1 THEN MV = 1
-         3730 I%(P,Z) = 1: PRINT I$(Z): RETURN 
-         3740  IF S = 11 THEN  PRINT "THE CROWN OF THE WITCH KING": PRINT "THE SCEPTER OF THE WITCH KING": PRINT "THE ORB OF THE WITCH KING": PRINT "HUNDREDS OF GEMS AND PIECES OF JEWELERY"
-         3750  RETURN 
-        */
     }
 
     IEnumerator RunAwayOption()
