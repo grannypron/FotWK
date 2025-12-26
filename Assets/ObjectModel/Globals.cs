@@ -35,4 +35,19 @@ public static class Globals
 
     public static int MAGIC_MAP_CHANCE = 100 - 70; // 3600... IF RND(1) < .7 THEN 3640
 
+    public static int WARRIORS_CRUSHING_CHANCE = 25;  // 3840  PRINT: IF I% (P, 5) < 1 OR RND(1) < .75 THEN GOSUB 3890: GOTO 3910
+    public static int DWARVES_CRUSHING_CHANCE = 50;   // 3890  IF I% (P, 22) < 1 OR RND(1) < .5 THEN RETURN
+    public static int WIZARDS_CAST_CHANCE = 50;   // 3910  PRINT: IF I% (P, 11) < 1 OR RND(1) < .5 THEN 3980
+    public static int ELVES_CAST_CHANCE = 35;   // 3980  PRINT: IF I% (P, 21) < 1 OR RND(1) < .65 THEN 3970
+    public static int MONSTERS_CHARGE_CHANCE = 20;   // 4010  IF RND(1) < .80 THEN 4050
+    public static int MONSTERS_CAST_CHANCE = 40;   // 4090  IF RND(1) < .6 THEN 3970
+    public static int MONSTERS_ELVES_CAST_CHANCE = 30; // 4140  IF  RND (1) < .7 THEN 3970
+    public static float WARRIORS_CRUSHING_DAMAGE_MULTIPLER = .8f;  // 3850  GOSUB 3890:M = 5:N = .8: GOSUB 3860: GOTO 3910 
+    public static float DWARVES_CRUSHING_DAMAGE_MULTIPLER = 2;   // 3900 M = 22:N = 2: GOTO 3860
+    public static float WIZARD_SPELL_GENERAL_DAMAGE_MULTIPLIER = 1.3f; // 3920  PRINT "YOUR "I$(11)" HAS CAST A ";:DF = INT(RND(1) * 4 + 1): ON DF GOSUB 3930,3940,3950,3960: GOSUB 1400:D = D + DF * RND(1) * 1.3 + 1: GOTO 3980
+    public static int SPELL_DAMAGE_FACTOR_LIGHTNING_BOLT = 10;  // 3930  PRINT "LIGHTNING BOLT":DF = 10: GOTO 1480
+    public static int SPELL_DAMAGE_FACTOR_FIRE_BALL = 15;       // 3940  PRINT "FIRE BALL":DF = 15:PP = 5: GOTO 1460
+    public static int SPELL_DAMAGE_FACTOR_TOWER_OF_FLAME = 10;  // 3950  PRINT "TOWER OF FLAME":DF = 10:PP = 5: GOTO 1460
+    public static int SPELL_DAMAGE_FACTOR_DEATH_RAY = 7;        // 3960  PRINT "DEATH RAY":DF = 7:PP = 2: GOTO 1460
+    public static double MONSTERS_ADVANCE_COMPARE = .01;        // 2310  IF RND(1) < Y * .01 THEN PRINT "THE "O$(S);: IF X > 1 THEN PRINT "S ADVANCE";: GOTO 2340
 }

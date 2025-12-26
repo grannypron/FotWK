@@ -24,4 +24,5 @@ public class PlayerState
     public void setName(string name) { mName = name; }
     public bool getSurprised() { return mSurprised; }
     public void setSurprised(bool surprised) { mSurprised = surprised; }
+
 }

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public static class Utility 
 {
+
+    public static bool inittedAlreadyTODORemove = false; // TODO: Remove
+
     const int HIDE_X_OFFSET = 1000;
     public static void HideObject(GameObject obj)
     {
@@ -32,7 +35,7 @@ public static class Utility
 
     public static string addS(int quantity, string str)
     {
-        return quantity > 1 ? "S" : "";
+        return str + (quantity == 1 ? "" : "S");
 
     }
     public static void assert(bool assert)

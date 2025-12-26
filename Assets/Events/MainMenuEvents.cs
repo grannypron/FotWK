@@ -9,7 +9,10 @@ public class MainMenuEvents : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameStateManager.getGameState().initForDemo();
+        if (!Utility.inittedAlreadyTODORemove) {
+            GameStateManager.getGameState().initForDemo();
+            Utility.inittedAlreadyTODORemove = true;
+        }
         GameStateManager.getGameState().getCurrentPlayerState().getParty().rations = 1;
         int movementFactorsRemaining = GameStateManager.getGameState().getMovementFactorsRemaining();
         string playerName = GameStateManager.getGameState().getCurrentPlayerState().getName();

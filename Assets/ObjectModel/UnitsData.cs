@@ -76,14 +76,25 @@ namespace FotWK
             mUnitTypeID.Add(UnitTypeID.Goblin, new UnitType("Goblin", .3f));
             mUnitTypeID.Add(UnitTypeID.Orc, new UnitType("Orc", .5f));
             mUnitTypeID.Add(UnitTypeID.Troll, new UnitType("Troll", 10f));
-            mUnitTypeID.Add(UnitTypeID.Ogre, new UnitType("Ogre", 16f));
+            // As I trace this, it is possible that an OGRE, DRAGON or WITCH KING can cast a spell (as well as wizards and elves)
+            // - if S=6 or S=10, it will fall through line 4000,
+            // either fall through line 4010 or not and still get to line 4050, which will send it to line 4090 - the spell casting line
+            // 4000  PRINT: IF S = 8 OR S = 9 OR S = 11 THEN 4050
+            // 4010  IF RND(1) < .80 THEN 4050
+            // 4020  PRINT "THE "O$(S);: IF X > 1 THEN PRINT "S ARE CHARGING";: GOTO 4040
+            // 4030  PRINT " IS CHARGING";
+            // 4040  PRINT: GOSUB 1390:D1 = D1 + RND(1) * Y * .3
+            // 4050  PRINT: IF S = 6 OR S = 9 OR S = 11 OR S = 8 OR S = 10 THEN 4090
+            mUnitTypeID.Add(UnitTypeID.Ogre, new UnitType("Ogre", 16f, true));
             mUnitTypeID.Add(UnitTypeID.EarthGiant, new UnitType("EarthGiant", 20f));
-            mUnitTypeID.Add(UnitTypeID.Wizard, new UnitType("Wizard", 25f));
-            mUnitTypeID.Add(UnitTypeID.Hacker, new UnitType("Hacker", 50f));
+            mUnitTypeID.Add(UnitTypeID.Wizard, new UnitType("Wizard", 25f, true));
+            mUnitTypeID.Add(UnitTypeID.Hacker, new UnitType("Hacker", 50f, true));
+            mUnitTypeID.Add(UnitTypeID.Dragon, new UnitType("Dragon", 100f, true));
+            mUnitTypeID.Add(UnitTypeID.WitchKing, new UnitType("WitchKing", 150f, true));
             mUnitTypeID.Add(UnitTypeID.Hydra, new UnitType("Hydra", 40f));
             mUnitTypeID.Add(UnitTypeID.Gorgon, new UnitType("Gorgon", 30f));
             mUnitTypeID.Add(UnitTypeID.Hobgoblin, new UnitType("Hobgoblin", .6f));
-            mUnitTypeID.Add(UnitTypeID.Elf, new UnitType("Elf", 2f));
+            mUnitTypeID.Add(UnitTypeID.Elf, new UnitType("Elf", 2f, true));
             mUnitTypeID.Add(UnitTypeID.Dwarf, new UnitType("Dwarf", 3f));
         }
     }

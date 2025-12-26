@@ -57,6 +57,12 @@ namespace FotWK
 			Utility.assert(mSpecialItems.Contains(type));
 			mSpecialItems.Remove(type);
 		}
-
+		public void addGold(int _gold) {
+			gold += _gold; 
+		}
+		public void setGold(int _gold)
+		{
+			gold = _gold;
+		}
 	}
 }

@@ -5,7 +5,6 @@ If you don't have enough warriors (and maybe other units), you get the message t
 Encounters
 	- Parlay mechanic - start testing the input gathering and test the code to add the force numbers to the party - only warriors, elves, and dwarves
 	- Playing a second sound on surprise never plays - probably related to sounds don't always finish playing
-	- 3520  PRINT "YOU HAVE FOUND THE FOLLOWING ITEMS" mechanic
 	- It's interesting, aren't elves parley-able?  No they are because I left out Dragon & WitchKing in the enum.  I have put them in.  If not, I have to change isParlayable() in UnitsData.cs  2230  PRINT : IF S = 0 OR S > 14 THEN  PRINT "DO YOU WISH TO PARLEY";:
 	- After initial encounter, if you get the chance to run away, the screen should NOT clear before asking "Will you run away"
 	
@@ -72,8 +71,9 @@ Presumably then, here are our indexes for non-player types, which tracks with li
 
 
 Battles - Battle Scene
+	 - "SIRE WE HAVE JUST LOST A " section to battle()
 	- Player name on battle screen
-
+	- THEY HAVE YOU NOW when you fail to run away
 	- Each round doesn't necessarily contain combat - check out the first encounter after inventory.C64, we see two wizards and we are surprised, but no combat happens, just a round update
 		 2290  FOR DF = 0 TO 500: NEXT : HOME : PRINT  TAB( 10)"PRESS 'R' TO RETREAT!!": 
 		 PRINT : PRINT :
@@ -99,7 +99,6 @@ Battles - Battle Scene
 		 2350 Z =  INT ( RND (1) * 12): 
 		 IF Z = 5 OR Z < 2 OR Z = 4 OR Z = 6 OR Z = 8 OR Z = 9 THEN 2380
 	- "Round Update" comes if there is no retreat
-	- Retreat
 Implement random you find stuff scene
 Maybe use generics more for the monsters?
 Spells

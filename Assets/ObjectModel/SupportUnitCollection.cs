@@ -6,7 +6,8 @@ namespace FotWK
 {
 	public enum SupportUnitType
     {
-		Mule = 1
+		Mule = 1,
+        Cleric = 2
     }
 
 	public class SupportUnitCollection : Dictionary<SupportUnitType, int>
