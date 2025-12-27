@@ -128,7 +128,7 @@ namespace FotWK
             // Probably the 11/10 exception was to skip "WITCH KING" and "DRAGON"
             // Here, getEncounterableForceUnits() filters those two out for us
             UnitsData units = UnitsDataFactory.getUnitsData();
-            List<UnitTypeID> encounterableTypes = units.getEncounterableForceUnitTypeID();
+            List<UnitTypeID> encounterableTypes = units.getEncounterableForceUnitTypes();
             int unitTypeIdx = RNG.rollInRange(3, 3);//encounterableTypes.Count)  TODO: Remove;
             UnitTypeID monsterId = encounterableTypes[unitTypeIdx];
             UnitType monster = units.getUnitTypeByID(monsterId);

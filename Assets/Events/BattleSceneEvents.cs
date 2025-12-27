@@ -69,7 +69,7 @@ public class BattleSceneEvents : MonoBehaviour
             float Y = enemyForce[enemyUnitTypeID] * FotWK.UnitsDataFactory.getUnitsData().getUnitTypeByID(enemyUnitTypeID).getWeight();
             float playerForceWeight = playerForce[FotWK.UnitTypeID.Warrior] +
                 (playerForce[FotWK.UnitTypeID.Wizard] * 20) + (FotWK.RNG.rollPercentage0To1() * 15) +
-                (player.getParty().hasSpecialItem(FotWK.SpecialItemType.HammerOfThor) ? 1 * 15 : 0 * hammerOfThorMultiplier) +   // TODO: Can multiple hammers of thor be had?
+                (player.getParty().hasSpecialItem(FotWK.SpecialItemTypeID.HammerOfThor) ? 1 * 15 : 0 * hammerOfThorMultiplier) +   // TODO: Can multiple hammers of thor be had?
                 (playerForce[FotWK.UnitTypeID.Dwarf] * 2);
 
             if (FotWK.RNG.rollPercentage0To1() < playerForceWeight * Globals.ATTACK_PRESS_CHANCE_MULTIPLIER)
@@ -118,7 +118,7 @@ public class BattleSceneEvents : MonoBehaviour
             playerForce[FotWK.UnitTypeID.Warrior] = System.Math.Max(0, playerForce[FotWK.UnitTypeID.Warrior] - (int)System.Math.Floor(mDamageAgainstPlayer));
 
             // 2450  ON I% (P, 2) < 1 GOTO 2480: ON RND(1) > (.35 + I % (P, 2) * .01) GOTO 2480: ON D1<  = 0 GOTO 2480
-            int numClerics = player.getParty().supportUnits[FotWK.SupportUnitType.Cleric];
+            int numClerics = player.getParty().supportUnits[FotWK.SupportUnitTypeID.Cleric];
             if (numClerics > 0 && FotWK.RNG.rollPercentage0To1() < (0.35 + numClerics * .01) && mDamageAgainstPlayer > 0)
             {
                 // 2460 Z = INT(D1 * I % (P, 2) * .03 + 1): IF D1<Z THEN Z = D1
@@ -207,9 +207,9 @@ public class BattleSceneEvents : MonoBehaviour
         // *3520  ...IF S = 10 THEN I% (P, 6) = 0 // 7005 IF S = 10 THEN I% (P, 6) = 0
         if (monsterId == FotWK.UnitTypeID.Dragon && originalEnemyForce[FotWK.UnitTypeID.Dragon] > 0)
         {
-            if (player.getParty().hasSpecialItem(FotWK.SpecialItemType.DragonSlayer))
+            if (player.getParty().hasSpecialItem(FotWK.SpecialItemTypeID.DragonSlayer))
             {
-                player.getParty().removeSpecialItem(FotWK.SpecialItemType.DragonSlayer);
+                player.getParty().removeSpecialItem(FotWK.SpecialItemTypeID.DragonSlayer);
             }
         }
 
@@ -224,9 +224,9 @@ public class BattleSceneEvents : MonoBehaviour
         // 7020 IF RND(1)< .2 AND I% (P, 6) < 1 THEN I% (P, 6) = 1:PRINT I$(6)
         if (FotWK.RNG.rollAgainstPercentage(Globals.LOOT_DRAGON_SLAYER_PERCENTAGE))
         {
-            if (!player.getParty().hasSpecialItem(FotWK.SpecialItemType.DragonSlayer))
+            if (!player.getParty().hasSpecialItem(FotWK.SpecialItemTypeID.DragonSlayer))
             {
-                player.getParty().addSpecialItem(FotWK.SpecialItemType.DragonSlayer);
+                player.getParty().addSpecialItem(FotWK.SpecialItemTypeID.DragonSlayer);
             }
         }
 
@@ -316,17 +316,17 @@ public class BattleSceneEvents : MonoBehaviour
                 switch (z)
                 {
                     case 0:
-                        if (!player.getParty().hasSpecialItem(FotWK.SpecialItemType.HammerOfThor))
+                        if (!player.getParty().hasSpecialItem(FotWK.SpecialItemTypeID.HammerOfThor))
                         {
                             //3730 I % (P, Z) = 1: PRINT I$(Z): RETURN
-                            player.getParty().addSpecialItem(FotWK.SpecialItemType.HammerOfThor);
+                            player.getParty().addSpecialItem(FotWK.SpecialItemTypeID.HammerOfThor);
                         }
                         break;
                     case 1:
-                        if (!player.getParty().hasSpecialItem(FotWK.SpecialItemType.TalismanOfSpeed))
+                        if (!player.getParty().hasSpecialItem(FotWK.SpecialItemTypeID.TalismanOfSpeed))
                         {
                             //3730 I % (P, Z) = 1: PRINT I$(Z): RETURN
-                            player.getParty().addSpecialItem(FotWK.SpecialItemType.TalismanOfSpeed);
+                            player.getParty().addSpecialItem(FotWK.SpecialItemTypeID.TalismanOfSpeed);
                         }
 
                         //3720  IF Z = 18 THEN MV = MV + 1: IF MV< 1 THEN MV = 1

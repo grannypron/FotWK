@@ -40,19 +40,19 @@ namespace FotWK
 			//force.Add(UnitTypeID.Raider, 3);
 			force.Add(UnitTypeID.Warrior, 50);
 			supportUnits = new SupportUnitCollection();
-			supportUnits[SupportUnitType.Mule] = 1;
+			supportUnits[FotWK.SupportUnitTypeID.Mule] = 1;
 			mSpecialItems = new SpecialItemCollection();
-			mSpecialItems.Add(SpecialItemType.DragonSlayer);
+			mSpecialItems.Add(SpecialItemTypeID.DragonSlayer);
 		}
-		public bool hasSpecialItem(SpecialItemType type)
+		public bool hasSpecialItem(SpecialItemTypeID type)
 		{
 			return mSpecialItems.Contains(type);
 		}
-		public void addSpecialItem(SpecialItemType type)
+		public void addSpecialItem(SpecialItemTypeID type)
 		{
 			mSpecialItems.Add(type);
 		}
-		public void removeSpecialItem(SpecialItemType type)
+		public void removeSpecialItem(SpecialItemTypeID type)
 		{
 			Utility.assert(mSpecialItems.Contains(type));
 			mSpecialItems.Remove(type);

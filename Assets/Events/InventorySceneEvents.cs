@@ -15,6 +15,7 @@ public class InventorySceneEvents : MonoBehaviour
     void Start()
     {
         PlayerState playerState = GameStateManager.getGameState().getCurrentPlayerState();
+        FotWK.UnitsData unitsData = FotWK.UnitsDataFactory.getUnitsData();
 
         Text txtScreenText = GameObject.Find("txtScreenText").GetComponent<Text>();
 
@@ -31,21 +32,21 @@ public class InventorySceneEvents : MonoBehaviour
         foreach (KeyValuePair<FotWK.UnitTypeID, int> unit in party.force)
         {
             if (unit.Value > 0) {
-                txtScreenText.text += AddInventoryLine(unit.Value, "UNIT _ TODO");
+                txtScreenText.text += AddInventoryLine(unit.Value, unitsData.getUnitTypeByID(unit.Key).getName().ToUpper());
             }
         }
-        foreach (KeyValuePair<FotWK.SupportUnitType, int> unit in party.supportUnits)
+        foreach (KeyValuePair<FotWK.SupportUnitTypeID, int> unit in party.supportUnits)
         {
             if (unit.Value > 0)
             {
-                txtScreenText.text += AddInventoryLine(unit.Value, "UNIT _ TODO");
+                txtScreenText.text += AddInventoryLine(unit.Value, unitsData.getSupportUnitTypeByID(unit.Key).getName().ToUpper());
             }
         }
-        foreach (FotWK.SpecialItemType itemType in Enum.GetValues(typeof(FotWK.SpecialItemType)))
+        foreach (FotWK.SpecialItemTypeID itemType in Enum.GetValues(typeof(FotWK.SpecialItemTypeID)))
         {
             if (party.hasSpecialItem(itemType))
             { 
-                txtScreenText.text += AddInventoryLine(1, "SPECIAL ITEM _ TODO" + itemType);
+                txtScreenText.text += AddInventoryLine(1, FotWK.SpecialItemTypeData.getName(itemType));
             }
         }
 

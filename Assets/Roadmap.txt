@@ -70,44 +70,19 @@ Presumably then, here are our indexes for non-player types, which tracks with li
 
 
 
-Battles - Battle Scene
-	 - "SIRE WE HAVE JUST LOST A " section to battle()
-	- Player name on battle screen
-	- THEY HAVE YOU NOW when you fail to run away
-	- Each round doesn't necessarily contain combat - check out the first encounter after inventory.C64, we see two wizards and we are surprised, but no combat happens, just a round update
-		 2290  FOR DF = 0 TO 500: NEXT : HOME : PRINT  TAB( 10)"PRESS 'R' TO RETREAT!!": 
-		 PRINT : PRINT :
-		 Y = X * L:
-		 Y1 = (I%(P,5) + (I%(P,11) * 20) + ( RND (1) * 15) + (I%(P,17) * 15) * X3) + I%(P,22) * 2
-		 IF S = 10 AND I%(P,6) > 0 THEN Y1 = Y1 + 50
-			2300  PRINT "THE BATTLE RAGES ON"
-			IF  RND (1) < Y1 * .012 THEN							*** Note here that ALL statements after on the line after the "THEN" keyword will be executed (when there are multiple separated by colons), not just the first
-				GOSUB 1400: 
-				PRINT N$(P)"'S SIDE PRESSES THE ATTACK ":
-				D = D +  RND (1) * Y1 + 1:
-				GOSUB 3840
-		 2310  IF  RND (1) < Y * .01 THEN  
-				PRINT "THE "O$(S);
-				IF X > 1 THEN  PRINT "S ADVANCE";:					*** Interesting place to handle the plural, but whatever
-				GOTO 2340
-		 2320  IF  NOT  RND (0) < Y * .01 THEN 2440                 *** Show the "Round update" - RND(0) is the last value returned from the RNG, so this equates to an "else"
-		 2330  PRINT " ADVANCES";
-		 2340  PRINT :
-			D1 = D1 +  RND (1) * Y * .4: 
-			GOSUB 1390: 
-			GOSUB 4000
-		 2350 Z =  INT ( RND (1) * 12): 
-		 IF Z = 5 OR Z < 2 OR Z = 4 OR Z = 6 OR Z = 8 OR Z = 9 THEN 2380
-	- "Round Update" comes if there is no retreat
-Implement random you find stuff scene
-Maybe use generics more for the monsters?
-Spells
-Magic Map
-Load/Save - serialization of state - json?
-Moves per turn
-Map level difficulty mechanic
-Player level difficulty mechanic
-Remove GamesState.initForDemo(), BattleSceneEvents.initForDemo() and remove GameState-deleteme from MainMenu scene
+
+Master TODO:
+- Finish Inventory Screen
+- Error: Start from MainMenuScene and choose "S" to stay.  Error because GameStateManager.getGameState().setCurrentTileName() has not been called yet.  This may or may not occur during normal gameplay
+- Rations need to decrease
+- Implement random you find stuff scene
+- Spells
+- Magic Map
+- Load/Save - serialization of state - json?
+- Multiplayer
+- Map level difficulty mechanic
+- Player level difficulty mechanic
+- Remove GamesState.initForDemo(), BattleSceneEvents.initForDemo() and remove GameState-deleteme from MainMenu scene
 
 - Rando todos:
 "STAND BY.  FILLING ARRAYS" should be in negative text

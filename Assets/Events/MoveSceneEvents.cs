@@ -59,6 +59,7 @@ public class MoveSceneEvents : MonoBehaviour
                 string tileName = getTileNameUnderCursor(new Vector2Int(newX, newY), closeUpMapTilemap);
                 GameStateManager.getGameState().setCurrentTileName(tileName);
             }
+            GameStateManager.getGameState().decMovementFactorsRemaining(1);
             NextScreen();
         }
     }

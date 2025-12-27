@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FotWK
 {
-	public enum SpecialItemType
+	public enum SpecialItemTypeID
     {
 		DragonSlayer,
 		HornOfOpening,
@@ -14,15 +14,35 @@ namespace FotWK
 		HammerOfThor,
 		TalismanOfSpeed
 	}
+
+	public static class SpecialItemTypeData
+    {
+		static Dictionary<SpecialItemTypeID, String> mItemNames;
+		static SpecialItemTypeData()
+		{
+			mItemNames = new Dictionary<SpecialItemTypeID, string>();
+			mItemNames.Add(SpecialItemTypeID.DragonSlayer, "DRAGON SLAYER");
+			mItemNames.Add(SpecialItemTypeID.HornOfOpening, "HORN OF OPENING");
+			mItemNames.Add(SpecialItemTypeID.BootsOfStealth, "BOOTS OF STEALTH");
+			mItemNames.Add(SpecialItemTypeID.ArmourOfDefense, "ARMOUR OF DEFENSE");
+			mItemNames.Add(SpecialItemTypeID.SwordOfStrength, "SWORD OF STRENGTH");
+			mItemNames.Add(SpecialItemTypeID.HammerOfThor, "HAMMER OF THOR");
+			mItemNames.Add(SpecialItemTypeID.TalismanOfSpeed, "TALISMAN OF SPEED");
+		}
+		public static String getName(SpecialItemTypeID id)
+        {
+			return mItemNames[id];
+        }
+	}
 	public class SpecialItemCollection 
 	{
-		private List<SpecialItemType> mItems;
+		private List<SpecialItemTypeID> mItems;
 		public SpecialItemCollection()
         {
-			mItems = new List<SpecialItemType>();
+			mItems = new List<SpecialItemTypeID>();
         }
 
-		public void Add(SpecialItemType type)
+		public void Add(SpecialItemTypeID type)
         {
 			if (mItems.Contains(type))
             {
@@ -34,7 +54,7 @@ namespace FotWK
             }
         }
 
-		public void Remove(SpecialItemType type)
+		public void Remove(SpecialItemTypeID type)
 		{
 			if (mItems.Contains(type))
 			{
@@ -46,7 +66,7 @@ namespace FotWK
 			}
 		}
 
-		public bool Contains(SpecialItemType type)
+		public bool Contains(SpecialItemTypeID type)
         {
 			return mItems.Contains(type);
         }
