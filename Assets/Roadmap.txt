@@ -76,8 +76,8 @@ Master TODO:
 - Test battle events for wizards, elves, dwarves, etc and for enemy spellcasters and dragons
 - "YOU HAVE BEEN RAIDED!!" mechanic
 - Scouts and enemy camps
-- Error: Start from MainMenuScene and choose "S" to stay.  Error because GameStateManager.getGameState().setCurrentTileName() has not been called yet.  This may or may not occur during normal gameplay
-- "WOULD YOU LIKE TO SAVE THE GAME"
+- "YOU HAD TO DROP # GOLD PIECES" mechanic
+- End turn screen and "WOULD YOU LIKE TO SAVE THE GAME?"
 - Implement random you find stuff scene
 - Spells
 - Magic Map

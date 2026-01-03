@@ -37,6 +37,10 @@ public class MoveSceneEvents : MonoBehaviour
             yMove--; xMove--;  // NW
         } else if (Input.GetKeyDown("s")) {
             // Stay
+            Vector2 position = GameStateManager.getGameState().getCurrentPlayerState().getMapPosition();
+            Tilemap closeUpMapTilemap = GameObject.Find("CloseUpMapTilemap").GetComponent<Tilemap>();
+            string tileName = getTileNameUnderCursor(new Vector2Int((int)position.x, (int)position.y), closeUpMapTilemap);
+            GameStateManager.getGameState().setCurrentTileName(tileName);  // This value must be set - including on the very first move
             NextScreen();
         }
 
