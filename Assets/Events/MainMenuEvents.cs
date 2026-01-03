@@ -13,7 +13,6 @@ public class MainMenuEvents : MonoBehaviour
             GameStateManager.getGameState().initForDemo();
             Utility.inittedAlreadyTODORemove = true;
         }
-        GameStateManager.getGameState().getCurrentPlayerState().getParty().rations = 1;
         int movementFactorsRemaining = GameStateManager.getGameState().getMovementFactorsRemaining();
         string playerName = GameStateManager.getGameState().getCurrentPlayerState().getName();
 

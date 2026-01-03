@@ -103,7 +103,7 @@ namespace FotWK
             }
             else
             {
-                NextScene("MoveScene");
+                NextScene("MainMenu");
             }
         }
 

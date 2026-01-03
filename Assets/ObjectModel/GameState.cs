@@ -14,7 +14,11 @@ public class GameState
     public GameState() {
         mPlayerStates = new PlayerState[1];
         mPlayerStates[0] = new PlayerState();
-        initForDemo();
+        if (!Utility.inittedAlreadyTODORemove)
+        {
+            initForDemo();
+            Utility.inittedAlreadyTODORemove = true;
+        }
     }
     public PlayerState getPlayerState(int idx) { 
         if (idx <= 0) {
@@ -52,6 +56,11 @@ public class GameState
     public int getMovementFactorsRemaining()
     {
         return mMovementFactorsRemaining;
+    }
+
+    public void decMovementFactorsRemaining(int moves)
+    {
+        mMovementFactorsRemaining -= moves;
     }
 
     public void initForDemo()

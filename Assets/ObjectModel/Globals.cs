@@ -19,7 +19,7 @@ public static class Globals
 
     public static int MOVES_PER_TURN = 4;
 
-    public static int ENCOUNTER_CHANCE_MULTIPLIER = 10;//0; // For quick turning on/off encounters or to scale difficulty
+    public static float ENCOUNTER_CHANCE_MULTIPLIER = 1; // For quick turning on/off encounters or to scale difficulty
 
     public static int MIN_RATION_SANCTUARY_HELP = 10;
     public static int MIN_WARRIOR_SANCTUARY_HELP = 10;

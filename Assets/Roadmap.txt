@@ -72,9 +72,12 @@ Presumably then, here are our indexes for non-player types, which tracks with li
 
 
 Master TODO:
-- Finish Inventory Screen
+- BUG: Rations need to decrease only on end of turn - right now they are happening on every move
+- Test battle events for wizards, elves, dwarves, etc and for enemy spellcasters and dragons
+- "YOU HAVE BEEN RAIDED!!" mechanic
+- Scouts and enemy camps
 - Error: Start from MainMenuScene and choose "S" to stay.  Error because GameStateManager.getGameState().setCurrentTileName() has not been called yet.  This may or may not occur during normal gameplay
-- Rations need to decrease
+- "WOULD YOU LIKE TO SAVE THE GAME"
 - Implement random you find stuff scene
 - Spells
 - Magic Map

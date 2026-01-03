@@ -60,6 +60,7 @@ public class MoveSceneEvents : MonoBehaviour
                 GameStateManager.getGameState().setCurrentTileName(tileName);
             }
             GameStateManager.getGameState().decMovementFactorsRemaining(1);
+            GameStateManager.getGameState().getCurrentPlayerState().decRations();
             NextScreen();
         }
     }

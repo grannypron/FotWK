@@ -10,6 +10,10 @@ namespace FotWK
     {
         public static bool rollAgainstPercentage(int percentage)
         {
+            return rollAgainstPercentage((float) percentage);
+        }
+        public static bool rollAgainstPercentage(float percentage)
+        {
             int roll = UnityEngine.Random.Range(1, 100);
             return roll <= percentage;
         }
