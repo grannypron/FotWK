@@ -25,7 +25,7 @@ public class PlayerState
     public bool getSurprised() { return mSurprised; }
     public void setSurprised(bool surprised) { mSurprised = surprised; }
 
-    public void decRations()
+    public void eatRations()
     {
         // 380 ... I%(P,0) = I%(P,0) - (I%(P,5) / 10)
         mParty.rations -= (int)(mParty.force[FotWK.UnitTypeID.Warrior] / 10);

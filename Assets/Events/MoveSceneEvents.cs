@@ -64,7 +64,6 @@ public class MoveSceneEvents : MonoBehaviour
                 GameStateManager.getGameState().setCurrentTileName(tileName);
             }
             GameStateManager.getGameState().decMovementFactorsRemaining(1);
-            GameStateManager.getGameState().getCurrentPlayerState().decRations();
             NextScreen();
         }
     }
@@ -93,7 +92,7 @@ public class MoveSceneEvents : MonoBehaviour
 
         // The array is laid out from the bottom row to the top row and left to right is how the index runs.  No idea why, but calculate the index as such:
         TileBase[] arrBlocks = closeUpMapTilemap.GetTilesBlock(closeUpMapTilemap.cellBounds);
-        int tileIdx = (Globals.MAX_MAP_Y - position.y) * 40 + (position.x - 1);
+        int tileIdx = (Globals.MAX_MAP_Y - position.y) * 40 + (position.x - 1);  // TODO: Magic #
 
         return arrBlocks[tileIdx].name;
     }

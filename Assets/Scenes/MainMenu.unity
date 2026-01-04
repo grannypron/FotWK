@@ -375,8 +375,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\n\r\n\r\n\r\n                  >MAIN MENU<\r\n\r\n    TURN 1  :PLAYER#
-    1  -> {0}\n    MOVEMENT FACTORS REMAINING -> {1, 1}\n\r\n       OPTIONS:\r\n\r\n   
+  m_Text: "\n\r\n\r\n\r\n                  >MAIN MENU<\r\n\r\n    TURN {0} : PLAYER#
+    1  -> {1}\n    MOVEMENT FACTORS REMAINING -> {2, 1}\n\r\n       OPTIONS:\r\n\r\n   
     1 = LOOK AT MAP\r\n\r\n    2 = LOOK AT CLOSE UP MAP\r\n\r\n    I = INVENTORY\r\n\r\n   
     M = MOVE\r\n\r\n    U = USE SPELL\r\n\r\n    E = END TURN\r\n\r\n    L = LOOK
     AT MAGIC MAP\r\n\r\n    ENTER OPTION--->"

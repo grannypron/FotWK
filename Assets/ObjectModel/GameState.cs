@@ -10,6 +10,7 @@ public class GameState
     private string mCurrentTileName;
     private Force mCurrentEnemyForce;
     private int mMovementFactorsRemaining;
+    private int mTurnCount = 1;
 
     public GameState() {
         mPlayerStates = new PlayerState[1];
@@ -63,6 +64,11 @@ public class GameState
         mMovementFactorsRemaining -= moves;
     }
 
+    public void resetMovementFactorsRemaining()
+    {
+        mMovementFactorsRemaining = Globals.MOVES_PER_TURN;
+    }
+
     public void initForDemo()
     {
         mPlayerStates[0].setMapPosition(new Vector2(18, 20));
@@ -76,6 +82,15 @@ public class GameState
         mPlayerStates[0].setName("Hotmustard");
         mMovementFactorsRemaining = 4;
     }
-    
 
+    public int getTurn()
+    {
+        return mTurnCount;
+    }
+
+
+    public int endTurn()
+    {
+        return ++mTurnCount;
+    }
 }

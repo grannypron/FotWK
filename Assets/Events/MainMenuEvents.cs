@@ -15,8 +15,9 @@ public class MainMenuEvents : MonoBehaviour
         }
         int movementFactorsRemaining = GameStateManager.getGameState().getMovementFactorsRemaining();
         string playerName = GameStateManager.getGameState().getCurrentPlayerState().getName();
+        int turn = GameStateManager.getGameState().getTurn();
 
-        GameObject.Find("txtMenuText").GetComponent<Text>().text = String.Format(GameObject.Find("txtMenuText").GetComponent<Text>().text, playerName, movementFactorsRemaining);
+        GameObject.Find("txtMenuText").GetComponent<Text>().text = String.Format(GameObject.Find("txtMenuText").GetComponent<Text>().text, turn, playerName, movementFactorsRemaining);
     }
 
     // Update is called once per frame
@@ -24,25 +25,17 @@ public class MainMenuEvents : MonoBehaviour
     {
         if (Input.GetKeyDown("m"))
         {
-            Move();
+            StartCoroutine(LoadScene("MoveScene"));
         } else if (Input.GetKeyDown("i"))
         {
-            Inventory();
+            StartCoroutine(LoadScene("InventoryScene"));
+        } else if (Input.GetKeyDown("e"))
+        {
+            StartCoroutine(LoadScene("EndTurnScene"));
         }
 
 
     }
-
-    void Move()
-    {
-        StartCoroutine(LoadScene("MoveScene"));
-    }
-
-    void Inventory()
-    {
-        StartCoroutine(LoadScene("InventoryScene"));
-    }
-
     IEnumerator LoadScene(string sceneName)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
