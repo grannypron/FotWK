@@ -4,8 +4,8 @@ using System.Text;
 
 namespace FotWK
 {
-
-	public class SupportUnitCollection : Dictionary<SupportUnitTypeID, int>
+    [System.Serializable]
+    public class SupportUnitCollection : SerializableDictionary.Scripts.SerializableDictionary<SupportUnitTypeID, int>
 	{
         public SupportUnitCollection()
         {

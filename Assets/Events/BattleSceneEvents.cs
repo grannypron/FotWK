@@ -66,11 +66,11 @@ public class BattleSceneEvents : MonoBehaviour
             FotWK.Force playerForce = player.getParty().force;
 
             //2290... Y = X * L:Y1 = (I % (P, 5) + (I % (P, 11) * 20) + (RND(1) * 15) + (I % (P, 17) * 15) * X3) + I % (P, 22) * 2
-            float Y = enemyForce[enemyUnitTypeID] * FotWK.UnitsDataFactory.getUnitsData().getUnitTypeByID(enemyUnitTypeID).getWeight();
-            float playerForceWeight = playerForce[FotWK.UnitTypeID.Warrior] +
-                (playerForce[FotWK.UnitTypeID.Wizard] * 20) + (FotWK.RNG.rollPercentage0To1() * 15) +
+            float Y = enemyForce.Get(enemyUnitTypeID) * FotWK.UnitsDataFactory.getUnitsData().getUnitTypeByID(enemyUnitTypeID).getWeight();
+            float playerForceWeight = playerForce.Get(FotWK.UnitTypeID.Warrior) +
+                (playerForce.Get(FotWK.UnitTypeID.Wizard) * 20) + (FotWK.RNG.rollPercentage0To1() * 15) +
                 (player.getParty().hasSpecialItem(FotWK.SpecialItemTypeID.HammerOfThor) ? 1 * 15 : 0 * hammerOfThorMultiplier) +   // TODO: Can multiple hammers of thor be had?
-                (playerForce[FotWK.UnitTypeID.Dwarf] * 2);
+                (playerForce.Get(FotWK.UnitTypeID.Dwarf) * 2);
 
             if (FotWK.RNG.rollPercentage0To1() < playerForceWeight * Globals.ATTACK_PRESS_CHANCE_MULTIPLIER)
             { /*IF RND(1) < Y1 * .012 THEN*** Note here that ALL statements after on the line after the "THEN" keyword will be executed(when there are multiple separated by colons), not just the first */
@@ -115,10 +115,10 @@ public class BattleSceneEvents : MonoBehaviour
             txtScreenText.text += "\n";
             Debug.Log("mDamageAgainstPlayer:" + mDamageAgainstPlayer);
             Debug.Log("mDamageAgainstPlayer:" + playerDamage);
-            playerForce[FotWK.UnitTypeID.Warrior] = System.Math.Max(0, playerForce[FotWK.UnitTypeID.Warrior] - (int)System.Math.Floor(mDamageAgainstPlayer));
+            playerForce.Set(FotWK.UnitTypeID.Warrior, System.Math.Max(0, playerForce.Get(FotWK.UnitTypeID.Warrior) - (int)System.Math.Floor(mDamageAgainstPlayer)));
 
             // 2450  ON I% (P, 2) < 1 GOTO 2480: ON RND(1) > (.35 + I % (P, 2) * .01) GOTO 2480: ON D1<  = 0 GOTO 2480
-            int numClerics = player.getParty().supportUnits[FotWK.SupportUnitTypeID.Cleric];
+            int numClerics = player.getParty().supportUnits.Get(FotWK.SupportUnitTypeID.Cleric);
             if (numClerics > 0 && FotWK.RNG.rollPercentage0To1() < (0.35 + numClerics * .01) && mDamageAgainstPlayer > 0)
             {
                 // 2460 Z = INT(D1 * I % (P, 2) * .03 + 1): IF D1<Z THEN Z = D1
@@ -126,7 +126,7 @@ public class BattleSceneEvents : MonoBehaviour
                 restoredUnits = (int)System.Math.Min(mDamageAgainstPlayer, restoredUnits);
 
                 // 2470 Z = INT(Z):I % (P, 5) = I % (P, 5) + Z: PRINT "YOUR "I$(2)"S RESTORE "Z" "I$(5);: IF Z > 1 THEN PRINT "S";
-                playerForce[FotWK.UnitTypeID.Warrior] += restoredUnits;
+                playerForce.Set(FotWK.UnitTypeID.Warrior, playerForce.Get(FotWK.UnitTypeID.Warrior) + restoredUnits);
 
                 txtScreenText.text += Utility.centerString("YOUR CLERICS RESTORE " + restoredUnits + " " + Utility.addS(restoredUnits, "WARRIOR"));
                 txtScreenText.text += "\n";
@@ -136,7 +136,7 @@ public class BattleSceneEvents : MonoBehaviour
 
             // 2480 D1 = 0: PRINT: PRINT "YOU HAVE "I % (P, 5)" "I$(5);: IF I% (P, 5) <  > 1 THEN PRINT "S";
             txtScreenText.text += "\n";
-            txtScreenText.text += Utility.centerString("YOU HAVE " + playerForce[FotWK.UnitTypeID.Warrior] + " " + Utility.addS(playerForce[FotWK.UnitTypeID.Warrior], "WARRIOR"));
+            txtScreenText.text += Utility.centerString("YOU HAVE " + playerForce.Get(FotWK.UnitTypeID.Warrior) + " " + Utility.addS(playerForce.Get(FotWK.UnitTypeID.Warrior), "WARRIOR"));
             txtScreenText.text += "\n";
 
             // 2490  PRINT: Z = INT(D / L): ...
@@ -147,16 +147,16 @@ public class BattleSceneEvents : MonoBehaviour
             if (Z >= 1)
             {
                 // 2500 X = X - Z:D = D - Z * L: IF D< 0 THEN D = 0
-                enemyForce[enemyUnitTypeID] = enemyForce[enemyUnitTypeID] - Z;
+                enemyForce.Set(enemyUnitTypeID, enemyForce.Get(enemyUnitTypeID) - Z);
                 playerDamage -= Z * enemyWeight;
                 playerDamage = System.Math.Max(0, playerDamage);
 
             }
 
             // 2510  IF X< 1 THEN X = 0
-            enemyForce[enemyUnitTypeID] = System.Math.Max(enemyForce[enemyUnitTypeID], 0);
+            enemyForce.Set(enemyUnitTypeID, System.Math.Max(enemyForce.Get(enemyUnitTypeID), 0));
             // 2520  PRINT "THEY HAVE "X" "O$(S);: IF X<  > 1 THEN PRINT "S";
-            txtScreenText.text += Utility.centerString("THEY HAVE " + enemyForce[enemyUnitTypeID] + " " + Utility.addS(enemyForce[enemyUnitTypeID], FotWK.UnitsDataFactory.getUnitsData().getUnitTypeByID(enemyUnitTypeID).getName().ToUpper()));
+            txtScreenText.text += Utility.centerString("THEY HAVE " + enemyForce.Get(enemyUnitTypeID) + " " + Utility.addS(enemyForce.Get(enemyUnitTypeID), FotWK.UnitsDataFactory.getUnitsData().getUnitTypeByID(enemyUnitTypeID).getName().ToUpper()));
             txtScreenText.text += "\n";
 
             if (enemyForce.IsEmpty()) {
@@ -164,7 +164,7 @@ public class BattleSceneEvents : MonoBehaviour
                 FotWK.UnityGameEngine.getEngine().getSoundEngine().playSound("AttentionAndCharge", GetBattleSceneEvents());
                 yield return new WaitForSeconds(3);
                 // 2530...IF I%(P,5) < 1 THEN  PRINT "JUST BARELY!!"
-                if (playerForce[FotWK.UnitTypeID.Warrior] < 1)
+                if (playerForce.Get(FotWK.UnitTypeID.Warrior) < 1)
                 {
                     txtScreenText.text += "JUST BARELY!!\n";
                 }
@@ -205,7 +205,7 @@ public class BattleSceneEvents : MonoBehaviour
         FotWK.UnitTypeID monsterId = originalEnemyForce.GetFirstUnitTypeID();
 
         // *3520  ...IF S = 10 THEN I% (P, 6) = 0 // 7005 IF S = 10 THEN I% (P, 6) = 0
-        if (monsterId == FotWK.UnitTypeID.Dragon && originalEnemyForce[FotWK.UnitTypeID.Dragon] > 0)
+        if (monsterId == FotWK.UnitTypeID.Dragon && originalEnemyForce.Get(FotWK.UnitTypeID.Dragon) > 0)
         {
             if (player.getParty().hasSpecialItem(FotWK.SpecialItemTypeID.DragonSlayer))
             {
@@ -217,7 +217,7 @@ public class BattleSceneEvents : MonoBehaviour
         //7010 IF RND(1)< .25 THEN I% (P, 1) = I % (P, 1) + 1:PRINT I$(1)
         if (FotWK.RNG.rollAgainstPercentage(Globals.LOOT_TELEPORT_SPELL_PERCENTAGE))
         {
-            player.getParty().spells[FotWK.SpellType.TELEPORT] = player.getParty().spells[FotWK.SpellType.TELEPORT] + 1;
+            player.getParty().spells.Set(FotWK.SpellType.TELEPORT, player.getParty().spells.Get(FotWK.SpellType.TELEPORT) + 1);
         }
 
         // 3540  IF RND(1) < .2 AND I% (P, 6) < 1 THEN I% (P, 6) = 1: PRINT I$(6) 
@@ -234,7 +234,7 @@ public class BattleSceneEvents : MonoBehaviour
         // 7025 IF RND(1)< .15 AND I% (P, 8) < 1 THEN I% (P, 8) = 1:PRINT I$(8)
         if (FotWK.RNG.rollAgainstPercentage(Globals.LOOT_SPELL_OF_SEEING_PERCENTAGE))
         {
-            player.getParty().spells[FotWK.SpellType.SEEING] = 1;
+            player.getParty().spells.Set(FotWK.SpellType.SEEING, 1);
         }
 
         float lootFactor = originalEnemyForce.CalculateLootFactor();
@@ -334,10 +334,10 @@ public class BattleSceneEvents : MonoBehaviour
 
                         break;
                     case 2:
-                        if (player.getParty().spells[FotWK.SpellType.SEEKING] <= 0)
+                        if (player.getParty().spells.Get(FotWK.SpellType.SEEKING) <= 0)
                         {
                             //3730 I % (P, Z) = 1: PRINT I$(Z): RETURN
-                            player.getParty().spells[FotWK.SpellType.SEEKING] = 1;
+                            player.getParty().spells.Set(FotWK.SpellType.SEEKING, 1);
                         }
                         break;
                     default:
@@ -431,33 +431,33 @@ public class BattleSceneEvents : MonoBehaviour
         // First, If you have warriors and you roll greater than 75, "Your warriors are crusing the enemy"
         // Next (and in addition), If you have dwarves and (another) roll greater than 50, "Your dwarves are crushing the enemy"
 
-        if (playerForce[FotWK.UnitTypeID.Warrior] > 0 && FotWK.RNG.rollAgainstPercentage(Globals.WARRIORS_CRUSHING_CHANCE))
+        if (playerForce.Get(FotWK.UnitTypeID.Warrior) > 0 && FotWK.RNG.rollAgainstPercentage(Globals.WARRIORS_CRUSHING_CHANCE))
         {
             FotWK.UnityGameEngine.getEngine().getSoundEngine().playSound("Attention", GetBattleSceneEvents());
-            if (playerForce[FotWK.UnitTypeID.Warrior] == 1)
+            if (playerForce.Get(FotWK.UnitTypeID.Warrior) == 1)
             {
                 txtScreenText.text += "YOUR WARRIOR IS CRUSHING YOUR FOE\n";
             }
             else {
                 txtScreenText.text += "YOUR WARRIORS ARE CRUSHING THE ENEMY\n";
             }
-            damageAgainstMonsters += FotWK.RNG.rollPercentage0To1() * playerForce[FotWK.UnitTypeID.Warrior] * Globals.WARRIORS_CRUSHING_DAMAGE_MULTIPLER;
+            damageAgainstMonsters += FotWK.RNG.rollPercentage0To1() * playerForce.Get(FotWK.UnitTypeID.Warrior) * Globals.WARRIORS_CRUSHING_DAMAGE_MULTIPLER;
         }
-        if (playerForce[FotWK.UnitTypeID.Dwarf] > 0 && FotWK.RNG.rollAgainstPercentage(Globals.DWARVES_CRUSHING_CHANCE))
+        if (playerForce.Get(FotWK.UnitTypeID.Dwarf) > 0 && FotWK.RNG.rollAgainstPercentage(Globals.DWARVES_CRUSHING_CHANCE))
         {
             FotWK.UnityGameEngine.getEngine().getSoundEngine().playSound("Attention", GetBattleSceneEvents());
-            if (playerForce[FotWK.UnitTypeID.Dwarf] == 1)
+            if (playerForce.Get(FotWK.UnitTypeID.Dwarf) == 1)
             {
                 txtScreenText.text += "YOUR DWARF IS CRUSHING YOUR FOE\n";
             }
             else {
                 txtScreenText.text += "YOUR DWARVES ARE CRUSHING THE ENEMY\n";
             }
-            damageAgainstMonsters += FotWK.RNG.rollPercentage0To1() * playerForce[FotWK.UnitTypeID.Dwarf] * Globals.DWARVES_CRUSHING_DAMAGE_MULTIPLER;
+            damageAgainstMonsters += FotWK.RNG.rollPercentage0To1() * playerForce.Get(FotWK.UnitTypeID.Dwarf) * Globals.DWARVES_CRUSHING_DAMAGE_MULTIPLER;
         }
 
         // 3910  PRINT: IF I% (P, 11) < 1 OR RND(1) < .5 THEN 3980
-        if (playerForce[FotWK.UnitTypeID.Wizard] > 0 && FotWK.RNG.rollAgainstPercentage(Globals.WIZARDS_CAST_CHANCE))
+        if (playerForce.Get(FotWK.UnitTypeID.Wizard) > 0 && FotWK.RNG.rollAgainstPercentage(Globals.WIZARDS_CAST_CHANCE))
         {
 
             string spellName = "";
@@ -473,13 +473,13 @@ public class BattleSceneEvents : MonoBehaviour
         }
 
         // 3980  PRINT: IF I% (P, 21) < 1 OR RND(1) < .65 THEN 3970  // 3970 is leaving the subroutine so, this really is a 35% chance
-        if (playerForce[FotWK.UnitTypeID.Elf] > 0 && FotWK.RNG.rollAgainstPercentage(Globals.ELVES_CAST_CHANCE))
+        if (playerForce.Get(FotWK.UnitTypeID.Elf) > 0 && FotWK.RNG.rollAgainstPercentage(Globals.ELVES_CAST_CHANCE))
         {
             // 3990  PRINT "YOUR "I$(21)"S HAVE CAST A ";:DF = INT(RND(1) * 4 + 1): ON DF GOSUB 3930,3940,3950,3960: GOSUB 1400:D = D + DF * RND(1) + I % (P, 21) / 2: GOTO 3970
             int df = 0;
             (df, pp) = CastRandomSpell("ELVES");
             // 3920...  D = D + DF * RND(1) + I % (P, 21) / 2
-            damageAgainstMonsters += df * FotWK.RNG.rollPercentage0To1() * playerForce[FotWK.UnitTypeID.Elf] / 2;
+            damageAgainstMonsters += df * FotWK.RNG.rollPercentage0To1() * playerForce.Get(FotWK.UnitTypeID.Elf) / 2;
         }
 
         // 4000  PRINT: IF S = 8 OR S = 9 OR S = 11 THEN 4050
@@ -490,7 +490,7 @@ public class BattleSceneEvents : MonoBehaviour
             if (FotWK.RNG.rollAgainstPercentage(Globals.MONSTERS_CHARGE_CHANCE))
             {
                 string plural = " IS";
-                if (enemyForce[enemyType] > 1)
+                if (enemyForce.Get(enemyType) > 1)
                 {
                     plural = "S ARE";
                 }
@@ -500,7 +500,7 @@ public class BattleSceneEvents : MonoBehaviour
                 txtScreenText.text += "THE " + enemyName + plural + " CHARGING\n";
 
                 // 2290  ... Y = X * L
-                float wieghtedForceUnits = enemyForce[enemyType] * enemyUnitTypeData.getWeight();
+                float wieghtedForceUnits = enemyForce.Get(enemyType) * enemyUnitTypeData.getWeight();
 
                 // 4040  PRINT: GOSUB 1390:D1 = D1 + RND(1) * Y * .3  // Note: 2290 ...Y = X * L
                 mDamageAgainstPlayer += FotWK.RNG.rollPercentage0To1() * wieghtedForceUnits * 0.3f;  // TODO: Make constant
@@ -634,7 +634,7 @@ public class BattleSceneEvents : MonoBehaviour
         if (GameStateManager.getGameState().getCurrentEnemyForce() == null) { 
             GameStateManager.getGameState().initForDemo();
             FotWK.Force f = new FotWK.Force();
-            f[FotWK.UnitTypeID.Goblin] = 1;
+            f.Add(FotWK.UnitTypeID.Goblin, 1);
             GameStateManager.getGameState().setCurrentEnemyForce(f);
             Text txtScreenText = GameObject.Find("txtScreenText").GetComponent<Text>();
             txtScreenText.text = "Sample force: " + f;

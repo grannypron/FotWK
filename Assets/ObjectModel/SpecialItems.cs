@@ -34,8 +34,10 @@ namespace FotWK
 			return mItemNames[id];
         }
 	}
+	[System.Serializable]
 	public class SpecialItemCollection 
 	{
+		[UnityEngine.SerializeField]
 		private List<SpecialItemTypeID> mItems;
 		public SpecialItemCollection()
         {

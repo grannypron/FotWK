@@ -4,16 +4,23 @@ using System.Text;
 
 namespace FotWK
 {
-	public class Force : Dictionary<UnitTypeID, int>
+	[System.Serializable]
+	public class Force : SerializableDictionary.Scripts.SerializableDictionary<UnitTypeID, int>
 	{
 		public Force() : base() { }
-		public Force(IDictionary<UnitTypeID, int> force) : base(force) { }
+		public Force(SerializableDictionary.Scripts.SerializableDictionary<UnitTypeID, int> force) 
+		{
+			foreach (UnitTypeID key in this.Keys())
+			{
+				this.Set(key, force.Get(key));
+			}
+		}
 
 		public override string ToString()
 		{
 			string str = "";
-			foreach (UnitTypeID key in this.Keys) {
-				str += Enum.GetName(typeof(FotWK.UnitTypeID), key) + ": " + this[key] + "\n";
+			foreach (UnitTypeID key in this.Keys()) {
+				str += Enum.GetName(typeof(FotWK.UnitTypeID), key) + ": " + this.Get(key) + "\n";
 			}
 
 			return str;
@@ -21,15 +28,15 @@ namespace FotWK
 
 		public bool IsEmpty()
 		{
-			if (this.Keys.Count == 0)
+			if (this.Keys().Count == 0)
 			{
 				return true;
 			}
 			else
 			{
-				foreach (UnitTypeID key in this.Keys)
+				foreach (UnitTypeID key in this.Keys())
 				{
-					if (this[key] > 0)
+					if (this.Get(key) > 0)
 					{
 						return false;
 					}
@@ -41,7 +48,7 @@ namespace FotWK
 		// Since the orignal game only has forces of one type, this is useful
 		public UnitTypeID GetFirstUnitTypeID()
         {
-			var e = this.Keys.GetEnumerator();
+			var e = this.Keys().GetEnumerator();
 			e.MoveNext();
 			return e.Current;
 
@@ -57,12 +64,16 @@ namespace FotWK
             }
 			UnitsData units = UnitsDataFactory.getUnitsData();
 			UnitTypeID monsterId = this.GetFirstUnitTypeID();
-			int qty = this[monsterId];
+			int qty = this.Get(monsterId);
 			UnitType monster = units.getUnitTypeByID(monsterId);
 			
 			return qty * monster.getWeight(); // 2200 X7 = X * L:
 		}
 
+		public Dictionary<UnitTypeID, int>.Enumerator GetEnumerator()
+		{
+			return base.GetEnumerator();
+		}
 
 	}
 

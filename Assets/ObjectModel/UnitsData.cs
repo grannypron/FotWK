@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FotWK
 {
+    [System.Serializable]
     public enum UnitTypeID {
         Warrior,
         Bandit,
@@ -25,10 +26,12 @@ namespace FotWK
         Elf,
         Dwarf
     }
+    [System.Serializable]
     public enum SupportUnitTypeID
     {
         Mule = 1,
-        Cleric = 2
+        Cleric = 2,
+        Scout = 3
     }
 
     public class UnitsData

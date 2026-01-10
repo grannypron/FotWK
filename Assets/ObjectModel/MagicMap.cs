@@ -8,8 +8,10 @@ namespace FotWK
 	 * Even though there were only 4 magic maps in the original game, I decided to set up a more OOP way of representing
 	 * magic maps for mods or future development
 	 */
+	[System.Serializable]
 	public class MagicMap
 	{
+		[UnityEngine.SerializeField]
 		private int mId;
 
 		public MagicMap(int id)

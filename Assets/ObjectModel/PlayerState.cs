@@ -1,13 +1,18 @@
 ﻿using FotWK;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Unity.Properties;
 
+
+[System.Serializable]
 public class PlayerState
 {
+    [SerializeField]
     private string mName;
+    [SerializeField] 
     private Vector2 mMapPosition;
+    [SerializeField] 
     private Party mParty;
+    [SerializeField] 
     private bool mSurprised;   // This is necessary to "pass" between EncounterableLocation and BattleScene :/
 
     public PlayerState()
@@ -28,7 +33,7 @@ public class PlayerState
     public void eatRations()
     {
         // 380 ... I%(P,0) = I%(P,0) - (I%(P,5) / 10)
-        mParty.rations -= (int)(mParty.force[FotWK.UnitTypeID.Warrior] / 10);
+        mParty.rations -= (int)(mParty.force.Get(FotWK.UnitTypeID.Warrior) / 10);
     }
 
 }

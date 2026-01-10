@@ -1,15 +1,20 @@
 ﻿using FotWK;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
 public class GameState
 {
+    [SerializeField]
     private PlayerState[] mPlayerStates;
+    [SerializeField]
     private string mCurrentTileName;
+    [SerializeField] 
     private Force mCurrentEnemyForce;
+    [SerializeField] 
     private int mMovementFactorsRemaining;
+    [SerializeField] 
     private int mTurnCount = 1;
 
     public GameState() {
@@ -76,11 +81,11 @@ public class GameState
         mPlayerStates[0].getParty().initializeToStartingValues();
         foreach (UnitTypeID unitTypeId in Enum.GetValues(typeof(UnitTypeID)))  
         {  
-            mPlayerStates[0].getParty().force[unitTypeId] = 0;
+            mPlayerStates[0].getParty().force.Set(unitTypeId, 0);
         }  
-        mPlayerStates[0].getParty().force[UnitTypeID.Warrior] = 50;
+        mPlayerStates[0].getParty().force.Set(UnitTypeID.Warrior, 50);
         mPlayerStates[0].setName("Hotmustard");
-        mMovementFactorsRemaining = 4;
+        mMovementFactorsRemaining = 0;
     }
 
     public int getTurn()

@@ -52,7 +52,7 @@ namespace FotWK
             } else {
                 player.setSurprised(false);
                 //2230  PRINT : IF S = 0 OR S > 14 THEN  PRINT "DO YOU WISH TO PARLEY";: GOSUB 40: IF  NOT Y THEN 2270
-                UnitTypeID unitTypeID = force.Keys.First<UnitTypeID>(); // Assume here that the force is only made up of one unit type
+                UnitTypeID unitTypeID = force.Keys().First<UnitTypeID>(); // Assume here that the force is only made up of one unit type
                 if (UnitsDataFactory.getUnitsData().isParlayable(unitTypeID))
                 {
                     // Collect input.  If y, do the parlay routine
@@ -84,8 +84,8 @@ namespace FotWK
 
                 // Add these folks to the party count
                 Force force = GameStateManager.getGameState().getCurrentEnemyForce();
-                UnitTypeID unitTypeID = force.Keys.First<UnitTypeID>();
-                player.getParty().force[unitTypeID] += force.Values.First<int>();
+                UnitTypeID unitTypeID = force.Keys().First<UnitTypeID>();
+                player.getParty().force.Set(unitTypeID, player.getParty().force.Get(unitTypeID) + force.Values().First<int>());
                 
                 // Clean up and change the scene
                 GameStateManager.getGameState().setCurrentEnemyForce(null);
@@ -137,7 +137,7 @@ namespace FotWK
 
             // 2190 L = O(S):                                               - I THINK this is pulling the number that is stored with each of the names somehow
             //          X =  INT (1 / L * (I%(P,5) + I%(P,22))):            - Note this from Wade Clarke's FAQ:  "Monsters usually appear in groups whose size is calculated relative to the size of your own forces"   I%(P,5) is the number of warriors in your group - see line 140.  I%(P,22) is the number of dwarves - see line 2410
-            int qty = (int)((1/monster.getWeight()) * (playerForce[UnitTypeID.Warrior] + playerForce[UnitTypeID.Dwarf]));
+            int qty = (int)((1/monster.getWeight()) * (playerForce.Get(UnitTypeID.Warrior) + playerForce.Get(UnitTypeID.Dwarf)));
 
             //          X =  INT (X + (X * .15 * ( RND (1) * 3 - 1))): 
             qty = (int)(qty + (qty * Globals.ENCOUNTER_ENEMY_SIZE_MULTIPLIER * (UnityEngine.Random.Range(0, Globals.ENCOUNTER_ENEMY_SIZE_RANDOM_FACTOR) - 1) ));
@@ -154,7 +154,7 @@ namespace FotWK
                 }
             }
 
-            opposingForce[monsterId] = qty;
+            opposingForce.Set(monsterId, qty);
 
             return opposingForce;
         }

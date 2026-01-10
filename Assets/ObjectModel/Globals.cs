@@ -49,5 +49,12 @@ public static class Globals
     public static int SPELL_DAMAGE_FACTOR_FIRE_BALL = 15;       // 3940  PRINT "FIRE BALL":DF = 15:PP = 5: GOTO 1460
     public static int SPELL_DAMAGE_FACTOR_TOWER_OF_FLAME = 10;  // 3950  PRINT "TOWER OF FLAME":DF = 10:PP = 5: GOTO 1460
     public static int SPELL_DAMAGE_FACTOR_DEATH_RAY = 7;        // 3960  PRINT "DEATH RAY":DF = 7:PP = 2: GOTO 1460
-    public static double MONSTERS_ADVANCE_COMPARE = .01;        // 2310  IF RND(1) < Y * .01 THEN PRINT "THE "O$(S);: IF X > 1 THEN PRINT "S ADVANCE";: GOTO 2340
+    public static float MONSTERS_ADVANCE_COMPARE = .01f;        // 2310  IF RND(1) < Y * .01 THEN PRINT "THE "O$(S);: IF X > 1 THEN PRINT "S ADVANCE";: GOTO 2340
+
+    public static float RAFT_ENCUMBRANCE = 50.0f;               //3790 Z = Z - DF * 50
+    public static float NUM_MULES_REQUIRED_PER_RAFT = 4.0f;     //3770 DF = I % (P, 9) * 4: 
+    public static float AVAILABLE_ENCUMBRANCE_PER_SCOUT = 5.0f; //3760  TEXT: HOME: Z = I % (P, 3) * 5 + I % (P, 5) * 10 + I % (P, 10) * 50 + 5:Y = 0
+    public static float AVAILABLE_ENCUMBRANCE_PER_WARRIOR = 10.0f;  //3760  TEXT: HOME: Z = I % (P, 3) * 5 + I % (P, 5) * 10 + I % (P, 10) * 50 + 5:Y = 0
+    public static float AVAILABLE_ENCUMBRANCE_PER_MULE = 50.0f; //3760  TEXT: HOME: Z = I % (P, 3) * 5 + I % (P, 5) * 10 + I % (P, 10) * 50 + 5:Y = 0
+    public static float AVAILABLE_ENCUMBRANCE_BASE = 0.5f;      //3760  TEXT: HOME: Z = I % (P, 3) * 5 + I % (P, 5) * 10 + I % (P, 10) * 50 + 5:Y = 0
 }

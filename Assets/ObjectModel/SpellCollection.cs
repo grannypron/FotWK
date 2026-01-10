@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FotWK
 {
-    public class SpellCollection : Dictionary<SpellType, int>
+    [System.Serializable]
+    public class SpellCollection : SerializableDictionary.Scripts.SerializableDictionary<SpellType, int>
     {
         public SpellCollection()
         {

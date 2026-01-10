@@ -24,6 +24,12 @@ public class EndTurnSceneEvents : MonoBehaviour
 
     private void handleInput(string key)
     {
+        if (key != null && key.ToLower() == "y")
+        {
+            String s = JsonUtility.ToJson(GameStateManager.getGameState());
+            // Do save state here - ask for file name?
+            UnityEngine.Debug.Log(s);
+        }
         EndTurnSceneEvents.GetEndTurnSceneEvents().StartCoroutine(LoadNextScene("MainMenu"));
     }
     public static EndTurnSceneEvents GetEndTurnSceneEvents()

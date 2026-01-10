@@ -14,11 +14,11 @@ namespace FotWK
 			UnityGameEngine.getEngine().getSoundEngine().playSound("Sanctuary", VisitSceneEvents.GetVisitSceneEvents());
 			VisitSceneEvents visitSceneEvents = VisitSceneEvents.GetVisitSceneEvents();
 			PlayerState player = GameStateManager.getGameState().getCurrentPlayerState();
-			if (player.getParty().force[UnitTypeID.Warrior] < Globals.MIN_WARRIOR_SANCTUARY_HELP)
+			if (player.getParty().force.Get(UnitTypeID.Warrior) < Globals.MIN_WARRIOR_SANCTUARY_HELP)
 			{
 				visitSceneEvents.AddTextLine("SOME WARRIORS HERE JOIN THE RANKS");   // Line 980
 				int addition = 15 + RNG.rollInRange(1, 10);
-				player.getParty().force[UnitTypeID.Warrior] += addition;
+				player.getParty().force.Set(UnitTypeID.Warrior, player.getParty().force.Get(UnitTypeID.Warrior) + addition);
 			}
 			if (player.getParty().rations < Globals.MIN_RATION_SANCTUARY_HELP)
             {
