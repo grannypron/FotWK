@@ -110,6 +110,11 @@ public class MainMenuEvents : MonoBehaviour
                 mEncumbranceMessage = "";
             }
         }
+        else if (Input.GetKeyDown("2"))
+        {
+            GameStateManager.getGameState().getSceneTransitionData().viewOnlyMap = true;
+            StartCoroutine(LoadScene("MoveScene"));
+        }
 
 
     }

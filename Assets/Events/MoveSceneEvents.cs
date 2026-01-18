@@ -4,19 +4,40 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class MoveSceneEvents : MonoBehaviour
 {
+    private bool mViewOnly = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        if(GameStateManager.getGameState().getSceneTransitionData().viewOnlyMap)
+        {
+            mViewOnly = true;
+            GameStateManager.getGameState().getSceneTransitionData().viewOnlyMap = false;
+            GameObject.Find("txtMoveGuideText").GetComponent<Text>().text = "PRESS RETURN TO CONTINUE";
+        }
         Tilemap closeUpMapTilemap = GameObject.Find("CloseUpMapTilemap").GetComponent<Tilemap>();
         renderMap(GameStateManager.getGameState().getCurrentPlayerState().getMapPosition(), closeUpMapTilemap);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (mViewOnly)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                StartCoroutine(LoadScene("MainMenu"));
+            }
+            else
+            {
+                return;
+            }
+        }
         int xMove = 0;
         int yMove = 0;
         if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1)) {
@@ -114,5 +135,17 @@ public class MoveSceneEvents : MonoBehaviour
             yield return null;
         }
     }
+
+    IEnumerator LoadScene(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
 }
 

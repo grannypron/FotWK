@@ -19,7 +19,7 @@ I is a 2d array of P = player (I think) and the second index (1-22) are the type
 1: TELEPORT SPELL
 2: CLERIC
 3: SCOUT
-4: GOLD PIECE
+4: GOLD PIECE   (0x8A27)
 5: WARRIOR
 6: SWORD (DRAGON SLAYER)
 7: RAIDER
@@ -72,16 +72,17 @@ Presumably then, here are our indexes for non-player types, which tracks with li
 
 
 Master TODO:
-- BUG: Rations need to decrease only on end of turn - right now they are happening on every move
+- 1 key zoomout map on Main Menu
+- Spells - U key on Main Menu
+- Magic Map
+- Water restriction on movement unless with a raft
 - Test battle events for wizards, elves, dwarves, etc and for enemy spellcasters and dragons
 - "YOU HAVE BEEN RAIDED!!" mechanic
 - Scouts and enemy camps
-- "YOU HAD TO DROP # GOLD PIECES" mechanic
 - End turn screen and "WOULD YOU LIKE TO SAVE THE GAME?"
 - Implement random you find stuff scene
-- Spells
-- Magic Map
-- Load/Save - serialization of state - json?
+- Implement save game in EndTurnSceneEvents
+- Implement load game
 - Multiplayer
 - Map level difficulty mechanic
 - Player level difficulty mechanic

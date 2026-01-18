@@ -17,6 +17,8 @@ public class GameState
     [SerializeField] 
     private int mTurnCount = 1;
 
+    private SceneTransitionData mSceneTransitionData;
+
     public GameState() {
         mPlayerStates = new PlayerState[1];
         mPlayerStates[0] = new PlayerState();
@@ -25,6 +27,7 @@ public class GameState
             initForDemo();
             Utility.inittedAlreadyTODORemove = true;
         }
+        mSceneTransitionData = new SceneTransitionData();
     }
     public PlayerState getPlayerState(int idx) { 
         if (idx <= 0) {
@@ -74,6 +77,11 @@ public class GameState
         mMovementFactorsRemaining = Globals.MOVES_PER_TURN;
     }
 
+    public SceneTransitionData getSceneTransitionData()
+    {
+        return mSceneTransitionData;
+    }
+
     public void initForDemo()
     {
         mPlayerStates[0].setMapPosition(new Vector2(18, 20));
@@ -98,4 +106,9 @@ public class GameState
     {
         return ++mTurnCount;
     }
+}
+
+public class SceneTransitionData
+{
+    public bool viewOnlyMap = false;
 }
