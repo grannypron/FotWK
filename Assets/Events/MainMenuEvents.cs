@@ -102,6 +102,10 @@ public class MainMenuEvents : MonoBehaviour
         {
             StartCoroutine(LoadScene("EndTurnScene"));
         }
+        else if (Input.GetKeyDown("u"))
+        {
+            StartCoroutine(LoadScene("UseSpellScene"));
+        }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
             if (mEncumbranceMessage != "")
@@ -114,6 +118,11 @@ public class MainMenuEvents : MonoBehaviour
         {
             GameStateManager.getGameState().getSceneTransitionData().viewOnlyMap = true;
             StartCoroutine(LoadScene("MoveScene"));
+        }
+        else if (Input.GetKeyDown("1"))
+        {
+            GameStateManager.getGameState().getSceneTransitionData().viewOnlyMap = true;
+            StartCoroutine(LoadScene("ZoomOutMapScene"));
         }
 
 

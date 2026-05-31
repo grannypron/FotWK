@@ -26,4 +26,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleScene.unity
     guid: cf8561069dce70a4d9e3b4028f3e4d25
+  - enabled: 1
+    path: Assets/Scenes/EndTurnScene.unity
+    guid: 85cb8055ffc7ade489d95f459ced58fe
+  - enabled: 1
+    path: Assets/Scenes/UseSpellScene.unity
+    guid: dd132207efbb5c848803c922fdeeab64
+  - enabled: 1
+    path: Assets/Scenes/ZoomOutMapScene.unity
+    guid: b3ba8a044ede83d49bc04225e9efeadd
   m_configObjects: {}

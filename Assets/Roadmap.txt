@@ -19,8 +19,8 @@ I is a 2d array of P = player (I think) and the second index (1-22) are the type
 1: TELEPORT SPELL
 2: CLERIC
 3: SCOUT
-4: GOLD PIECE   (0x8A27)
-5: WARRIOR
+4: GOLD PIECE   (0x8A27-0x8A28)
+5: WARRIOR		(0x8A29-0x8A2A)
 6: SWORD (DRAGON SLAYER)
 7: RAIDER
 8: SPELL OF SEEING
@@ -72,10 +72,10 @@ Presumably then, here are our indexes for non-player types, which tracks with li
 
 
 Master TODO:
-- 1 key zoomout map on Main Menu
 - Spells - U key on Main Menu
 - Magic Map
 - Water restriction on movement unless with a raft
+- When the player tries to move out of bounds of the map, just do nothing
 - Test battle events for wizards, elves, dwarves, etc and for enemy spellcasters and dragons
 - "YOU HAVE BEEN RAIDED!!" mechanic
 - Scouts and enemy camps
@@ -87,6 +87,7 @@ Master TODO:
 - Map level difficulty mechanic
 - Player level difficulty mechanic
 - Remove GamesState.initForDemo(), BattleSceneEvents.initForDemo() and remove GameState-deleteme from MainMenu scene
+- Make this whole thing more Unity-y.  Make Force and Player into GameObjects rather than POCOs and manipulate them more in Unity-y ways?  Is there a built-in way to save game state for all Unity GameObjects that we can leverage this way and get rid of GameState?
 
 - Rando todos:
 "STAND BY.  FILLING ARRAYS" should be in negative text

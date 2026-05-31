@@ -4,5 +4,5 @@ No effort was made to order the inventory screen listing in the order that the o
 
 Surprise mechanic set to 20% - from Apple 2 source line 2220 - hanve't verified from C64 version - 2220  PRINT :D = 0:D1 = 0:X3 = 1: IF  RND (1) < .2 THEN  PRINT : PRINT "YOU HAVE BEEN SURPRISED!": GOSUB 1390: GOTO 2290
 
+I think the singular of dwarves is "DWARVE" in the original, but i corrected that.  Have not confirmed in actual gameplay yet, though.
 
-I assumed 2290 was a bug: ...Y1 = (I%(P,5) + (I%(P,11) * 20) + ( RN...    I%(P,11) is the number of magic maps?  Why would that matter here?  Probably a wrong index  Maybe not idk

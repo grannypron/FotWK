@@ -1,8 +1,10 @@
 fileFormatVersion: 2
-guid: 7c8765ced140d684086127b4fe256e0f
+guid: 1a9a7e654c0f8764586f5adfb4ff64db
+labels:
+- Tile
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 0
+  mainObjectFileID: 11400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
