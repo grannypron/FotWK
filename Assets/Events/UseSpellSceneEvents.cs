@@ -79,6 +79,8 @@ public class UseSpellSceneEvents : MonoBehaviour
             {
                 if (mActiveSpellChoice == FotWK.SpellType.SEEING)
                 {
+                    GameStateManager.getGameState().getSceneTransitionData().viewOnlyMap = true;
+                    GameStateManager.getGameState().getSceneTransitionData().spellActive = true;
                     StartCoroutine(LoadZoomOutMapScene());
                 }
                 if (mActiveSpellChoice == FotWK.SpellType.SEEKING)

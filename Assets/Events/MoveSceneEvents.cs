@@ -74,15 +74,22 @@ public class MoveSceneEvents : MonoBehaviour
             } else {
                 int newX = (int)position.x + xMove;
                 int newY = (int)position.y + yMove;
-                GameStateManager.getGameState().getCurrentPlayerState().setMapPosition(new Vector2(newX, newY));
 
                 Tilemap closeUpMapTilemap = GameObject.Find("CloseUpMapTilemap").GetComponent<Tilemap>();
-                TileBase tile = closeUpMapTilemap.GetTile(new Vector3Int(newX, newY, 0));
+                string destinationTileName = getTileNameUnderCursor(new Vector2Int(newX, newY), closeUpMapTilemap);
+                bool hasRaft = GameStateManager.getGameState().getCurrentPlayerState().getParty().equipment.Get(FotWK.EquipmentID.Raft) > 0;
+
+                if (destinationTileName != null && destinationTileName.ToLowerInvariant() == "lake" && !hasRaft)
+                {
+                    GameObject.Find("txtMoveGuideText").GetComponent<Text>().text = "NO RAFT! TRY AGAIN";
+                    return;
+                }
+
+                GameStateManager.getGameState().getCurrentPlayerState().setMapPosition(new Vector2Int(newX, newY));
                 renderMap(GameStateManager.getGameState().getCurrentPlayerState().getMapPosition(), closeUpMapTilemap);
 
                 // Get the tile that is now active (under the position indicator)
-                string tileName = getTileNameUnderCursor(new Vector2Int(newX, newY), closeUpMapTilemap);
-                GameStateManager.getGameState().setCurrentTileName(tileName);
+                GameStateManager.getGameState().setCurrentTileName(destinationTileName);
             }
             GameStateManager.getGameState().decMovementFactorsRemaining(1);
             NextScreen();
@@ -106,16 +113,17 @@ public class MoveSceneEvents : MonoBehaviour
 
     private string getTileNameUnderCursor(Vector2Int position, Tilemap closeUpMapTilemap)
     {
-        // Get cursor local position
-        Tilemap positionTilemap = GameObject.Find("PositionTilemap").GetComponent<Tilemap>();
+        //UnityEngine.Debug.Log(position.x + " x " + position.y);
+        // I don't know why this is right now, but   // TODO:
+        int x = position.x - 1;
+        int y = (position.y * -1) + 2;
+        TileBase tile = closeUpMapTilemap.GetTile(new Vector3Int(x, y, 0));
+        if (tile == null)
+        {
+            return "";
+        }
 
-        Tile currentTile = (Tile)closeUpMapTilemap.GetTile(new Vector3Int(position.x, position.y, (int)closeUpMapTilemap.origin.z));
-
-        // The array is laid out from the bottom row to the top row and left to right is how the index runs.  No idea why, but calculate the index as such:
-        TileBase[] arrBlocks = closeUpMapTilemap.GetTilesBlock(closeUpMapTilemap.cellBounds);
-        int tileIdx = (Globals.MAX_MAP_Y - position.y) * 40 + (position.x - 1);  // TODO: Magic #
-
-        return arrBlocks[tileIdx].name;
+        return tile.name;
     }
 
 

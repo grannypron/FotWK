@@ -84,7 +84,7 @@ public class GameState
 
     public void initForDemo()
     {
-        mPlayerStates[0].setMapPosition(new Vector2(18, 20));
+        mPlayerStates[0].setMapPosition(new Vector2Int(18, 20));
         mPlayerStates[0].getParty().force = new Force();
         mPlayerStates[0].getParty().initializeToStartingValues();
         foreach (UnitTypeID unitTypeId in Enum.GetValues(typeof(UnitTypeID)))  
@@ -93,7 +93,7 @@ public class GameState
         }  
         mPlayerStates[0].getParty().force.Set(UnitTypeID.Warrior, 50);
         mPlayerStates[0].setName("Hotmustard");
-        mMovementFactorsRemaining = 0;
+        mMovementFactorsRemaining = 4;
     }
 
     public int getTurn()
@@ -111,4 +111,5 @@ public class GameState
 public class SceneTransitionData
 {
     public bool viewOnlyMap = false;
+    public bool spellActive = false;
 }

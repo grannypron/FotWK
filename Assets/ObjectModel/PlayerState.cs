@@ -9,7 +9,7 @@ public class PlayerState
     [SerializeField]
     private string mName;
     [SerializeField] 
-    private Vector2 mMapPosition;
+    private Vector2Int mMapPosition;
     [SerializeField] 
     private Party mParty;
     [SerializeField] 
@@ -17,13 +17,13 @@ public class PlayerState
 
     public PlayerState()
     {
-        mMapPosition = new Vector2(0, 0);
+        mMapPosition = new Vector2Int(0, 0);
         mParty = new Party();
         mName = "Player";
         mSurprised = false;
     }
-    public Vector2 getMapPosition() { return mMapPosition; }
-    public void setMapPosition(Vector2 pos) { mMapPosition = pos; }
+    public Vector2Int getMapPosition() { return mMapPosition; }
+    public void setMapPosition(Vector2Int pos) { mMapPosition = pos; }
     public Party getParty() { return mParty; }
     public string getName() { return mName; }
     public void setName(string name) { mName = name; }

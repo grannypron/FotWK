@@ -57,4 +57,6 @@ public static class Globals
     public static float AVAILABLE_ENCUMBRANCE_PER_WARRIOR = 10.0f;  //3760  TEXT: HOME: Z = I % (P, 3) * 5 + I % (P, 5) * 10 + I % (P, 10) * 50 + 5:Y = 0
     public static float AVAILABLE_ENCUMBRANCE_PER_MULE = 50.0f; //3760  TEXT: HOME: Z = I % (P, 3) * 5 + I % (P, 5) * 10 + I % (P, 10) * 50 + 5:Y = 0
     public static float AVAILABLE_ENCUMBRANCE_BASE = 0.5f;      //3760  TEXT: HOME: Z = I % (P, 3) * 5 + I % (P, 5) * 10 + I % (P, 10) * 50 + 5:Y = 0
+
+    public static float CURSOR_FLASH_INTERVAL = 0.01f;
 }
