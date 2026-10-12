@@ -6,3 +6,6 @@ Surprise mechanic set to 20% - from Apple 2 source line 2220 - hanve't verified 
 
 I think the singular of dwarves is "DWARVE" in the original, but i corrected that.  Have not confirmed in actual gameplay yet, though.
 
+In the "LOOK AT MAP" and "LOOK AT CLOSE UP MAP" (among others) screens, line 30 in the source, the input says to PRESS RETURN TO CONTINUE but allows the user to type characters in via INPUT (which is triggered via th RETURN key), but my version does not allow this by design because I don't think it was intended behavior
+
+When the user tries to move onto a water square but has no raft and the game shows the "NO RAFT! TRY AGAIN" message, there is like a scrolling text effect that I did not implement because I didn't really feel like it was worth it.  Like the text goes away but then gets painted downwards as the screen refreshes

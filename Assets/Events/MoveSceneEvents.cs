@@ -81,7 +81,13 @@ public class MoveSceneEvents : MonoBehaviour
 
                 if (destinationTileName != null && destinationTileName.ToLowerInvariant() == "lake" && !hasRaft)
                 {
-                    GameObject.Find("txtMoveGuideText").GetComponent<Text>().text = "NO RAFT! TRY AGAIN";
+                    Text txtStatusMessage = GameObject.Find("txtStatusMessage").GetComponent<Text>();
+                    txtStatusMessage.text = "NO RAFT! TRY AGAIN";
+                    RectTransform parentRect = txtStatusMessage.transform.parent as RectTransform;
+                    if (parentRect != null)
+                    {
+                        LayoutRebuilder.ForceRebuildLayoutImmediate(parentRect);
+                    }
                     return;
                 }
 
@@ -116,7 +122,7 @@ public class MoveSceneEvents : MonoBehaviour
         //UnityEngine.Debug.Log(position.x + " x " + position.y);
         // I don't know why this is right now, but   // TODO:
         int x = position.x - 1;
-        int y = (position.y * -1) + 2;
+        int y = (position.y * -1) + 3;
         TileBase tile = closeUpMapTilemap.GetTile(new Vector3Int(x, y, 0));
         if (tile == null)
         {

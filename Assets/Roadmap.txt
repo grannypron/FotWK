@@ -74,7 +74,8 @@ Presumably then, here are our indexes for non-player types, which tracks with li
 Master TODO:
 - Spells - U key on Main Menu
 - Magic Map
-- Water restriction on movement unless with a raft
+- Mechanic where you can drop gold pieces when you retreat???
+- Implement water travel with raft
 - When the player tries to move out of bounds of the map, just do nothing
 - Test battle events for wizards, elves, dwarves, etc and for enemy spellcasters and dragons
 - "YOU HAVE BEEN RAIDED!!" mechanic
